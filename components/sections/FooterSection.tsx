@@ -3,6 +3,7 @@ import { t } from '@/lib/locales';
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Separator } from "../ui/separator";
+import { LocalizedLink } from '../LocalizedLink';
 
 interface FooterSectionProps {
   theme?: 'dark' | 'light';
@@ -56,9 +57,13 @@ export const FooterSection = ({ theme = 'dark' }: FooterSectionProps): JSX.Eleme
           </CardContent>
 
           <div className="flex items-center justify-center relative w-full">
-            <Button className="w-full sm:w-auto p-4 bg-neutral-01100 rounded-lg font-sora font-bold text-neutral-08 text-lg md:text-xl lg:text-2xl text-center tracking-[0.84px] leading-5">
-              Request A Free Automation Audit
-            </Button>
+            <LocalizedLink
+              route="contact"
+            >
+              <Button className="w-full sm:w-auto p-4 bg-neutral-01100 rounded-lg font-sora font-bold text-neutral-08 text-lg md:text-xl lg:text-2xl text-center tracking-[0.84px] leading-5">
+                Request A Free Automation Audit
+              </Button>
+            </LocalizedLink>
           </div>
         </Card>
         </div>
