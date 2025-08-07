@@ -5,9 +5,9 @@ const HeroSection = () => {
   return (
     <div className="pt-7 xl:pt-[140px] w-full max-w-[992px] mx-auto relative">
       <div className="relative z-10">
-        <h2 className="text-center justify-start text-white text-2xl sm:text-3xl md:text-4xl xl:text-6xl font-semibold font-sora leading-normal xl:leading-[72px]">
+        <h1 className="text-center justify-start text-white text-2xl sm:text-3xl md:text-4xl xl:text-6xl font-semibold font-sora leading-normal xl:leading-[72px]">
           {t.content.homeHero.title}
-        </h2>
+        </h1>
         <div className="w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[450px] xl:max-w-[522px] mx-auto">
           <img src="/assets/images/curveLine.svg" alt="line" />
         </div>
