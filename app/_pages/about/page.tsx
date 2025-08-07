@@ -1,3 +1,13 @@
+import type { Metadata } from 'next'
+import { t } from "@/lib/locales";
+
+
+export const metadata: Metadata = {
+  title: t.metaData.aboutTitle,
+  description: t.metaData.aboutDesc,
+}
+
+
 export default function AboutPage() {
   // Get the current locale from environment variable
   const locale = process.env.NEXT_PUBLIC_LOCALE || 'en'
