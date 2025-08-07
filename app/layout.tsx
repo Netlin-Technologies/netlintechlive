@@ -2,6 +2,7 @@ import { ClientLayout } from '@/components/ClientLayout'
 import type { Metadata } from 'next'
 import { Montserrat, Sora } from 'next/font/google';
 import './globals.css'
+import {t} from "@/lib/locales";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -16,8 +17,8 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: 'Netlintech - Automate your business, not your life',
-  description: 'We develop custom AI-powered systems that eliminate manual work, save time, and keep your business running even when you\'re offline.',
+  title: t.metaData.homeTitle,
+  description: t.metaData.homeDesc,
 }
 
 export default function RootLayout({

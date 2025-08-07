@@ -7,6 +7,18 @@ interface Translations {
     automation: string;
     blog: string;
   };
+  metaData:{
+    homeTitle: string;
+    homeDesc: string;
+    automationTitle: string;
+    automationDesc: string;
+    blogTitle: string;
+    blogDesc: string;
+    contactTitle: string;
+    contactDesc: string;
+    aboutTitle: string;
+    aboutDesc: string;
+  },
   content: {
     aboutUsTitle: string;
     aboutUsDescription: string;
@@ -365,6 +377,18 @@ const translations: Record<string, Translations> = {
       services: '/services',
       automation: '/automation',
       blog: '/blog'
+    },
+    metaData: {
+      homeTitle: 'No-Code AI Automation | Custom, Scalable workflows for your business | NETLINTECH',
+      homeDesc: "We turn your biz into a system that runs itself. Custom AI workflows that slash overhead, kill manual tasks and scale hard. Built to win. Built by NETLINTECH.",
+      automationTitle: 'Automate your business with AI | Print Cash | NETLINTECH',
+      automationDesc: 'We build scalable automations that kill busywork and print ROI. No BS. No code. Just scalable systems that run while you sleep. Built by NETLINTECH.',
+      blogTitle: 'Proven systems. Real ROI. | Learn no-code AI Automation | NETLINTECH',
+      blogDesc: 'Get real strategies that grow businesses. No theory. Just tested AI automations, scalable systems and results you can copy. Use what works. Skip the BS.',
+      contactTitle: 'Talk to Builders, not Salespeople | No-code AI Automation | NETLINTECH',
+      contactDesc: "Have a problem worth solving? Let's fix it. No sales scripts. Just straight answers, proven systems and ROI-focused execution.",
+      aboutTitle: 'Who Builds the Systems that Print ROI? | About Us | NETLINTECH',
+      aboutDesc: "We're builders who solve real problems with real automation. This is the crew that solves the chaos. Built different. Built by NETLINTECH.",
     },
     content: {
       aboutUsTitle: 'About Us',
@@ -872,6 +896,23 @@ const translations: Record<string, Translations> = {
       automation: '/automatisierung',
       blog: '/blog'
     },
+    metaData: {
+      homeTitle: 'No-Code KI-Automatisierung | Individuelle, skalierbare Workflows für dein Business | NETLINTECH',
+      homeDesc: "Wir machen aus deinem Business ein System, das sich selbst betreibt. Individuelle KI-Workflows, die Overhead killen, manuelle Aufgaben eliminieren und hart skalieren. Built to win. Built by NETLINTECH.",
+      
+      automationTitle: 'Automatisiere dein Business mit KI | Cash drucken | NETLINTECH',
+      automationDesc: 'Wir bauen skalierbare Automationen, die Bullshit-Arbeit eliminieren und ROI drucken. Kein Blabla. Kein Code. Nur Systeme, die laufen, während du schläfst. Built by NETLINTECH.',
+      
+      blogTitle: 'Erprobte Systeme. Echter ROI. | No-Code KI-Automatisierung lernen | NETLINTECH',
+      blogDesc: 'Echte Strategien, die Unternehmen wachsen lassen. Keine Theorie. Nur getestete KI-Automationen, skalierbare Systeme und Resultate zum Nachbauen. Nutze, was funktioniert. Spar dir den Bullshit.',
+      
+      contactTitle: 'Sprich mit Machern, nicht Verkäufern | No-Code KI-Automatisierung | NETLINTECH',
+      contactDesc: "Du hast ein Problem, das es wert ist, gelöst zu werden? Lass es uns fixen. Keine Verkaufsskripte. Nur klare Antworten, bewährte Systeme und ROI-fokussierte Umsetzung.",
+      
+      aboutTitle: 'Wer baut die Systeme, die ROI drucken? | Über uns | NETLINTECH',
+      aboutDesc: "Wir sind Builder, die echte Probleme mit echter Automatisierung lösen. Das ist das Team hinter dem Chaos. Built different. Built by NETLINTECH.",
+    },
+
     content: {
       aboutUsTitle: 'Über Uns',
       aboutUsDescription: 'Erfahren Sie mehr über unser Unternehmen',
