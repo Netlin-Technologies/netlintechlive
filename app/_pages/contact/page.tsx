@@ -1,12 +1,4 @@
 import { Contact } from '@/components/Contact'
-import type { Metadata } from 'next'
-import { t } from "@/lib/locales";
-
-
-export const metadata: Metadata = {
-  title: t.metaData.contactTitle,
-  description: t.metaData.contactDesc,
-}
 
 export default function ContactPage() {
   return <Contact />

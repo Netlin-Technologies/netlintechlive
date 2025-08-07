@@ -1,4 +1,8 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
+import { t } from '@/lib/locales'
+import { supabase } from '@/lib/supabase'
+import { getLocalizedContent, getLocalizedArray } from '@/lib/locale'
 
 // Import your actual page components
 import AboutPage from '@/app/_pages/about/page'
@@ -44,6 +48,149 @@ const translations = {
 
 interface PageProps {
   params: Promise<{ slug: string[] }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const requestedPath = '/' + slug.join('/')
+  
+  // Handle special cases first
+  if (requestedPath === '/admin') {
+    return {
+      title: 'Admin Panel - Netlin Technologies',
+      description: 'Admin panel for managing content'
+    }
+  }
+  
+  // Check if this is a blog article route
+  if (slug.length === 2 && slug[0] === 'blog') {
+    const articleSlug = slug[1]
+    
+    try {      
+      // Try to fetch the blog post from Supabase
+      let { data: post, error } = await supabase
+        .from('netlin_blog_posts')
+        .select('*')
+        .eq('slug', articleSlug)
+        .maybeSingle()
+
+      // If not found by English slug, try German slug
+      if (!post) {
+        const germanResult = await supabase
+          .from('netlin_blog_posts')
+          .select('*')
+          .eq('slug_de', articleSlug)
+          .maybeSingle()
+        
+        post = germanResult.data
+        error = germanResult.error
+      }
+
+      if (post && !error) {        
+        // Get current locale
+        const locale = process.env.NEXT_PUBLIC_LOCALE || 'en'
+        
+        // Get localized content based on locale
+        let localizedTitle: string
+        let localizedExcerpt: string
+        
+        if (locale === 'de') {
+          localizedTitle = post.title_de || post.title || 'Article'
+          localizedExcerpt = post.excerpt_de || post.excerpt || 'Article excerpt'
+        } else {
+          localizedTitle = post.title || 'Article'
+          localizedExcerpt = post.excerpt || 'Article excerpt'
+        }
+
+        const metadata: Metadata = {
+          title: `${localizedTitle} - Netlin Technologies`,
+          description: localizedExcerpt,
+          // Optional: Add more metadata
+          openGraph: {
+            title: localizedTitle,
+            description: localizedExcerpt,
+            type: 'article',
+            publishedTime: post.published_at || post.created_at,
+            authors: [post.author_name],
+            tags: locale === 'de' ? (post.tags_de || post.tags || []) : (post.tags || []),
+          },
+          twitter: {
+            card: 'summary_large_image',
+            title: localizedTitle,
+            description: localizedExcerpt,
+          }
+        }
+        
+        return metadata
+      }
+    } catch (error) {
+      console.error('generateMetadata: Error fetching blog post:', error)
+    }
+    
+    // Fallback to generic blog metadata if post not found or error occurred
+    return {
+      title: `${t.metaData.blogTitle} - ${articleSlug}`,
+      description: t.metaData.blogDesc
+    }
+  }
+  
+  // Get the current locale from environment variable
+  const locale = process.env.NEXT_PUBLIC_LOCALE || 'en'
+  const currentTranslations = translations[locale as keyof typeof translations]
+  
+  if (!currentTranslations) {
+    return {
+      title: t.metaData.homeTitle,
+      description: t.metaData.homeDesc
+    }
+  }
+  
+  // Find which page this route corresponds to
+  const routeEntries = Object.entries(currentTranslations.routes)
+  const foundRoute = routeEntries.find(([_, path]) => path === requestedPath)
+  
+  if (!foundRoute) {
+    return {
+      title: t.metaData.homeTitle,
+      description: t.metaData.homeDesc
+    }
+  }
+  
+  const [routeKey] = foundRoute
+  
+  // Map route keys to their corresponding metadata
+  const metadataMap: Record<string, { title: string; description: string }> = {
+    about: {
+      title: t.metaData.aboutTitle,
+      description: t.metaData.aboutDesc
+    },
+    contact: {
+      title: t.metaData.contactTitle,
+      description: t.metaData.contactDesc
+    },
+    services: {
+      title: t.metaData.homeTitle, // You might want to add servicesTitle to your locales
+      description: t.metaData.homeDesc // You might want to add servicesDesc to your locales
+    },
+    blog: {
+      title: t.metaData.blogTitle,
+      description: t.metaData.blogDesc
+    },
+    automation: {
+      title: t.metaData.automationTitle,
+      description: t.metaData.automationDesc
+    }
+  }
+  
+  const pageMetadata = metadataMap[routeKey] || {
+    title: t.metaData.homeTitle,
+    description: t.metaData.homeDesc
+  }
+  
+  return {
+    title: pageMetadata.title,
+    description: pageMetadata.description
+  }
 }
 
 export default async function DynamicPage({ params }: PageProps) {

@@ -1,8 +1,8 @@
-import { ClientLayout } from '@/components/ClientLayout'
 import type { Metadata } from 'next'
-import { Montserrat, Sora } from 'next/font/google';
 import './globals.css'
-import {t} from "@/lib/locales";
+import { Montserrat, Sora } from 'next/font/google';
+import { ClientLayout } from '@/components/ClientLayout'
+
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -15,12 +15,6 @@ const sora = Sora({
   variable: '--font-sora',
   display: 'swap',
 });
-
-export const metadata: Metadata = {
-  title: t.metaData.homeTitle,
-  description: t.metaData.homeDesc,
-}
-
 export default function RootLayout({
   children,
 }: {
