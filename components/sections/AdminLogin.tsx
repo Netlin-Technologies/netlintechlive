@@ -98,18 +98,6 @@ export const AdminLogin: React.FC = () => {
               </button>
             </div>
           </form>
-
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-semibold text-blue-900 mb-2">Getting Started:</h3>
-            <p className="text-sm text-blue-800">
-              Since this is a fresh setup, you'll need to create your first admin account using the "Sign up" option above.
-            </p>
-            <p className="text-sm text-blue-800 mt-2">
-              <strong>Recommended:</strong><br/>
-              Email: admin@netlintech.com<br/>
-              Password: admin123456
-            </p>
-          </div>
         </CardContent>
       </Card>
     </div>
