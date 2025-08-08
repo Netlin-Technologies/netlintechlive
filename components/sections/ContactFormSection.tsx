@@ -427,3 +427,5 @@ export const ContactFormSection = (): JSX.Element => {
     </div>
   );
 };
+
+export default ContactFormSection;
