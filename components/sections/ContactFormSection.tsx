@@ -1,7 +1,5 @@
-'use client'
-
-import { ChevronDownIcon, Loader2 } from "lucide-react";
-import React, { useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
+import React from "react";
 import { t } from '@/lib/locales';
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
@@ -17,28 +15,6 @@ import {
 import { Switch } from "../ui/switch";
 
 export const ContactFormSection = (): JSX.Element => {
-  // Local state
-  const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
-    workEmail: '',
-    service: '',
-    message: '',
-  })
-  const [discoveryCall, setDiscoveryCall] = useState(true)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState(false)
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
-  // Track whether discovery call was enabled when the form was submitted
-  const [submittedDiscoveryCall, setSubmittedDiscoveryCall] = useState(false)
-
-  // Optional: configurable Google Calendar embed URL via env
-  const calendarEmbedUrl = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL
-  // Force a light-looking calendar using a CSS filter (useful when the Google UI renders dark)
-  const calendarForceLight = process.env.NEXT_PUBLIC_CALENDAR_FORCE_LIGHT !== 'false'
-  const calendarIframeClasses = `w-full h-[800px] border-0 ${calendarForceLight ? 'filter invert hue-rotate-180 saturate-125 brightness-105' : ''}`
-
   // Form field data for mapping
   const formFields = [
     {
@@ -77,259 +53,142 @@ export const ContactFormSection = (): JSX.Element => {
     },
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-    setFieldErrors({})
-
-    // Require service selection
-    const errs: Record<string, string> = {}
-    if (!form.service) {
-      errs.service = t.content.contactForm.errors.serviceRequired
-    }
-    if (!form.firstName) errs.firstName = t.content.contactForm.errors.firstNameRequired
-    if (!form.lastName) errs.lastName = t.content.contactForm.errors.lastNameRequired
-    if (!form.workEmail) errs.workEmail = t.content.contactForm.errors.emailRequired
-    if (!form.message) errs.message = t.content.contactForm.errors.messageRequired
-
-    if (Object.keys(errs).length > 0) {
-      setFieldErrors(errs)
-      setLoading(false)
-      return
-    }
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, discoveryCall })
-      })
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
-        throw new Error(data?.error || 'Failed to send message')
-      }
-
-      setSuccess(true)
-      // Remember the discoveryCall state at the moment of successful submit
-      setSubmittedDiscoveryCall(discoveryCall)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to send message')
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
     <div className="flex flex-col items-center justify-center gap-6 pt-8 md:pt-16 pb-0 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative self-stretch w-full animate-fade-in-up animation-delay-600">
       <Card className="flex flex-col gap-6 md:gap-8 p-6 md:p-8 lg:p-10 bg-[#0c0b12] rounded-2xl border border-solid border-[hsl(0,0,18%)] shadow-[0px_0px_100px_#034baecc] w-full max-w-4xl hover:shadow-[0px_0px_120px_#034baecc] transition-all duration-500">
         <CardContent className="flex flex-col gap-6 md:gap-8 p-0">
-          {success ? (
-            <>
-              <div className="flex flex-col items-center justify-center text-center gap-4 p-8 bg-[#0e0d16] rounded-2xl border border-[hsl(0,0,18%)]">
-                <div className="w-14 h-14 rounded-full bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] flex items-center justify-center shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="font-sora font-semibold text-white text-2xl">{t.content.contactForm.success.title}</h3>
-                <p className="font-sora text-[#b9b8c0]">{t.content.contactForm.success.description}</p>
-                <Button onClick={() => { setSuccess(false); setSubmittedDiscoveryCall(false); setForm({ firstName:'', lastName:'', workEmail:'', service:'', message:'' }) }} className="mt-2 p-3 md:p-4 rounded-lg border border-solid border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] text-white font-sora hover:opacity-90 transition-all duration-300">
-                  {t.content.contactForm.success.anotherMessageButton}
-                </Button>
-              </div>
+          {formFields.map((row) => (
+            <div
+              key={`row-${row.row}`}
+              className="flex flex-col lg:flex-row items-start gap-4 md:gap-6 lg:gap-8 w-full"
+            >
+              {row.fields.map((field) => (
+                <div
+                  key={field.id}
+                  className="flex flex-col items-start gap-2 md:gap-3 w-full"
+                >
+                  <Label
+                    htmlFor={field.id}
+                    className="font-sora font-normal text-white text-sm md:text-base"
+                  >
+                    {field.label}
+                  </Label>
 
-              {submittedDiscoveryCall && (
-                <div className="flex flex-col gap-4 md:gap-6 mt-6">
-                  <h4 className="font-sora font-semibold text-white text-xl text-center">{t.content.contactForm.discoveryCall.title}</h4>
-                  {calendarEmbedUrl ? (
-                    <div className="overflow-hidden rounded-2xl border border-[hsl(0,0,18%)] bg-[#0e0d16]">
-                      <iframe
-                        src={calendarEmbedUrl}
-                        className={calendarIframeClasses}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        allow="clipboard-write; encrypted-media;"
-                        title="Discovery Call Booking"
-                      />
-                      <div className="flex justify-center py-3">
-                        <a
-                          href={calendarEmbedUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-sora text-[#b9b8c0] hover:text-white transition-colors"
+                  {field.isSelect ? (
+                    <Select>
+                      <SelectTrigger
+                        id={field.id}
+                        className="justify-between p-3 md:p-4 w-full bg-[#12101e] rounded-xl border border-solid border-[hsl(0,0,18%)] text-[#414141] text-sm md:text-base font-sora font-normal hover:border-[#4d9aff] focus:border-[#4d9aff] transition-all duration-300 hover:animate-rotate-glow-subtle"
+                      >
+                        <SelectValue 
+                          placeholder={field.placeholder}
+                          className="text-[#414141] font-sora"
+                        />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#12101e] border border-[hsl(0,0,18%)] rounded-xl">
+                        <SelectItem 
+                          value="web-development" 
+                          className="text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200"
                         >
-                          {t.content.contactForm.booking.openInNewTab}
-                        </a>
-                      </div>
-                    </div>
+                          {t.content.contactForm.form.service.options.webDevelopment}
+                        </SelectItem>
+                        <SelectItem 
+                          value="ai-automation" 
+                          className="text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200"
+                        >
+                          {t.content.contactForm.form.service.options.aiAutomation}
+                        </SelectItem>
+                        <SelectItem 
+                          value="consulting" 
+                          className="text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200"
+                        >
+                          {t.content.contactForm.form.service.options.consulting}
+                        </SelectItem>
+                        <SelectItem 
+                          value="custom-solutions" 
+                          className="text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200"
+                        >
+                          {t.content.contactForm.form.service.options.customSolutions}
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
                   ) : (
-                    <div className="text-center text-sm md:text-base font-sora text-[#b9b8c0] bg-[#0e0d16] rounded-2xl border border-[hsl(0,0,18%)] p-6">
-                      {t.content.contactForm.booking.notConfigured}
-                    </div>
+                    <Input
+                      id={field.id}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      className="p-3 md:p-4 w-full bg-[#12101E] rounded-lg border border-solid border-[hsl(0,0,18%)] text-white text-sm md:text-base font-sora font-normal placeholder:text-[#414141] hover:border-[#4d9aff] focus:border-[#4d9aff] transition-all duration-300 hover:animate-rotate-glow-subtle focus:animate-rotate-glow-subtle"
+                    />
                   )}
                 </div>
-              )}
-            </>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6 md:gap-8">
-              {formFields.map((row) => (
-                <div
-                  key={`row-${row.row}`}
-                  className="flex flex-col lg:flex-row items-start gap-4 md:gap-6 lg:gap-8 w-full"
-                >
-                  {row.fields.map((field: any) => (
-                    <div
-                      key={field.id}
-                      className="flex flex-col items-start gap-2 md:gap-3 w-full"
-                    >
-                      <Label
-                        htmlFor={field.id}
-                        className="font-sora font-normal text-white text-sm md:text-base"
-                      >
-                        {field.label}
-                      </Label>
-
-                      {field.isSelect ? (
-                        <>
-                          <Select value={form.service} onValueChange={(v) => { setForm({ ...form, service: v }); setFieldErrors(prev => ({ ...prev, service: '' })) }}>
-                            <SelectTrigger
-                              id={field.id}
-                              className={`text-white placeholder:text-[#414141] justify-between p-3 md:p-4 w-full bg-[#12101e] rounded-xl border border-solid text-sm md:text-base font-sora font-normal transition-all duration-300 hover:animate-rotate-glow-subtle ${fieldErrors.service ? 'border-red-500' : 'border-[hsl(0,0,18%)] hover:border-[#4d9aff] focus:border-[#4d9aff]'}`}
-                              aria-invalid={!!fieldErrors.service}
-                            >
-                              <SelectValue 
-                                placeholder={field.placeholder}
-                                className="text-white placeholder:text-[#414141] font-sora"
-                              />
-                            </SelectTrigger>
-                            <SelectContent className="bg-[#12101e] border border-[hsl(0,0,18%)] rounded-xl">
-                              <SelectItem value="web-development" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
-                                {t.content.contactForm.form.service.options.webDevelopment}
-                              </SelectItem>
-                              <SelectItem value="ai-automation" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
-                                {t.content.contactForm.form.service.options.aiAutomation}
-                              </SelectItem>
-                              <SelectItem value="consulting" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
-                                {t.content.contactForm.form.service.options.consulting}
-                              </SelectItem>
-                              <SelectItem value="custom-solutions" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
-                                {t.content.contactForm.form.service.options.customSolutions}
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
-                          {fieldErrors.service && (
-                            <p className="text-red-400 text-xs mt-1">{fieldErrors.service}</p>
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          <Input
-                            id={field.id}
-                            type={field.type}
-                            placeholder={field.placeholder}
-                            value={(form as any)[field.id]}
-                            onChange={(e) => { setForm({ ...form, [field.id]: e.target.value }); setFieldErrors(prev => ({ ...prev, [field.id]: '' })) }}
-                            className={`text-white p-3 md:p-4 w-full bg-[#12101E] rounded-lg border border-solid text-sm md:text-base font-sora font-normal placeholder:text-[#414141] transition-all duration-300 hover:animate-rotate-glow-subtle focus:animate-rotate-glow-subtle ${fieldErrors[field.id] ? 'border-red-500' : 'border-[hsl(0,0,18%)] hover:border-[#4d9aff] focus:border-[#4d9aff]'}`}
-                            aria-invalid={!!fieldErrors[field.id]}
-                          />
-                          {fieldErrors[field.id] && (
-                            <p className="text-red-400 text-xs mt-1">{fieldErrors[field.id]}</p>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </div>
               ))}
+            </div>
+          ))}
 
-              {/* Message textarea */}
-              <div className="flex flex-col items-start gap-2 md:gap-3 w-full">
-                <Label
-                  htmlFor="message"
-                  className="font-sora font-normal text-white text-sm md:text-base"
-                >
-                  {t.content.contactForm.form.message.label}
-                </Label>
-                <textarea
-                  id="message"
-                  placeholder={t.content.contactForm.form.message.placeholder}
-                  rows={4}
-                  value={form.message}
-                  onChange={(e) => { setForm({ ...form, message: e.target.value }); setFieldErrors(prev => ({ ...prev, message: '' })) }}
-                  className={`text-white p-3 md:p-4 w-full bg-[#12101e] rounded-xl border border-solid text-sm md:text-base font-sora font-normal placeholder:text-[#414141] transition-all duration-300 hover:animate-rotate-glow-subtle focus:animate-rotate-glow-subtle resize-vertical min-h-[100px] focus:outline-none focus:ring-0 ${fieldErrors.message ? 'border-red-500' : 'border-[hsl(0,0,18%)] hover:border-[#4d9aff] focus:border-[#4d9aff]'}`}
-                  aria-invalid={!!fieldErrors.message}
-                />
-                {fieldErrors.message && (
-                  <p className="text-red-400 text-xs mt-1">{fieldErrors.message}</p>
-                )}
-              </div>
+          {/* Message textarea */}
+          <div className="flex flex-col items-start gap-2 md:gap-3 w-full">
+            <Label
+              htmlFor="message"
+              className="font-sora font-normal text-white text-sm md:text-base"
+            >
+              {t.content.contactForm.form.message.label}
+            </Label>
+            <textarea
+              id="message"
+              placeholder={t.content.contactForm.form.message.placeholder}
+              rows={4}
+              className="p-3 md:p-4 w-full bg-[#12101e] rounded-xl border border-solid border-[hsl(0,0,18%)] text-white text-sm md:text-base font-sora font-normal placeholder:text-[#414141] hover:border-[#4d9aff] focus:border-[#4d9aff] transition-all duration-300 hover:animate-rotate-glow-subtle focus:animate-rotate-glow-subtle resize-vertical min-h-[100px] focus:outline-none focus:ring-0"
+            />
+          </div>
 
-              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 w-full">
-                <div className="flex-1">
-                  <h3 className="font-sora font-semibold text-white text-lg md:text-xl mb-2">
-                    {t.content.contactForm.discoveryCall.title}
-                  </h3>
-                  <p className="font-sora font-normal text-sm md:text-base leading-relaxed">
-                    <span className="text-[#807f8c]">{t.content.contactForm.discoveryCall.description.part1}</span>
-                    <span className="text-white">
-                      {t.content.contactForm.discoveryCall.description.highlight1}
-                    </span>
-                    <span className="text-[#807f8c]">
-                      {" "}
-                      {t.content.contactForm.discoveryCall.description.part2}{" "}
-                    </span>
-                    <span className="text-white">
-                      {t.content.contactForm.discoveryCall.description.highlight2}
-                    </span>
-                    <span className="text-[#807f8c]">
-                      {" "}
-                      {t.content.contactForm.discoveryCall.description.part3}
-                    </span>
-                  </p>
-                </div>
-                <div className="flex items-center justify-center">
-                  <Switch
-                    className="data-[state=checked]:bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] data-[state=unchecked]:bg-[#33323e] h-8 w-14 rounded-full border-0 [&>span]:h-6 [&>span]:w-6 [&>span]:data-[state=checked]:translate-x-6 [&>span]:data-[state=unchecked]:translate-x-1 [&>span]:transition-transform [&>span]:duration-200 [&>span]:bg-white [&>span]:rounded-full [&>span]:shadow-lg"
-                    checked={discoveryCall}
-                    onCheckedChange={setDiscoveryCall}
-                  />
-                </div>
-              </div>
-
-              {error && (
-                <div className="text-red-400 font-sora text-sm bg-red-950/30 border border-red-900 rounded-lg p-3">
-                  {error}
-                </div>
-              )}
-
-              <Button type="submit" disabled={loading} className="w-full p-3 md:p-4 rounded-lg border border-solid border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] text-white text-base md:text-lg font-sora font-normal hover:opacity-90 transition-all duration-300 hover:animate-rotate-glow">
-                {loading ? (
-                  <span className="inline-flex items-center gap-2">
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    {t.content.contactForm.states.sending}
-                  </span>
-                ) : (
-                  t.content.contactForm.submitButton
-                )}
-              </Button>
-
-              <p className="text-center text-sm md:text-base font-sora font-normal leading-relaxed">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 w-full">
+            <div className="flex-1">
+              <h3 className="font-sora font-semibold text-white text-lg md:text-xl mb-2">
+                {t.content.contactForm.discoveryCall.title}
+              </h3>
+              <p className="font-sora font-normal text-sm md:text-base leading-relaxed">
+                <span className="text-[#807f8c]">{t.content.contactForm.discoveryCall.description.part1}</span>
+                <span className="text-white">
+                  {t.content.contactForm.discoveryCall.description.highlight1}
+                </span>
                 <span className="text-[#807f8c]">
-                  {t.content.contactForm.agreement.text}{" "}
+                  {" "}
+                  {t.content.contactForm.discoveryCall.description.part2}{" "}
                 </span>
-                <span className="font-semibold text-white cursor-pointer hover:text-[#4d9aff] transition-colors duration-200">
-                  {t.content.contactForm.agreement.terms}
+                <span className="text-white">
+                  {t.content.contactForm.discoveryCall.description.highlight2}
                 </span>
-                <span className="text-[#807f8c]"> {t.content.contactForm.agreement.and} </span>
-                <span className="font-semibold text-white cursor-pointer hover:text-[#4d9aff] transition-colors duration-200">
-                  {t.content.contactForm.agreement.privacy}
+                <span className="text-[#807f8c]">
+                  {" "}
+                  {t.content.contactForm.discoveryCall.description.part3}
                 </span>
-                <span className="text-[#807f8c]">.</span>
               </p>
-            </form>
-          )}
+            </div>
+            <div className="flex items-center justify-center">
+              <Switch
+                className="data-[state=checked]:bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] data-[state=unchecked]:bg-[#33323e] h-8 w-14 rounded-full border-0 [&>span]:h-6 [&>span]:w-6 [&>span]:data-[state=checked]:translate-x-6 [&>span]:data-[state=unchecked]:translate-x-1 [&>span]:transition-transform [&>span]:duration-200 [&>span]:bg-white [&>span]:rounded-full [&>span]:shadow-lg"
+                defaultChecked
+              />
+            </div>
+          </div>
+
+          <Button className="w-full p-3 md:p-4 rounded-lg border border-solid border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] text-white text-base md:text-lg font-sora font-normal hover:opacity-90 transition-all duration-300 hover:animate-rotate-glow">
+            {t.content.contactForm.submitButton}
+          </Button>
+
+          <p className="text-center text-sm md:text-base font-sora font-normal leading-relaxed">
+            <span className="text-[#807f8c]">
+              {t.content.contactForm.agreement.text}{" "}
+            </span>
+            <span className="font-semibold text-white cursor-pointer hover:text-[#4d9aff] transition-colors duration-200">
+              {t.content.contactForm.agreement.terms}
+            </span>
+            <span className="text-[#807f8c]"> {t.content.contactForm.agreement.and} </span>
+            <span className="font-semibold text-white cursor-pointer hover:text-[#4d9aff] transition-colors duration-200">
+              {t.content.contactForm.agreement.privacy}
+            </span>
+            <span className="text-[#807f8c]">.</span>
+          </p>
         </CardContent>
       </Card>
 

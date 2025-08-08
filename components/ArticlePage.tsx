@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react'
 import { Badge } from './ui/badge'
