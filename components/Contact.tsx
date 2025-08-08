@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { ContactFormSection } from "./sections/ContactFormSection";
 import { ContactHeroSection } from "./sections/ContactHeroSection";
