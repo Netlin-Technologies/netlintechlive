@@ -214,7 +214,7 @@ export const ArticlePage: React.FC = () => {
       )}
 
       {/* Article Content */}
-      <section className="py-16">
+      <section className="py-4">
         <div className="max-w-4xl mx-auto px-4">
           <Card className="border-none shadow-none bg-transparent">
             <CardContent className="p-0">
