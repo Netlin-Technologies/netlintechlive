@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react'
 import { Badge } from './ui/badge'
@@ -26,6 +26,7 @@ export const ArticlePage: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [debugInfo, setDebugInfo] = useState<string>('')
+  const contentRef = useRef<HTMLDivElement>(null)
   
   const labels = getLanguageLabels()
 
@@ -85,6 +86,175 @@ export const ArticlePage: React.FC = () => {
       setDebugInfo(`Hook error: ${hookError}`)
     }
   }, [hookError])
+
+  // Enhance and style code blocks from Quill/HTML after content renders (client-only)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const root = contentRef.current
+    if (!root || !post?.content) return
+
+  const enhanceQuill = async (container: HTMLElement) => {
+      // Skip if already processed
+      if (container.querySelector('.code-block-header')) return
+
+      // Build header (language badge + copy)
+      const header = document.createElement('div')
+      header.className = 'code-block-header'
+
+      // Infer language and sanitize control lines
+      let language = 'plaintext'
+      const lines = Array.from(container.querySelectorAll<HTMLElement>('.ql-code-block'))
+      while (lines.length && /^(copy|copyedit)$/i.test(lines[0].innerText.trim())) {
+        lines.shift()?.remove()
+      }
+      const firstLine = lines[0]
+      const token = firstLine?.innerText?.trim().toLowerCase()
+      if (token && token.length < 20 && /^[a-z+#]+[\w+-]*$/.test(token)) {
+        language = token
+        firstLine?.remove()
+      }
+
+  const lang = document.createElement('span')
+      lang.className = 'code-lang-badge'
+      lang.textContent = language
+
+      const btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'code-copy-btn'
+      btn.setAttribute('aria-label', 'Copy code')
+      btn.textContent = 'Copy'
+      btn.addEventListener('click', async () => {
+        const text = Array.from(container.querySelectorAll<HTMLElement>('.ql-code-block'))
+          .map((l) => l.innerText)
+          .join('\n')
+          .replace(/\n\n+/g, '\n')
+        try {
+          await navigator.clipboard.writeText(text)
+          const prev = btn.textContent
+          btn.textContent = 'Copied'
+          window.setTimeout(() => { btn.textContent = prev || 'Copy' }, 1200)
+        } catch {}
+      })
+
+      header.appendChild(lang)
+      header.appendChild(btn)
+      container.insertBefore(header, container.firstChild)
+
+      // Enable line numbers on the container
+      container.classList.add('line-numbers')
+
+      // Add a language class to help Prism (e.g., language-javascript)
+      if (language && language !== 'plaintext') {
+        container.classList.add(`language-${language}`)
+      }
+
+      // Prism highlighting: load theme + languages and map tokens back per line
+      try {
+        // Ensure theme CSS is present (already imported globally, but safe to lazy add if needed)
+        // @ts-ignore
+        if (!document.querySelector('link[data-prism]')) {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = 'https://cdn.jsdelivr.net/npm/prismjs@1.30.0/themes/prism.min.css'
+          link.setAttribute('data-prism', 'true')
+          document.head.appendChild(link)
+        }
+
+        const { default: Prism } = await import('prismjs')
+        // Optionally load popular languages on demand (js, ts, json)
+        if (language === 'javascript' || language === 'js') await import('prismjs/components/prism-javascript')
+        if (language === 'typescript' || language === 'ts') await import('prismjs/components/prism-typescript')
+        if (language === 'json') await import('prismjs/components/prism-json')
+
+        if (language && language !== 'plaintext') {
+          // Build a consolidated <pre><code> for Prism to process while preserving line divs
+          const lineNodes = Array.from(container.querySelectorAll<HTMLElement>('.ql-code-block'))
+          if (!lineNodes.length) return
+          const codeText = lineNodes.map(l => l.innerText).join('\n')
+          const tempPre = document.createElement('pre')
+          const tempCode = document.createElement('code')
+          tempCode.className = `language-${language}`
+          tempCode.textContent = codeText
+          tempPre.appendChild(tempCode)
+          Prism.highlightElement(tempCode)
+          const highlightedHTML = tempCode.innerHTML
+          const highlightedLines = highlightedHTML.split(/\n/)
+          lineNodes.forEach((line, i) => {
+            line.innerHTML = highlightedLines[i] ?? (line.textContent || '')
+          })
+        }
+      } catch {
+        // If Prism not available, skip gracefully
+      }
+    }
+
+    const enhancePre = (pre: HTMLElement) => {
+      const prev = pre.previousElementSibling
+      if (prev && prev.classList.contains('code-block-header')) return
+      const header = document.createElement('div')
+      header.className = 'code-block-header'
+
+      const lang = document.createElement('span')
+      lang.className = 'code-lang-badge'
+      const classAttr = pre.getAttribute('class') || ''
+      const match = classAttr.match(/language-([a-z0-9#+-]+)/i)
+      lang.textContent = match?.[1]?.toLowerCase() || 'plaintext'
+
+      const btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'code-copy-btn'
+      btn.setAttribute('aria-label', 'Copy code')
+      btn.textContent = 'Copy'
+      btn.addEventListener('click', async () => {
+        const text = (pre.textContent || '').replace(/\n\n+/g, '\n')
+        try {
+          await navigator.clipboard.writeText(text)
+          const prev = btn.textContent
+          btn.textContent = 'Copied'
+          window.setTimeout(() => { btn.textContent = prev || 'Copy' }, 1200)
+        } catch {}
+      })
+
+      header.appendChild(lang)
+      header.appendChild(btn)
+      pre.parentNode?.insertBefore(header, pre)
+    }
+
+    const enhanceAll = async () => {
+      let changed = false
+      const quillBlocks = root.querySelectorAll<HTMLElement>('.ql-code-block-container')
+      for (const el of Array.from(quillBlocks)) {
+        const before = el.classList.contains('line-numbers') || !!el.querySelector('.code-block-header')
+        await enhanceQuill(el)
+        const after = el.classList.contains('line-numbers') || !!el.querySelector('.code-block-header')
+        if (!before && after) changed = true
+      }
+      const preBlocks = root.querySelectorAll<HTMLElement>('pre')
+      preBlocks.forEach((el) => {
+        const before = !!(el.previousElementSibling && el.previousElementSibling.classList.contains('code-block-header'))
+        enhancePre(el)
+        const after = !!(el.previousElementSibling && el.previousElementSibling.classList.contains('code-block-header'))
+        if (!before && after) changed = true
+      })
+      return changed
+    }
+
+    // Try several animation frames in case content is inserted later
+    let attempts = 0
+    const tryEnhance = async () => {
+      if (await enhanceAll()) return
+      if (attempts++ < 12) window.requestAnimationFrame(() => { void tryEnhance() })
+    }
+    void tryEnhance()
+
+    // Observe future mutations (e.g., hydration updates)
+    const observer = new MutationObserver(() => {
+      void enhanceAll()
+    })
+    observer.observe(root, { childList: true, subtree: true })
+
+    return () => observer.disconnect()
+  }, [post?.content])
 
   if (loading && !post) {
     return (
@@ -219,6 +389,7 @@ export const ArticlePage: React.FC = () => {
           <Card className="border-none shadow-none bg-transparent">
             <CardContent className="p-0">
               <div 
+                ref={contentRef}
                 className="prose prose-lg max-w-none font-['Sora',Helvetica] text-gray-800 leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: getLocalizedContent(post, 'content') }}
                 style={{
