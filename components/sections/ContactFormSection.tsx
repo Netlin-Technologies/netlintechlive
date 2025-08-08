@@ -8,7 +8,11 @@ import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Switch } from "../ui/switch";
+// import { Switch } from "../ui/switch";
+const Switch = dynamic(
+  () => import("../ui/switch").then((mod) => mod.Switch),
+  { ssr: false }
+);
 
 // Dynamically import Select components to prevent SSR issues
 const Select = dynamic(
