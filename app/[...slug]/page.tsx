@@ -6,7 +6,7 @@ import { getLocalizedContent, getLocalizedArray } from '@/lib/locale'
 
 // Import your actual page components
 import AboutPage from '@/app/_pages/about/page'
-import ContactPage from '@/app/_pages/contact/page'
+import ClientOnlyContact from '@/components/ClientOnlyContact'
 import ServicesPage from '@/app/_pages/services/page'
 import BlogPage from '@/app/_pages/blog/page'
 import AutomationPage from '@/app/_pages/automation/page'
@@ -15,7 +15,7 @@ import AdminPage from '@/app/_pages/admin/page'
 
 const pageComponents = {
   about: AboutPage,
-  contact: ContactPage,
+  contact: ClientOnlyContact,
   services: ServicesPage,
   blog: BlogPage,
   automation: AutomationPage,
