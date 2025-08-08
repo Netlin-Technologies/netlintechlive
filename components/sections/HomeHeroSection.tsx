@@ -3,7 +3,7 @@ import { LocalizedLink } from '../LocalizedLink';
 
 const HeroSection = () => {
   return (
-    <div className="pt-7 xl:pt-[140px] w-full max-w-[992px] mx-auto relative">
+    <div className="pt-7 xl:pt-12 w-full max-w-[992px] mx-auto relative">
       <div className="relative z-10">
         <h1 className="text-center justify-start text-white text-2xl sm:text-3xl md:text-4xl xl:text-6xl font-semibold font-sora leading-normal xl:leading-[72px]">
           {t.content.homeHero.title}
@@ -27,7 +27,7 @@ const HeroSection = () => {
         <div className="mt-8 flex flex-wrap gap-8 items-center justify-center">
           <LocalizedLink
             route="contact"
-            className="px-4 h-10 py-2 pt-2.5 bg-gradient-to-r from-blue-500 to-blue-800 rounded shadow-[0px_4px_6px_0px_rgba(0,0,0,0.05)] shadow-[0px_10px_15px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-offset-[-1px] outline-blue-400 inline-flex justify-center items-center gap-2.5 cursor-pointer transition-all duration-300 hover:brightness-120"
+            className="px-4 h-10 py-2 pt-2.5 bg-gradient-to-r from-blue-500 to-blue-800 rounded shadow-[0px_10px_15px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-offset-[-1px] outline-blue-400 inline-flex justify-center items-center gap-2.5 cursor-pointer transition-all duration-300 hover:brightness-120"
           >
             <p className="justify-start text-white text-lg font-semibold font-sora leading-normal">
               {t.content.homeHero.automateButton}
@@ -35,7 +35,7 @@ const HeroSection = () => {
           </LocalizedLink>
           <LocalizedLink
             route="automation"
-            className="px-4 h-10 py-2 pt-2.5 bg-gradient-to-r from-neutral-500/60 to-neutral-400/60 rounded shadow-[0px_4px_6px_0px_rgba(0,0,0,0.05)] shadow-[0px_10px_15px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-offset-[-1px] outline-neutral-400/60 inline-flex justify-center items-center gap-2.5 cursor-pointer transition-all duration-300 hover:brightness-120"
+            className="px-4 h-10 py-2 pt-2.5 bg-gradient-to-r from-neutral-500/60 to-neutral-400/60 rounded shadow-[0px_10px_15px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-offset-[-1px] outline-neutral-400/60 inline-flex justify-center items-center gap-2.5 cursor-pointer transition-all duration-300 hover:brightness-120"
           >
             <p className="justify-start text-white text-lg font-semibold font-sora leading-normal">
               {t.content.homeHero.howItWorksButton}

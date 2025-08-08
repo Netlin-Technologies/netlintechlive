@@ -554,8 +554,8 @@ const translations: Record<string, Translations> = {
         ]
       },
       homeHero: {
-        title: 'Save time and money with custom AI automation',
-        subtitle: 'Our custom systems save more than €3,000 per month and reduce monotonous tasks by over 67%.',
+        title: 'Stop wasting time. Stop wasting Payroll.',
+        subtitle: 'We build AI automations that put repetitive work on autopilot, saving you over €3,000 a month and cutting busywork by more than 67%.',
         savings: '€3,000',
         reduction: '67%',
         automateButton: 'Automate now',
