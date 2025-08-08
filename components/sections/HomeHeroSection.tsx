@@ -2,26 +2,31 @@ import { t } from '@/lib/locales';
 import { LocalizedLink } from '../LocalizedLink';
 
 const HeroSection = () => {
+  // Defensive programming: ensure all required strings exist before using split
+  const subtitle = t.content?.homeHero?.subtitle || '';
+  const savings = t.content?.homeHero?.savings || '';
+  const reduction = t.content?.homeHero?.reduction || '';
+  
   return (
     <div className="pt-7 xl:pt-12 w-full max-w-[992px] mx-auto relative">
       <div className="relative z-10">
         <h1 className="text-center justify-start text-white text-2xl sm:text-3xl md:text-4xl xl:text-6xl font-semibold font-sora leading-normal xl:leading-[72px]">
-          {t.content.homeHero.title}
+          {t.content?.homeHero?.title || ''}
         </h1>
         <div className="w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[450px] xl:max-w-[522px] mx-auto">
           <img src="/assets/images/curveLine.svg" alt="line" />
         </div>
         <div className=" mt-3 pt-px text-center justify-start text-base md:text-xl xl:text-2xl font-sora leading-normal xl:leading-8">
           <span className="text-[#C6D5DD] font-normal">
-            {t.content.homeHero.subtitle.split(t.content.homeHero.savings)[0]}
+            {savings && subtitle ? subtitle.split(savings)[0] : subtitle}
           </span>
-          <span className="text-[#C6D5DD] font-bold">{t.content.homeHero.savings}</span>
+          <span className="text-[#C6D5DD] font-bold">{savings}</span>
           <span className="text-[#C6D5DD] font-normal">
-            {t.content.homeHero.subtitle.split(t.content.homeHero.savings)[1].split(t.content.homeHero.reduction)[0]}
+            {savings && reduction && subtitle ? subtitle.split(savings)[1]?.split(reduction)[0] : ''}
           </span>
-          <span className="text-[#C6D5DD] font-bold">{t.content.homeHero.reduction}</span>
+          <span className="text-[#C6D5DD] font-bold">{reduction}</span>
           <span className="text-[#C6D5DD] font-normal">
-            {t.content.homeHero.subtitle.split(t.content.homeHero.reduction)[1]}
+            {reduction && subtitle ? subtitle.split(reduction)[1] : ''}
           </span>
         </div>
         <div className="mt-8 flex flex-wrap gap-8 items-center justify-center">

@@ -1,7 +1,7 @@
 'use client'
 
 import { ChevronDownIcon, Loader2 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { t } from '@/lib/locales';
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
@@ -17,6 +17,9 @@ import {
 import { Switch } from "../ui/switch";
 
 export const ContactFormSection = (): JSX.Element => {
+  // Prevent SSR issues by only rendering on client side
+  const [mounted, setMounted] = useState(false)
+
   // Local state
   const [form, setForm] = useState({
     firstName: '',
@@ -33,11 +36,25 @@ export const ContactFormSection = (): JSX.Element => {
   // Track whether discovery call was enabled when the form was submitted
   const [submittedDiscoveryCall, setSubmittedDiscoveryCall] = useState(false)
 
+  // Ensure component only renders on client side
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // Optional: configurable Google Calendar embed URL via env (client-side only)
-  const calendarEmbedUrl = typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL : undefined
+  const calendarEmbedUrl = typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL || '' : ''
   // Force a light-looking calendar using a CSS filter (useful when the Google UI renders dark)
-  const calendarForceLight = typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_CALENDAR_FORCE_LIGHT !== 'false' : true
+  const calendarForceLight = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_CALENDAR_FORCE_LIGHT || 'true') !== 'false' : true
   const calendarIframeClasses = `w-full h-[800px] border-0 ${calendarForceLight ? 'filter invert hue-rotate-180 saturate-125 brightness-105' : ''}`
+
+  // Don't render anything on server side
+  if (!mounted) {
+    return <div className="flex flex-col items-center justify-center gap-6 pt-8 md:pt-16 pb-0 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative self-stretch w-full animate-fade-in-up animation-delay-600">
+      <div className="flex justify-center items-center p-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      </div>
+    </div>
+  }
 
   // Form field data for mapping
   const formFields = [
@@ -143,7 +160,7 @@ export const ContactFormSection = (): JSX.Element => {
               {submittedDiscoveryCall && (
                 <div className="flex flex-col gap-4 md:gap-6 mt-6">
                   <h4 className="font-sora font-semibold text-white text-xl text-center">{t.content.contactForm.discoveryCall.title}</h4>
-                  {calendarEmbedUrl ? (
+                  {calendarEmbedUrl && calendarEmbedUrl.trim() ? (
                     <div className="overflow-hidden rounded-2xl border border-[hsl(0,0,18%)] bg-[#0e0d16]">
                       <iframe
                         src={calendarEmbedUrl}
