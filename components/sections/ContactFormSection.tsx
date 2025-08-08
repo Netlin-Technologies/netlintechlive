@@ -2,19 +2,35 @@
 
 import { ChevronDownIcon, Loader2 } from "lucide-react";
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { t } from '@/lib/locales';
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { Switch } from "../ui/switch";
+
+// Dynamically import Select components to prevent SSR issues
+const Select = dynamic(
+  () => import("../ui/select").then((mod) => mod.Select),
+  { ssr: false }
+);
+const SelectContent = dynamic(
+  () => import("../ui/select").then((mod) => mod.SelectContent),
+  { ssr: false }
+);
+const SelectItem = dynamic(
+  () => import("../ui/select").then((mod) => mod.SelectItem),
+  { ssr: false }
+);
+const SelectTrigger = dynamic(
+  () => import("../ui/select").then((mod) => mod.SelectTrigger),
+  { ssr: false }
+);
+const SelectValue = dynamic(
+  () => import("../ui/select").then((mod) => mod.SelectValue),
+  { ssr: false }
+);
 
 export const ContactFormSection = (): JSX.Element => {
   // Prevent SSR issues by only rendering on client side
@@ -210,32 +226,41 @@ export const ContactFormSection = (): JSX.Element => {
 
                       {field.isSelect ? (
                         <>
-                          <Select value={form.service} onValueChange={(v) => { setForm({ ...form, service: v }); setFieldErrors(prev => ({ ...prev, service: '' })) }}>
-                            <SelectTrigger
-                              id={field.id}
-                              className={`text-white placeholder:text-[#414141] justify-between p-3 md:p-4 w-full bg-[#12101e] rounded-xl border border-solid text-sm md:text-base font-sora font-normal transition-all duration-300 hover:animate-rotate-glow-subtle ${fieldErrors.service ? 'border-red-500' : 'border-[hsl(0,0,18%)] hover:border-[#4d9aff] focus:border-[#4d9aff]'}`}
-                              aria-invalid={!!fieldErrors.service}
+                          {mounted ? (
+                            <Select value={form.service} onValueChange={(v) => { setForm({ ...form, service: v }); setFieldErrors(prev => ({ ...prev, service: '' })) }}>
+                              <SelectTrigger
+                                id={field.id}
+                                className={`text-white placeholder:text-[#414141] justify-between p-3 md:p-4 w-full bg-[#12101e] rounded-xl border border-solid text-sm md:text-base font-sora font-normal transition-all duration-300 hover:animate-rotate-glow-subtle ${fieldErrors.service ? 'border-red-500' : 'border-[hsl(0,0,18%)] hover:border-[#4d9aff] focus:border-[#4d9aff]'}`}
+                                aria-invalid={!!fieldErrors.service}
+                              >
+                                <SelectValue 
+                                  placeholder={field.placeholder}
+                                  className="text-white placeholder:text-[#414141] font-sora"
+                                />
+                              </SelectTrigger>
+                              <SelectContent className="bg-[#12101e] border border-[hsl(0,0,18%)] rounded-xl">
+                                <SelectItem value="web-development" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
+                                  {t.content.contactForm.form.service.options.webDevelopment}
+                                </SelectItem>
+                                <SelectItem value="ai-automation" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
+                                  {t.content.contactForm.form.service.options.aiAutomation}
+                                </SelectItem>
+                                <SelectItem value="consulting" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
+                                  {t.content.contactForm.form.service.options.consulting}
+                                </SelectItem>
+                                <SelectItem value="custom-solutions" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
+                                  {t.content.contactForm.form.service.options.customSolutions}
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          ) : (
+                            <div 
+                              className={`text-white placeholder:text-[#414141] justify-between p-3 md:p-4 w-full bg-[#12101e] rounded-xl border border-solid text-sm md:text-base font-sora font-normal transition-all duration-300 flex items-center ${fieldErrors.service ? 'border-red-500' : 'border-[hsl(0,0,18%)]'}`}
                             >
-                              <SelectValue 
-                                placeholder={field.placeholder}
-                                className="text-white placeholder:text-[#414141] font-sora"
-                              />
-                            </SelectTrigger>
-                            <SelectContent className="bg-[#12101e] border border-[hsl(0,0,18%)] rounded-xl">
-                              <SelectItem value="web-development" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
-                                {t.content.contactForm.form.service.options.webDevelopment}
-                              </SelectItem>
-                              <SelectItem value="ai-automation" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
-                                {t.content.contactForm.form.service.options.aiAutomation}
-                              </SelectItem>
-                              <SelectItem value="consulting" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
-                                {t.content.contactForm.form.service.options.consulting}
-                              </SelectItem>
-                              <SelectItem value="custom-solutions" className="cursor-pointer text-white font-sora text-sm hover:bg-[#1a1825] hover:text-white focus:bg-[#1a1825] focus:text-white transition-colors duration-200">
-                                {t.content.contactForm.form.service.options.customSolutions}
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
+                              <span className="text-[#414141]">{field.placeholder}</span>
+                              <ChevronDownIcon className="h-4 w-4 opacity-50" />
+                            </div>
+                          )}
                           {fieldErrors.service && (
                             <p className="text-red-400 text-xs mt-1">{fieldErrors.service}</p>
                           )}
