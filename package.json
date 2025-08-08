@@ -31,6 +31,7 @@
     "lucide-react": "^0.453.0",
     "motion": "^12.18.1",
     "next": "^15.1.0",
+    "nodemailer": "^7.0.5",
     "openai": "^5.11.0",
     "quill": "^2.0.3",
     "react": "^18.3.1",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.20",

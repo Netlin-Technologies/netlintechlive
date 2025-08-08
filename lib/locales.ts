@@ -182,6 +182,29 @@ interface Translations {
           value: string;
         };
       };
+      // Added localized validation errors
+      errors: {
+        firstNameRequired: string;
+        lastNameRequired: string;
+        emailRequired: string;
+        messageRequired: string;
+        serviceRequired: string;
+      };
+      // Added success texts
+      success: {
+        title: string;
+        description: string;
+        anotherMessageButton: string;
+      };
+      // Added booking labels
+      booking: {
+        openInNewTab: string;
+        notConfigured: string;
+      };
+      // Added transient UI states
+      states: {
+        sending: string;
+      };
     };
     blogArticles: {
       title: string;
@@ -683,6 +706,29 @@ const translations: Record<string, Translations> = {
             label: 'LinkedIn',
             value: '@netlintech'
           }
+        },
+        // Added localized validation errors
+        errors: {
+          firstNameRequired: 'First name is required.',
+          lastNameRequired: 'Last name is required.',
+          emailRequired: 'Email is required.',
+          messageRequired: 'Message is required.',
+          serviceRequired: 'Please select a service.'
+        },
+        // Added success texts
+        success: {
+          title: 'Message sent successfully',
+          description: "Thanks for reaching out. We'll get back to you soon.",
+          anotherMessageButton: 'Send another message'
+        },
+        // Added booking labels
+        booking: {
+          openInNewTab: 'Open calendar in a new tab',
+          notConfigured: 'Calendar booking is not configured. Set NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL in your environment to show the booking iframe.'
+        },
+        // Added transient UI states
+        states: {
+          sending: 'Sending...'
         }
       },
       blogArticles: {
@@ -1079,7 +1125,7 @@ const translations: Record<string, Translations> = {
       homeHero: {
         title: 'Erspare Zeit und Geld mit maßgeschneiderter KI-Automatisierung',
         subtitle: 'Unsere maßgeschneiderte Systeme ersparen mehr als €3.000 pro Monat und reduzieren monotone Aufgaben mit über 67%.',
-        savings: '€3.000',
+        savings: '€3,000',
         reduction: '67%',
         automateButton: 'Jetzt automatisieren',
         howItWorksButton: 'Wie funktioniert\'s'
@@ -1206,6 +1252,25 @@ const translations: Record<string, Translations> = {
             label: 'LinkedIn',
             value: '@netlintech'
           }
+        },
+        errors: {
+          firstNameRequired: 'Vorname ist erforderlich.',
+          lastNameRequired: 'Nachname ist erforderlich.',
+          emailRequired: 'E-Mail ist erforderlich.',
+          messageRequired: 'Nachricht ist erforderlich.',
+          serviceRequired: 'Bitte wählen Sie einen Service aus.'
+        },
+        success: {
+          title: 'Nachricht erfolgreich gesendet',
+          description: 'Vielen Dank für Ihre Nachricht. Wir melden uns in Kürze.',
+          anotherMessageButton: 'Weitere Nachricht senden'
+        },
+        booking: {
+          openInNewTab: 'Kalender in neuem Tab öffnen',
+          notConfigured: 'Kalenderbuchung ist nicht konfiguriert. Setzen Sie NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL in Ihrer Umgebung, um das Buchungs-Iframe anzuzeigen.'
+        },
+        states: {
+          sending: 'Senden...'
         }
       },
       blogArticles: {

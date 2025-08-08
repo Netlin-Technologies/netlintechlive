@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react'
 import { Badge } from './ui/badge'
@@ -12,6 +12,7 @@ import { NavbarSection } from './sections/NavbarSection'
 import { FooterSection } from './sections/FooterSection'
 import { getLocalizedContent, getLocalizedArray, getLanguageLabels, getLocalizedSlug, getLocalizedFeaturedImage } from '../lib/locale'
 import Link from 'next/link'
+import "react-quill-new/dist/quill.snow.css";
 
 export const ArticlePage: React.FC = () => {
   const { slug } = useParams<{ slug: string | string[] }>()
@@ -26,6 +27,7 @@ export const ArticlePage: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [debugInfo, setDebugInfo] = useState<string>('')
+  const contentRef = useRef<HTMLDivElement>(null)
   
   const labels = getLanguageLabels()
 
@@ -85,6 +87,86 @@ export const ArticlePage: React.FC = () => {
       setDebugInfo(`Hook error: ${hookError}`)
     }
   }, [hookError])
+
+  // Enhance code blocks after post is loaded
+  useEffect(() => {
+    if (!post) return
+    const container = contentRef.current
+    if (!container) return
+
+    const enhanceBlock = (el: HTMLElement, getText: () => string) => {
+      if (el.getAttribute('data-code-enhanced') === 'true') return
+      el.setAttribute('data-code-enhanced', 'true')
+      el.classList.add(
+        'not-prose',
+        'bg-[#0e0d16]',
+        'text-white',
+        'rounded-xl',
+        'border',
+        'border-gray-200/40',
+        'p-4',
+        'overflow-x-auto',
+        'relative',
+        'my-6'
+      )
+
+      if (!el.querySelector('.copy-btn')) {
+        const btn = document.createElement('button')
+        btn.type = 'button'
+        btn.textContent = 'Copy'
+        btn.className = 'copy-btn absolute top-2 right-2 text-xs px-2 py-1 rounded-md border border-[#4d9aff] text-white bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] hover:opacity-90 transition-opacity z-10'
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault()
+          const text = getText()
+          try {
+            await navigator.clipboard.writeText(text)
+            const original = btn.textContent
+            btn.textContent = 'Copied!'
+            setTimeout(() => { if (btn) btn.textContent = original || 'Copy' }, 1200)
+          } catch (err) {
+            // Fallback copy
+            const range = document.createRange()
+            range.selectNodeContents(el)
+            const sel = window.getSelection()
+            sel?.removeAllRanges()
+            sel?.addRange(range)
+            document.execCommand('copy')
+            sel?.removeAllRanges()
+            const original = btn.textContent
+            btn.textContent = 'Copied!'
+            setTimeout(() => { if (btn) btn.textContent = original || 'Copy' }, 1200)
+          }
+        })
+        el.appendChild(btn)
+      }
+    }
+
+    // Enhance native <pre><code> blocks
+    const pres = Array.from(container.querySelectorAll('pre'))
+    pres.forEach((pre) => {
+      const preEl = pre as HTMLElement
+      // style code
+      const code = preEl.querySelector('code') as HTMLElement | null
+      if (code) code.classList.add('font-mono', 'text-sm')
+      enhanceBlock(preEl, () => (code?.innerText || preEl.innerText || '').trim())
+    })
+
+    // Enhance Quill code blocks (.ql-code-block-container)
+    const quillContainers = Array.from(container.querySelectorAll('.ql-code-block-container'))
+    quillContainers.forEach((qc) => {
+      const qEl = qc as HTMLElement
+      // style each line
+      const lines = Array.from(qEl.querySelectorAll('.ql-code-block')) as HTMLElement[]
+      lines.forEach((ln) => ln.classList.add('font-mono', 'text-sm', 'whitespace-pre'))
+
+      const getText = () => {
+        if (lines.length) return lines.map(l => (l.innerText || '').replace(/\n+$/, '')).join('\n').trim()
+        return (qEl.innerText || '').trim()
+      }
+
+      enhanceBlock(qEl, getText)
+    })
+  }, [post])
 
   if (loading && !post) {
     return (
@@ -219,6 +301,7 @@ export const ArticlePage: React.FC = () => {
           <Card className="border-none shadow-none bg-transparent">
             <CardContent className="p-0">
               <div 
+                ref={contentRef}
                 className="prose prose-lg max-w-none font-['Sora',Helvetica] text-gray-800 leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: getLocalizedContent(post, 'content') }}
                 style={{
