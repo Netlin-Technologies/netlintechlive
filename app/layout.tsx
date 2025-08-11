@@ -6,6 +6,11 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import JsonLd from '@/components/JsonLd'
 import { getSiteUrl } from '@/lib/utils'
 
+// Provide a site-wide metadata base so OG/Twitter images resolve to absolute URLs
+const buildLocale = process.env.NEXT_PUBLIC_LOCALE || 'en'
+export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl(buildLocale)),
+}
 
 const montserrat = Montserrat({
   subsets: ['latin'],
