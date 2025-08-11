@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/locales'
 import { supabase } from '@/lib/supabase'
 import { getLocalizedContent, getLocalizedArray } from '@/lib/locale'
+import JsonLd from '@/components/JsonLd'
+import { getSiteUrl } from '@/lib/utils'
 
 // Import your actual page components
 import AboutPage from '@/app/_pages/about/page'
@@ -86,7 +88,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         error = germanResult.error
       }
 
-      if (post && !error) {        
+  if (post && !error) {        
         // Get current locale
         const locale = process.env.NEXT_PUBLIC_LOCALE || 'en'
         
@@ -102,7 +104,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           localizedExcerpt = post.excerpt || 'Article excerpt'
         }
 
-        const metadata: Metadata = {
+  const metadata: Metadata = {
           title: `${localizedTitle} - Netlin Technologies`,
           description: localizedExcerpt,
           // Optional: Add more metadata
@@ -160,6 +162,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   // Map route keys to their corresponding metadata
   const metadataMap: Record<string, { title: string; description: string }> = {
+    home: {
+      title: t.metaData.homeTitle,
+      description: t.metaData.homeDesc
+    },
     about: {
       title: t.metaData.aboutTitle,
       description: t.metaData.aboutDesc
@@ -207,7 +213,40 @@ export default async function DynamicPage({ params }: PageProps) {
   // Check if this is a blog article route (e.g., /blog/article-slug)
   if (slug.length === 2 && slug[0] === 'blog') {
     // This is a blog article route: /blog/[article-slug]
-    return <BlogArticlePage params={Promise.resolve({ slug: slug[1] })} />
+    const articleSlug = slug[1]
+    // Fetch post for JSON-LD
+    const { data: post } = await supabase
+      .from('netlin_blog_posts')
+      .select('*')
+      .or(`slug.eq.${articleSlug},slug_de.eq.${articleSlug}`)
+      .maybeSingle()
+
+  const articleLocale = process.env.NEXT_PUBLIC_LOCALE || 'en'
+  const name = articleLocale === 'de' ? (post?.title_de || post?.title || 'Article') : (post?.title || 'Article')
+  const description = articleLocale === 'de' ? (post?.excerpt_de || post?.excerpt || '') : (post?.excerpt || '')
+
+  const siteUrl = getSiteUrl(articleLocale)
+    const url = `${siteUrl}/blog/${articleSlug}`
+
+    return (
+      <>
+        {post && (
+          <JsonLd
+            data={{
+              '@context': 'https://schema.org',
+              '@type': 'BlogPosting',
+              headline: name,
+              description,
+              datePublished: post.published_at || post.created_at,
+              author: post.author_name ? { '@type': 'Person', name: post.author_name } : undefined,
+              mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+              url,
+            }}
+          />
+        )}
+        <BlogArticlePage params={Promise.resolve({ slug: articleSlug })} />
+      </>
+    )
   }
   
   // Get the current locale from environment variable
@@ -233,7 +272,24 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound()
   }
   
-  return <PageComponent />
+  const pageLocale = process.env.NEXT_PUBLIC_LOCALE || 'en'
+  const siteUrl = getSiteUrl(pageLocale)
+  const pageUrl = `${siteUrl}${requestedPath}`
+  return (
+    <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: t.metaData.homeTitle,
+          description: t.metaData.homeDesc,
+          inLanguage: pageLocale,
+          url: pageUrl,
+        }}
+      />
+      <PageComponent />
+    </>
+  )
 }
 
 export async function generateStaticParams() {

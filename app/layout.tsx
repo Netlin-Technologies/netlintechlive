@@ -3,6 +3,8 @@ import './globals.css'
 import { Montserrat, Sora } from 'next/font/google';
 import { ClientLayout } from '@/components/ClientLayout'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import JsonLd from '@/components/JsonLd'
+import { getSiteUrl } from '@/lib/utils'
 
 
 const montserrat = Montserrat({
@@ -21,9 +23,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const layoutLocale = process.env.NEXT_PUBLIC_LOCALE || 'en'
+  const siteUrl = getSiteUrl(layoutLocale)
   return (
-    <html lang={(process.env.NEXT_PUBLIC_LOCALE || "en")}>
+    <html lang={layoutLocale}>
       <body className={`${montserrat.variable} ${sora.variable}`}>
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Netlin Technologies',
+            url: siteUrl,
+            logo: `${siteUrl}/logo.png`,
+            sameAs: [
+              'https://www.linkedin.com/company/netlin-technologies',
+            ]
+          }}
+        />
         <ClientLayout>
           {children}
         </ClientLayout>
