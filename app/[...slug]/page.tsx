@@ -104,7 +104,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           localizedExcerpt = post.excerpt || 'Article excerpt'
         }
 
-  const metadata: Metadata = {
+        const metadata: Metadata = {
           title: `${localizedTitle} - Netlin Technologies`,
           description: localizedExcerpt,
           // Optional: Add more metadata
@@ -115,6 +115,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             publishedTime: post.published_at || post.created_at,
             authors: [post.author_name],
             tags: locale === 'de' ? (post.tags_de || post.tags || []) : (post.tags || []),
+            images: [
+              `/og?title=${encodeURIComponent(localizedTitle)}&subtitle=${encodeURIComponent(localizedExcerpt)}&domain=${(process.env.NEXT_PUBLIC_LOCALE || 'en') === 'de' ? 'netlintech.de' : 'netlintech.com'}`
+            ]
           },
           twitter: {
             card: 'summary_large_image',
@@ -130,9 +133,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
     
     // Fallback to generic blog metadata if post not found or error occurred
+    const fallbackTitle = `${t.metaData.blogTitle} - ${articleSlug}`
+    const fallbackDesc = t.metaData.blogDesc
     return {
-      title: `${t.metaData.blogTitle} - ${articleSlug}`,
-      description: t.metaData.blogDesc
+      title: fallbackTitle,
+      description: fallbackDesc,
+      openGraph: {
+        title: fallbackTitle,
+        description: fallbackDesc,
+        images: [
+          `/og?title=${encodeURIComponent(fallbackTitle)}&subtitle=${encodeURIComponent(fallbackDesc)}&domain=${(process.env.NEXT_PUBLIC_LOCALE || 'en') === 'de' ? 'netlintech.de' : 'netlintech.com'}`
+        ]
+      }
     }
   }
   
@@ -152,9 +164,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const foundRoute = routeEntries.find(([_, path]) => path === requestedPath)
   
   if (!foundRoute) {
+    const title = t.metaData.homeTitle
+    const description = t.metaData.homeDesc
     return {
-      title: t.metaData.homeTitle,
-      description: t.metaData.homeDesc
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        images: [
+          `/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(description)}&domain=${(process.env.NEXT_PUBLIC_LOCALE || 'en') === 'de' ? 'netlintech.de' : 'netlintech.com'}`
+        ]
+      }
     }
   }
   
@@ -195,7 +216,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   return {
     title: pageMetadata.title,
-    description: pageMetadata.description
+    description: pageMetadata.description,
+    openGraph: {
+      title: pageMetadata.title,
+      description: pageMetadata.description,
+      images: [
+        `/og?title=${encodeURIComponent(pageMetadata.title)}&subtitle=${encodeURIComponent(pageMetadata.description)}&domain=${(process.env.NEXT_PUBLIC_LOCALE || 'en') === 'de' ? 'netlintech.de' : 'netlintech.com'}`
+      ]
+    }
   }
 }
 

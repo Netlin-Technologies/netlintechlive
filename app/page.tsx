@@ -7,13 +7,17 @@ import { getSiteUrl } from '@/lib/utils'
 export function generateMetadata(): Metadata {
   const title = t.metaData.homeTitle
   const description = t.metaData.homeDesc
+  const domain = (process.env.NEXT_PUBLIC_LOCALE || 'en') === 'de' ? 'netlintech.de' : 'netlintech.com'
   return {
     title,
     description,
     openGraph: {
       title,
       description,
-      type: 'website'
+      type: 'website',
+      images: [
+        `/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(description)}&domain=${domain}`
+      ]
     },
     twitter: {
       card: 'summary_large_image',
