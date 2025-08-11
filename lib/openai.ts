@@ -39,31 +39,31 @@ export async function translateToGerman(data: TranslationRequest): Promise<Trans
   try {
     const prompt = `You are a professional German translator specializing in technical and business content. 
     
-Please translate the following blog post content from English to German. Maintain the same tone, style, and technical accuracy. Keep HTML tags intact in the content field.
+      Please translate the following blog post content from English to German. Maintain the same tone, style, and technical accuracy. Keep HTML tags intact in the content field.
 
-For the slug, create a German URL-friendly version (lowercase, hyphens instead of spaces, no special characters).
+      For the slug, create a German URL-friendly version (lowercase, hyphens instead of spaces, no special characters).
 
-Please respond with a valid JSON object containing the German translations:
+      Please respond with a valid JSON object containing the German translations:
 
-English Content:
-- Title: "${data.title}"
-- Excerpt: "${data.excerpt}"
-- Content: "${data.content}"
-- Category: "${data.category}"
-- Tags: ${JSON.stringify(data.tags)}
+      English Content:
+      - Title: "${data.title}"
+      - Excerpt: "${data.excerpt}"
+      - Content: "${data.content}"
+      - Category: "${data.category}"
+      - Tags: ${JSON.stringify(data.tags)}
 
-Please respond with ONLY a JSON object in this exact format:
-{
-  "title_de": "German title here",
-  "excerpt_de": "German excerpt here", 
-  "content_de": "German content here (keep HTML tags)",
-  "category_de": "German category here",
-  "tags_de": ["German tag 1", "German tag 2"],
-  "slug_de": "german-url-slug-here"
-}`
+      Please respond with ONLY a JSON object in this exact format:
+      {
+        "title_de": "German title here",
+        "excerpt_de": "German excerpt here", 
+        "content_de": "German content here (keep HTML tags)",
+        "category_de": "German category here",
+        "tags_de": ["German tag 1", "German tag 2"],
+        "slug_de": "german-url-slug-here"
+      }`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-4o-mini-2024-07-18",
       messages: [
         {
           role: "system",
@@ -75,7 +75,7 @@ Please respond with ONLY a JSON object in this exact format:
         }
       ],
       temperature: 0.3,
-      max_tokens: 4000
+    //  max_tokens: 4000
     })
 
     const response = completion.choices[0]?.message?.content
