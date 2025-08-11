@@ -103,10 +103,17 @@ interface Translations {
       howItWorksButton: string;
     };
     footer: {
+      ctaSection: {
+        title: string;
+        description: string;
+        buttonText: string;
+      };
       categories: {
         title: string;
-        links: string[];
-      }[];
+        links: {
+          name: string;
+          route: string;
+        }[];      }[];
       copyright: string;
     };
     faq: {
@@ -592,15 +599,29 @@ const translations: Record<string, Translations> = {
         howItWorksButton: 'How it works'
       },
       footer: {
+        ctaSection: {
+            title: 'Ready To Stop Doing And Start Scaling?',
+            description: 'Netlin is not for everyone. Netlin is for the most SERIOUS business owners when efficiency & scale matters. Netlin is for operations-heavy businesses ready to eliminate manual work forever.',
+            buttonText: 'Request A Free Automation Audit',
+        },
         categories: [
           {
             title: 'SERVICES',
-            links: ['SERVICES', 'SERVICES', 'SERVICES']
+            links: [
+              {name: 'Automation', route: "automation"}
+            ]
           },
           {
             title: 'COMPANY',
-            links: ['ABOUT US', 'SUCCESS STORIES', 'CONTACT', 'PRIVACY POLICY']
+            links: [
+             // {name: 'ABOUT US', route: "about"},
+             // {name: 'SUCCESS STORIES', route: "success"},
+              {name: 'Contact', route: "contact"},
+              {name: "Blog", route: "blog"}
+            //  {name: 'PRIVACY POLICY', route: "privacy"}
+            ]
           },
+          /*
           {
             title: 'RESOURCES',
             links: ['BLOG', 'DOWNLOADS', 'DOCUMENTATION']
@@ -612,7 +633,7 @@ const translations: Record<string, Translations> = {
           {
             title: 'WHO WE SERVE',
             links: ['CONSULTANTS', 'CONTENT CREATORS', 'SEO']
-          }
+          }*/
         ],
         copyright: '© 2024 Your Company. All rights reserved.'
       },
@@ -1138,27 +1159,41 @@ const translations: Record<string, Translations> = {
         howItWorksButton: 'Wie es funktioniert'
       },
       footer: {
+        ctaSection: {
+          title: 'Bereit, weniger zu tun und mehr zu skalieren?',
+          description: 'Netlin ist nicht für jeden. Netlin ist für die engagiertesten Unternehmer, wenn Effizienz und Skalierung entscheidend sind. Netlin ist für betriebsintensive Unternehmen, die bereit sind, manuelle Arbeit für immer zu eliminieren.',
+          buttonText: 'Kostenloses Automatisierungs-Audit Anfordern',
+        },
         categories: [
           {
             title: 'DIENSTLEISTUNGEN',
-            links: ['DIENSTLEISTUNGEN', 'DIENSTLEISTUNGEN', 'DIENSTLEISTUNGEN']
+            links: [
+              {name: 'Automatisierung', route: "automation"}
+            ]
           },
           {
             title: 'UNTERNEHMEN',
-            links: ['ÜBER UNS', 'ERFOLGSGESCHICHTEN', 'KONTAKT', 'DATENSCHUTZ']
+            links: [
+             // {name: 'ABOUT US', route: "/about"},
+             // {name: 'SUCCESS STORIES', route: "/success"},
+              {name: 'Kontakt', route: "contact"},
+              {name: "Blog", route: "blog"}
+              //{name: 'Datenschutz', route: "/privacy"}
+            ]
+          },
+          /*
+          {
+            title: 'RESOURCES',
+            links: ['BLOG', 'DOWNLOADS', 'DOCUMENTATION']
           },
           {
-            title: 'RESSOURCEN',
-            links: ['BLOG', 'DOWNLOADS', 'DOKUMENTATION']
+            title: 'SOLUTIONS',
+            links: ['SERVICES', 'SERVICES', 'SERVICES']
           },
           {
-            title: 'LÖSUNGEN',
-            links: ['DIENSTLEISTUNGEN', 'DIENSTLEISTUNGEN', 'DIENSTLEISTUNGEN']
-          },
-          {
-            title: 'WEN WIR BEDIENEN',
-            links: ['BERATER', 'CONTENT CREATORS', 'SEO']
-          }
+            title: 'WHO WE SERVE',
+            links: ['CONSULTANTS', 'CONTENT CREATORS', 'SEO']
+          }*/
         ],
         copyright: '© 2024 Ihr Unternehmen. Alle Rechte vorbehalten.'
       },
