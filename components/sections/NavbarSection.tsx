@@ -29,6 +29,15 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
       ? "border-b border-gray-200" 
       : "border-b border-[#ffffff1a]",
     logo: theme === 'light' ? "text-gray-900" : "text-white",
+    dropdown: theme === 'light'
+      ? "border-gray-200 border-b border-r border-l w-auto absolute -left-3.5 mx-auto bg-[#FFF] shadow-[0px_10px_20px_0px_rgba(200,200,200,0.30)] rounded-bl-[10px] rounded-br-[10px] hidden lg:flex top-[92px] pointer-events-none opacity-0 -mt-1.5"
+      : "border-b border-[#ffffff1a] border-r border-l w-auto absolute -left-3.5 mx-auto bg-[#0D0C15] shadow-[0px_20px_20px_0px_rgba(0,0,0,0.70)] rounded-bl-[10px] rounded-br-[10px] hidden lg:flex top-[92px] pointer-events-none opacity-0 -mt-1.5",
+    dropdownButton: theme === 'light'
+      ? "bg-gray-100 border-gray-200 border-b border-r border-l border-t hover:bg-gray-200"
+      : "bg-[#0D0C15]",
+    dropdownText: theme === 'light'
+      ? "text-gray-700"
+      : "text-white",
     navLink: theme === 'light' 
       ? "text-gray-700 hover:text-[#4d9aff]" 
       : "text-white hover:text-[#4d9aff]",
@@ -95,15 +104,15 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
 
                     <div
                       style={{ transition: "all 0.5s ease" }}
-                      className={`border-b border-[#ffffff1a] border-r border-l w-auto absolute -left-3.5 mx-auto bg-[#0D0C15] shadow-[0px_20px_20px_0px_rgba(0,0,0,0.70)] rounded-bl-[10px] rounded-br-[10px] hidden lg:flex top-[92px] pointer-events-none opacity-0 -mt-1.5 ${
+                      className={`${themeStyles.dropdown} ${
                         isServicesHovered
                           ? " max-h-auto top-10 opacity-100 !pointer-events-auto "
                           : " "
                       }`}
                     >
-                      <div className="border-l border-r border-b border-[#181622] p-3 rounded-bl-[10px] rounded-br-[10px] flex items-center gap-[11px]">
+                      <div className={`p-3 rounded-bl-[10px] rounded-br-[10px] flex items-center gap-[11px]`}>
                         <LocalizedLink route="automation">
-                          <div className="h-[62px] min-w-[217px] cursor-pointer p-[18px] bg-[#181622] rounded-[14px] outline outline-offset-[-1px] transition-all duration-300 hover:brightness-120">
+                          <div className={`${themeStyles.dropdownButton} h-[62px] min-w-[217px] cursor-pointer p-[18px] rounded-[14px] transition-all duration-300 hover:brightness-120`}>
                             <div className="inline-flex justify-start items-center gap-3.5">
                               <div>
                                 <img
@@ -111,7 +120,7 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
                                   alt="Automatisierung Icon"
                                 />
                               </div>
-                              <div className="justify-start text-white text-base font-semibold font-sora">
+                              <div className={`${themeStyles.dropdownText} justify-start text-base font-semibold font-sora`}>
                                 {t.content.navigation.automation}
                               </div>
                             </div>

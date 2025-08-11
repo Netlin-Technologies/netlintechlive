@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Montserrat, Sora } from 'next/font/google';
 import { ClientLayout } from '@/components/ClientLayout'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 
 const montserrat = Montserrat({
@@ -21,12 +22,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang={(process.env.NEXT_PUBLIC_LOCALE || "en")}>
       <body className={`${montserrat.variable} ${sora.variable}`}>
         <ClientLayout>
           {children}
         </ClientLayout>
       </body>
+      <GoogleAnalytics gaId="G-LRJNGV7EWL" />
     </html>
   )
 }
