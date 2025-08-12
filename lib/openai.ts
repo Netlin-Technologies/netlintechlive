@@ -74,7 +74,7 @@ export async function translateToGerman(data: TranslationRequest): Promise<Trans
           content: prompt
         }
       ],
-      temperature: 0.3,
+      temperature: 1,
       response_format: { type: "json_object" },
     //  max_tokens: 4000
     })
