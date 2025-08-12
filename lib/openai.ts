@@ -63,7 +63,7 @@ export async function translateToGerman(data: TranslationRequest): Promise<Trans
       }`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini-2024-07-18",
+      model: "gpt-5-mini",
       messages: [
         {
           role: "system",
@@ -75,6 +75,7 @@ export async function translateToGerman(data: TranslationRequest): Promise<Trans
         }
       ],
       temperature: 0.3,
+      response_format: { type: "json_object" },
     //  max_tokens: 4000
     })
 
