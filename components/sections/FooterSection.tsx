@@ -60,7 +60,7 @@ export const FooterSection = ({ theme = 'dark' }: FooterSectionProps): JSX.Eleme
             <LocalizedLink
               route="contact"
             >
-              <Button className={themeStyles.buttonStyle}>
+              <Button className={`${themeStyles.buttonStyle} !whitespace-pre-wrap !h-full !leading-6`}>
                 {t.content.footer.ctaSection.buttonText}
               </Button>
             </LocalizedLink>

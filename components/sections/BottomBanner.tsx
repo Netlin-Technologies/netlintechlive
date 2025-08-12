@@ -13,12 +13,10 @@ const initialItems = [
   { id: 2, name: "Slack", logo: "/assets/images/slackLogo.png" },
   { id: 3, name: "Discord", logo: "/assets/images/discordLogo.png" },
   { id: 4, name: "WhatsApp", logo: "/assets/images/whatsaapLogo.png" },
-  { id: 5, name: "WhatsApp", logo: "/assets/images/whatsaapLogo.png" },
-  { id: 6, name: "Notion", logo: "/assets/images/notationLogo.png" },
-  { id: 7, name: "Slack", logo: "/assets/images/slackLogo.png" },
-  { id: 8, name: "Discord", logo: "/assets/images/discordLogo.png" },
-  { id: 9, name: "WhatsApp", logo: "/assets/images/whatsaapLogo.png" },
-  { id: 10, name: "WhatsApp", logo: "/assets/images/whatsaapLogo.png" },
+  { id: 5, name: "Notion", logo: "/assets/images/notationLogo.png" },
+  { id: 6, name: "Slack", logo: "/assets/images/slackLogo.png" },
+  { id: 7, name: "Discord", logo: "/assets/images/discordLogo.png" },
+  { id: 8, name: "WhatsApp", logo: "/assets/images/whatsaapLogo.png" },
 ];
 
 const CounterDigit = ({ value }: { value: string }) => {
@@ -267,28 +265,28 @@ const BottomBanner = () => {
         />
       </div>
       <div className="w-full 2xl:max-w-[1288px] xl:max-w-[1075px] mx-auto xl:h-[954px] pt-3.5">
-        <p className=" text-base md:text-lg xl:text-xl 2xl:text-2xl font-semibold font-sora text-[#3B84F7]">
+        <p className="text-center text-base md:text-lg xl:text-xl 2xl:text-2xl font-semibold font-sora text-[#3B84F7]">
           {t.content.bottomBanner.problems.heading}
         </p>
-        <h3 className="text-white text-xl md:text-2xl xl:text-3xl 2xl:text-5xl font-semibold font-sora mt-1">
+        <h3 className="text-center text-white text-xl md:text-2xl xl:text-3xl 2xl:text-5xl font-semibold font-sora mt-1">
           {t.content.bottomBanner.problems.subtitle}
         </h3>
-        <p className="w-full max-w-[773px] mt-1 text-[#807F8C]  text-base md:text-lg xl:text-xl 2xl:text-2xl font-normal font-sora leading-normal 2xl:leading-9">
+        <p className="text-center w-full max-w-[773px] mt-1 text-[#807F8C]  text-base md:text-lg xl:text-xl 2xl:text-2xl font-normal font-sora leading-normal 2xl:leading-9">
           {t.content.bottomBanner.problems.description}
         </p>
         <div className="mt-5 xl:mt-8 2xl:mt-12 flex md:flex-row flex-col gap-8 justify-between">
           <div className="flex flex-col gap-8">
-            <div className="border border-solid border-[hsl(0,0,18%)] rounded-[10px] bg-[#0D0C14] p-3 md:p-4 xl:p-6 2xl:p-8 relative w-full md:max-w-[628px] overflow-hidden">
+            <div className="border border-solid border-[hsl(0,0,18%)] rounded-[10px] bg-[#0D0C14] p-4 md:p-4 xl:p-6 2xl:p-8 relative w-full md:max-w-[628px] overflow-hidden">
               <div className="flex items-center gap-3">
                 <img src="/assets/images/goUppwardArrow.svg" alt="arrow" />
                 <h5 className=" text-white 2xl:text-xl text-base 2xl:leading-7 leading-5 font-semibold font-sora w-full max-w-[376px]">
                   {t.content.bottomBanner.problems.cards.scaling.title}
                 </h5>
               </div>
-              <p className="mt-2 lg:mt-3.5 2xl:mt-6 text-[#B2B2B2] 2xl:text-base text-[13px] font-normal font-sora">
+              <p className="mt-4 lg:mt-3.5 2xl:mt-6 text-[#B2B2B2] 2xl:text-base text-[13px] font-normal font-sora">
                 {t.content.bottomBanner.problems.cards.scaling.description}
               </p>
-              <div className="mt-3 lg:mt-6 2xl:mt-12 flex flex-col gap-3">
+              <div className="mt-8 lg:mt-6 2xl:mt-12 flex flex-col gap-3">
                 {t.content.bottomBanner.problems.cards.scaling.issues.map((issue, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <img src="/assets/images/dislike.svg" alt="dislike" />
@@ -306,17 +304,17 @@ const BottomBanner = () => {
               </div>
               <div className="absolute bottom-0  bg-gradient-to-br from-[#005ED3] to-[#3F91FD] w-[200px] h-[223px] rounded-full blur-[120px] right-[56px] -bottom-5"></div>
             </div>
-            <div className="border border-solid border-[hsl(0,0,18%)] rounded-[10px] bg-[#0D0C14] p-3 md:p-4 xl:p-6 2xl:p-8 relative w-full md:max-w-[628px] overflow-hidden">
+            <div className="border border-solid border-[hsl(0,0,18%)] rounded-[10px] bg-[#0D0C14] p-4 xl:p-6 2xl:p-8 relative w-full md:max-w-[628px] overflow-hidden">
               <div className="flex items-center gap-3">
                 <img src="/assets/images/left-arrow-heading.png" alt="arrow" />
                 <h5 className="text-white 2xl:text-xl text-base 2xl:leading-7 leading-5 font-semibold font-sora w-full max-w-[376px]">
                   {t.content.bottomBanner.problems.cards.support.title}
                 </h5>
               </div>
-              <p className="mt-2 lg:mt-3.5 2xl:mt-6 text-[#B2B2B2] 2xl:text-base text-[13px] font-normal font-sora">
+              <p className="mt-4 lg:mt-3.5 2xl:mt-6 text-[#B2B2B2] 2xl:text-base text-[13px] font-normal font-sora">
                 {t.content.bottomBanner.problems.cards.support.description}
               </p>
-              <div className="mt-3 lg:mt-6 2xl:mt-12 flex flex-col gap-3">
+              <div className="mt-8 lg:mt-6 2xl:mt-12 flex flex-col gap-3">
                 {t.content.bottomBanner.problems.cards.support.issues.map((issue, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <img src="/assets/images/dislike.svg" alt="dislike" />
@@ -335,14 +333,14 @@ const BottomBanner = () => {
               <div className="absolute bottom-0  bg-gradient-to-br from-[#005ED3] to-[#3F91FD] w-[200px] h-[248px] rounded-full blur-[120px] -left-[26px] bottom-[2px]"></div>
             </div>
           </div>
-          <div className="border border-solid border-[hsl(0,0,18%)] rounded-[10px] bg-[#0D0C14] p-3 md:p-4 xl:p-6 2xl:p-8 relative w-full md:max-w-[628px] overflow-hidden">
+          <div className="border border-solid border-[hsl(0,0,18%)] rounded-[10px] bg-[#0D0C14] p-4 md:p-4 xl:p-6 2xl:p-8 relative w-full md:max-w-[628px] overflow-hidden">
             <div className="flex items-center gap-3">
               <img src="/assets/images/left-arrow-heading.png" alt="arrow" />
               <h5 className=" text-white 2xl:text-xl text-base 2xl:leading-7 leading-5 font-semibold font-sora w-full max-w-[376px]">
                 {t.content.bottomBanner.problems.cards.efficiency.title}
               </h5>
             </div>
-            <p className="mt-2 lg:mt-3.5 2xl:mt-6 text-[#B2B2B2] 2xl:text-base text-[13px] font-normal font-sora">
+            <p className="mt-4 lg:mt-3.5 2xl:mt-6 text-[#B2B2B2] 2xl:text-base text-[13px] font-normal font-sora">
               {t.content.bottomBanner.problems.cards.efficiency.description}
             </p>
             <div className="lg:mt-7 2xl:mt-[83px] mt-4 lg:pt-0 flex flex-col gap-1.5 h-[224px] min-h-[244px] max-h-[244px] relative overflow-hidden">
@@ -398,7 +396,7 @@ const BottomBanner = () => {
                 </div>
               </AnimatePresence>
             </div>
-            <div className="mt-4 lg:mt-7 2xl:mt-[83px] flex flex-col gap-3">
+            <div className="mt-8 lg:mt-7 2xl:mt-[83px] flex flex-col gap-3">
               {t.content.bottomBanner.problems.cards.efficiency.issues.map((issue: string, index: number) => (
                 <div key={index} className="flex items-center gap-3">
                   <img src="/assets/images/dislike.svg" alt="dislike" />
@@ -459,13 +457,13 @@ const BottomBanner = () => {
             </div>
           </div>
           <div className="relative z-90 w-full bg-[url('/assets/images/dotsBackground.png')] max-w-[1044px] 2xl:h-[770px] xl:h-[650px] lg:pt-0 pt-10 xl:max-w-none lg:max-w-[1044px] lg:mx-0 mx-auto">
-              <ProcessFlowSVG/>
+              <ProcessFlowSVG className="w-full"/>
           </div>
         </div>
       </div>
-      <div className="xl:mt-[26px] mt-12 w-full mx-auto">
-        <div className="flex lg:flex-row flex-col-reverse lg:justify-center w-full lg:mt-0 mt-10 xl:gap-0 gap-6">
-          <div className="relative z-90 bg-[url('/assets/images/dotsBackground.png')] 2xl:max-w-[800px] w-full xl:max-w-[600px] lg:max-w-[900px] max-w-2xl lg:mx-0 mx-auto xl:h-[694px] 2xl:pr-[0px] xl:pr-0 xl:pl-0 lg:px-20 px-10">
+      <div className="mt-12 xl:mt-[26px] w-full mx-auto">
+        <div className="flex lg:flex-row flex-col-reverse lg:justify-center w-full lg:mt-0 xl:gap-0 gap-6">
+          <div className="relative z-90 bg-[url('/assets/images/dotsBackground.png')] pt-10 md:pt-0 2xl:max-w-[800px] w-full xl:max-w-[600px] lg:max-w-[900px] max-w-2xl lg:mx-0 mx-auto xl:h-[694px] 2xl:pr-[0px] xl:pr-0 xl:pl-0 lg:px-20 px-10">
             <svg
               className="w-full h-full"
               viewBox="0 0 607 664"
@@ -3223,7 +3221,7 @@ const BottomBanner = () => {
               </div>
             </div>
           </div>
-          <div className="w-full lg:max-w-[700px] 2xl:max-w-[1000px] relative lg:mt-0 mt-10 2xl:pt-[246px] 2xl:pl-[10rem] lg:pt-[123px] xl:pl-[160px] lg:px-0 px-4 lg:text-left text-center">
+          <div className="w-full lg:max-w-[700px] 2xl:max-w-[1000px] relative lg:mt-0 2xl:pt-[246px] 2xl:pl-[10rem] lg:pt-[123px] xl:pl-[160px] lg:px-0 px-4 lg:text-left text-center">
             <div className="flex gap-2 flex-col">
               <p className="text-base md:text-lg xl:text-xl 2xl:text-2xl font-semibold font-sora text-[#3B84F7]">
                 {t.content.bottomBanner.finalSection.subtitle}
@@ -3233,10 +3231,10 @@ const BottomBanner = () => {
               </h3>
               <p className="text-base md:text-lg xl:text-xl 2xl:text-2xl font-normal font-sora leading-normal 2xl:leading-9 text-[#807F8C] lg:max-w-[620px]">
                 {t.content.bottomBanner.finalSection.description}
-                <LocalizedLink route="automation" className="text-white text-2xl font-semibold font-sora leading-9 cursor-pointer">
+              </p>
+              <LocalizedLink route="automation" className="text-white text-base md:text-lg xl:text-xl 2xl:text-2xl font-semibold font-sora leading-9 cursor-pointer">
                   {t.content.bottomBanner.finalSection.learnMore}
                 </LocalizedLink>
-              </p>
             </div>
 
             <div className="mt-9 flex flex-col sm:flex-row items-center gap-9 lg:justify-start justify-center">

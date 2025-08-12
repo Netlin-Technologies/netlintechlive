@@ -1146,7 +1146,7 @@ const translations: Record<string, Translations> = {
       homeHero: {
         title: 'Erspare Zeit und Geld mit maßgeschneiderter KI-Automatisierung',
         subtitle: 'Unsere maßgeschneiderte Systeme ersparen mehr als €3.000 pro Monat und reduzieren monotone Aufgaben mit über 67%.',
-        savings: '€3,000',
+        savings: '€3.000',
         reduction: '67%',
         automateButton: 'Jetzt automatisieren',
         howItWorksButton: 'Wie funktioniert\'s'

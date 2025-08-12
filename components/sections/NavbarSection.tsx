@@ -4,6 +4,7 @@ import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react";
 import { LocalizedLink } from '../LocalizedLink';
 import { t } from '@/lib/locales';
 import React, { useState } from "react";
+import { usePathname } from 'next/navigation';
 import { Button } from "../ui/button";
 import {
   NavigationMenu,
@@ -19,6 +20,19 @@ interface NavbarSectionProps {
 export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Element => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesHovered, setIsServicesHovered] = useState(false);
+  // Separate mobile dropdown open state (hover doesn't apply on touch devices)
+  const [isServicesMobileOpen, setIsServicesMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isRouteActive = (route: keyof typeof t.routes) => {
+    const target = t.routes[route]; // localized path e.g. '/', '/aboutus'
+    if (!target) return false;
+    if (target === '/') return pathname === '/' || pathname === '';
+    // Normalize (strip trailing slash) for robust comparison
+    const normTarget = target.replace(/\/$/, '');
+    const normPath = pathname.replace(/\/$/, '');
+    return normPath === normTarget || normPath.startsWith(normTarget + '/');
+  };
 
   // Theme-aware styles
   const themeStyles = {
@@ -87,8 +101,8 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
                 <NavigationMenuItem key={index}>
                   { !item.hasDropdown ? (
                   <NavigationMenuLink asChild>
-                    <LocalizedLink route={item.route} className={`flex items-center px-0 py-8 font-sora font-semibold ${themeStyles.navLink} text-sm xl:text-base text-center tracking-[0.56px] leading-5 whitespace-nowrap transition-colors`}>
-                      {item.text}                    
+                    <LocalizedLink route={item.route} className={`flex items-center px-0 py-8 font-sora font-semibold ${themeStyles.navLink} ${isRouteActive(item.route) ? 'text-[#4d9aff]' : ''} text-sm xl:text-base text-center tracking-[0.56px] leading-5 whitespace-nowrap transition-colors`}>
+                      {item.text}
                     </LocalizedLink>
                   </NavigationMenuLink>
                   ) : (
@@ -97,7 +111,7 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
                     onMouseLeave={() => setIsServicesHovered(false)}
                     className="relative inline-block"
                   >
-                    <NavigationMenuLink className={`flex items-center px-0 py-8 font-sora font-semibold ${themeStyles.navLink} text-sm xl:text-base text-center tracking-[0.56px] leading-5 whitespace-nowrap transition-colors cursor-pointer`}>
+                    <NavigationMenuLink className={`flex items-center px-0 py-8 font-sora font-semibold ${themeStyles.navLink} ${isRouteActive('services') ? 'text-[#4d9aff]' : ''} text-sm xl:text-base text-center tracking-[0.56px] leading-5 whitespace-nowrap transition-colors cursor-pointer`}>
                       {item.text}
                       <ChevronDownIcon className={`ml-2 h-3.5 w-3.5 transition-transform duration-200 ${isServicesHovered ? "rotate-180" : ""}`} />
                     </NavigationMenuLink>
@@ -112,7 +126,7 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
                     >
                       <div className={`p-3 rounded-bl-[10px] rounded-br-[10px] flex items-center gap-[11px]`}>
                         <LocalizedLink route="automation">
-                          <div className={`${themeStyles.dropdownButton} h-[62px] min-w-[217px] cursor-pointer p-[18px] rounded-[14px] transition-all duration-300 hover:brightness-120`}>
+              <div className={`${themeStyles.dropdownButton} h-[62px] min-w-[217px] cursor-pointer p-[18px] rounded-[14px] transition-all duration-300 hover:brightness-120 ${isRouteActive('automation') ? 'ring-2 ring-[#4d9aff] bg-[#4d9aff]/10' : ''}`}>
                             <div className="inline-flex justify-start items-center gap-3.5">
                               <div>
                                 <img
@@ -120,7 +134,7 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
                                   alt="Automatisierung Icon"
                                 />
                               </div>
-                              <div className={`${themeStyles.dropdownText} justify-start text-base font-semibold font-sora`}>
+                <div className={`${themeStyles.dropdownText} justify-start text-base font-semibold font-sora ${isRouteActive('automation') ? 'text-[#4d9aff]' : ''}`}>
                                 {t.content.navigation.automation}
                               </div>
                             </div>
@@ -192,20 +206,44 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
           <div className={`absolute top-full left-0 right-0 ${themeStyles.mobileMenu} lg:hidden`}>
             <div className="flex flex-col p-4 space-y-4">
               {navItems.map((item, index) => (
-                <div key={index} className="flex items-center justify-between py-2">
+                <div key={index} className="py-2">
                   {!item.hasDropdown ? (
-                    <LocalizedLink route={item.route}>
-                      <span className={`font-sora font-semibold ${themeStyles.mobileLink} text-base transition-colors`}>
-                        {item.text}
-                      </span>
-                    </LocalizedLink>
+                    <div className="flex items-center justify-between">
+                      <LocalizedLink route={item.route}>
+                        <span className={`font-sora font-semibold ${themeStyles.mobileLink} ${isRouteActive(item.route) ? 'text-[#4d9aff]' : ''} text-base transition-colors`}>
+                          {item.text}
+                        </span>
+                      </LocalizedLink>
+                    </div>
                   ) : (
-                    <span className={`font-sora font-semibold ${themeStyles.mobileLink.split(' ')[0]} text-base`}>
-                      {item.text}
-                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setIsServicesMobileOpen(o => !o)}
+                      aria-expanded={isServicesMobileOpen}
+                      aria-controls="mobile-services-dropdown"
+                      className={`w-full flex items-center justify-between font-sora font-semibold ${themeStyles.mobileLink} ${isRouteActive('services') ? 'text-[#4d9aff]' : ''} text-base transition-colors`}
+                    >
+                      <span>{item.text}</span>
+                      <ChevronDownIcon className={`h-4 w-4 transition-transform ${isServicesMobileOpen ? 'rotate-180' : ''}`} />
+                    </button>
                   )}
-                  {item.hasDropdown && (
-                    <ChevronDownIcon className={`h-4 w-4 ${themeStyles.mobileButton}`} />
+                  {item.hasDropdown && isServicesMobileOpen && (
+                    <div
+                      id="mobile-services-dropdown"
+                      className="mt-3 pl-3 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2"
+                    >
+                      <LocalizedLink route="automation">
+                        <div className={`${themeStyles.dropdownButton} flex items-center gap-3 px-4 py-3 rounded-lg ${isRouteActive('automation') ? 'ring-2 ring-[#4d9aff] bg-[#4d9aff]/10' : ''}`}> 
+                          <img
+                            src="/assets/images/automatisierung.svg"
+                            alt="Automatisierung Icon"
+                            className="w-6 h-6"
+                          />
+                          <span className={`${themeStyles.dropdownText} font-sora font-semibold text-sm ${isRouteActive('automation') ? 'text-[#4d9aff]' : ''}`}>{t.content.navigation.automation}</span>
+                        </div>
+                      </LocalizedLink>
+                      {/** Future service items can be added here reusing the same pattern */}
+                    </div>
                   )}
                 </div>
               ))}

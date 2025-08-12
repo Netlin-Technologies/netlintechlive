@@ -183,15 +183,15 @@ const BannerInfo = () => {
   }
 
   return (
-    <div className="xl:mt-[170px] mt-[100px] overflow-hidden">
-      <h4 className="text-white lg:text-5xl text-3xl text-center font-semibold font-sora">
+    <div className="mt-12 md:mt-[100px] xl:mt-[170px] overflow-hidden">
+      <h4 className="text-white lg:text-5xl text-3xl text-center font-semibold font-sora px-5">
         Vorteile, die unsere Kunden erleben
       </h4>
-      <p className="lg:text-2xl text-xl font-normal font-sora mt-2 text-[#807F8C] text-center">
+      <p className="lg:text-2xl text-lg font-normal font-sora mt-2 text-[#807F8C] text-center px-5">
         {t.content.bannerInfo.subtitle}
       </p>
 
-      <div className="relative w-fit mx-auto mt-[42px]">
+      <div className="relative w-fit mx-auto mt-8">
         <div className="hidden flex-col font-sora w-full gap-2 lg:flex">
           <div
             ref={containerRef1}

@@ -17,18 +17,18 @@ const ReviewCard = ({
 }) => (
   <>
     <div
-      className="shrink-0 border border-[#282828] rounded-[14px] w-[503px] h-[240px] bg-[#13111C] mx-3 cursor-pointer overflow-hidden"
+      className="shrink-0 border border-[#282828] rounded-[14px] w-[350px] h-auto md:w-[503px] bg-[#13111C] mx-3 cursor-pointer overflow-hidden"
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
     >
-      <div className="border-b border-[#282828] px-6 py-4 flex gap-3.5 items-center bg-[#181622]">
+      <div className="border-b border-[#282828] px-4 md:px-6 py-4 flex gap-3.5 items-center bg-[#181622]">
         <img className="w-8 h-8 rounded-full" src={image} alt="profile" />
         <p className="text-white text-lg font-semibold font-sora">
           {name}
         </p>
       </div>
-      <div className="px-6 py-5 pt-[25px]">
-        <p className="text-lg font-sora text-[#807F8C] leading-6">{text}</p>
+      <div className="p-4 md:px-6 md:py-5 md:pt-[25px]">
+        <p className="text-sm md:text-base font-sora text-[#807F8C] leading-6">{text}</p>
       </div>
     </div>
     <svg
@@ -63,12 +63,12 @@ const ReviewSection = () => {
   };
 
   return (
-    <section className="xl:m-36 m-32">
+    <section className="xl:m-36 md:mx-5 mt-12">
       <h2 className="font-sora font-semibold text-white text-center text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl leading-normal mb-5 md:mb-[42px]">
         {t.content.reviews.title}
       </h2>
       <div className=" overflow-hidden relative">
-        <div className="relative h-[240px] w-full">
+        <div className="relative w-full">
           <div className="absolute top-0 left-0 w-15 sm:w-30 lg:w-[267px] h-full bg-gradient-to-r from-[#0D0C14] to-[#0D0C14]/0 z-10" />
           <div className="absolute top-0 right-0 w-15 sm:w-30 lg:w-[267px] h-full rotate-180 bg-gradient-to-r from-[#0D0C14] to-[#0D0C14]/0 z-10" />
 

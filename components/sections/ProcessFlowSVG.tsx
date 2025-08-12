@@ -66,12 +66,12 @@ const arrowAnimation = {
   }
 };
 
-export const ProcessFlowSVG = () => {
+export const ProcessFlowSVG = ({className}: {className: string}) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <svg width="756" height="765" viewBox="0 0 756 765" fill="none" xmlns="http://www.w3.org/2000/svg" ref={ref}>
+        <svg className={className} width="756" viewBox="0 0 756 765" fill="none" xmlns="http://www.w3.org/2000/svg" ref={ref}>
             <g id="GRAPHIC 2">
             <motion.path 
                 id="mask_pv-line-03" 

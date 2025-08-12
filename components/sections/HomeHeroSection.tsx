@@ -29,7 +29,7 @@ const HeroSection = () => {
             {reduction && subtitle ? subtitle.split(reduction)[1] : ''}
           </span>
         </div>
-        <div className="mt-8 flex flex-wrap gap-8 items-center justify-center">
+        <div className="gap-4 mt-8 flex flex-wrap md:gap-8 items-center justify-center">
           <LocalizedLink
             route="contact"
             className="px-4 h-10 py-2 pt-2.5 bg-gradient-to-r from-blue-500 to-blue-800 rounded shadow-[0px_10px_15px_0px_rgba(0,0,0,0.10)] outline outline-1 outline-offset-[-1px] outline-blue-400 inline-flex justify-center items-center gap-2.5 cursor-pointer transition-all duration-300 hover:brightness-120"

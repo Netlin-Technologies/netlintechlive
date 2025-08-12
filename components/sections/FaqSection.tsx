@@ -34,7 +34,7 @@ export const FaqSection = (): JSX.Element => {
               className="border-b border-[#ffffff26] pb-2 md:py-4"
             >
               <AccordionTrigger className="flex items-start md:items-center gap-4 md:gap-9 relative w-full text-left">
-                <div className="flex-1 font-sora font-normal text-neutral-01100 text-lg md:text-xl tracking-[0] leading-relaxed md:leading-8">
+                <div className="flex-1 font-sora font-normal text-neutral-01100 text-base md:text-xl tracking-[0] leading-relaxed md:leading-8 break-all">
                   {item.question}
                 </div>
               </AccordionTrigger>
