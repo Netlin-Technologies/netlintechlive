@@ -1,9 +1,7 @@
 interface Translations {
   routes: {
     home: string;
-    about: string;
     contact: string;
-    services: string;
     automation: string;
     blog: string;
   };
@@ -402,14 +400,12 @@ const translations: Record<string, Translations> = {
   en: {
     routes: {
       home: '/',
-      about: '/aboutus',
       contact: '/contact',
-      services: '/services',
       automation: '/automation',
       blog: '/blog'
     },
     metaData: {
-      homeTitle: 'No-Code AI Automation | Custom, Scalable workflows for your business | NETLINTECH',
+      homeTitle: 'Automate workflows for your business | No-Code AI Automation',
       homeDesc: "We turn your biz into a system that runs itself. Custom AI workflows that slash overhead, kill manual tasks and scale hard. Built to win. Built by NETLINTECH.",
       automationTitle: 'Automate your business with AI | Print Cash | NETLINTECH',
       automationDesc: 'We build scalable automations that kill busywork and print ROI. No BS. No code. Just scalable systems that run while you sleep. Built by NETLINTECH.',
@@ -957,9 +953,7 @@ const translations: Record<string, Translations> = {
   de: {
     routes: {
       home: '/',
-      about: '/überuns',
       contact: '/kontakt', 
-      services: '/dienstleistungen',
       automation: '/automatisierung',
       blog: '/blog'
     },
