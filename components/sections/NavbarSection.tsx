@@ -65,7 +65,7 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
   };
 
   //type RouteType = "about" | "services" | "blog" | "contact" | "automation" | "home";
-  const navItems: { text: string; route: "home" | "services" | "blog" | "contact" | "about" | "automation"; hasDropdown: boolean }[] = [
+  const navItems: { text: string; route: "home" | "services" | "blog" | "contact" | "automation"; hasDropdown: boolean }[] = [
     { text: t.content.navigation.home, route: "home", hasDropdown: false },
     { text: t.content.navigation.services, route: "services", hasDropdown: true },
     { text: t.content.navigation.blog, route: "blog", hasDropdown: false },

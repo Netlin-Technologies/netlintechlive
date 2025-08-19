@@ -4,6 +4,7 @@ interface Translations {
     contact: string;
     automation: string;
     blog: string;
+    services: string;
   };
   metaData:{
     homeTitle: string;
@@ -402,6 +403,7 @@ const translations: Record<string, Translations> = {
       home: '/',
       contact: '/contact',
       automation: '/automation',
+      services: '/services',
       blog: '/blog'
     },
     metaData: {
@@ -954,6 +956,7 @@ const translations: Record<string, Translations> = {
     routes: {
       home: '/',
       contact: '/kontakt', 
+      services: '/dienstleistungen',
       automation: '/automatisierung',
       blog: '/blog'
     },
