@@ -96,9 +96,9 @@ const BannerSection = () => {
 
   const cards = [
     {
-      icon: "/assets/images/slack.svg",
-      title: t.content.bannerSection.cards.slack.title,
-      desc: t.content.bannerSection.cards.slack.description,
+      icon: "/assets/images/gmailicon.svg",
+      title: t.content.bannerSection.cards.gmail.title,
+      desc: t.content.bannerSection.cards.gmail.description,
     },
     {
       icon: "/assets/images/aiAgent.svg",
@@ -106,9 +106,9 @@ const BannerSection = () => {
       desc: t.content.bannerSection.cards.aiAgent.description,
     },
     {
-      icon: "/assets/images/gmailicon.svg",
-      title: t.content.bannerSection.cards.gmail.title,
-      desc: t.content.bannerSection.cards.gmail.description,
+      icon: "/assets/images/slack.svg",
+      title: t.content.bannerSection.cards.slack.title,
+      desc: t.content.bannerSection.cards.slack.description,
     },
   ];
 
@@ -119,7 +119,7 @@ const BannerSection = () => {
       subtitle: t.content.bannerSection.modules.chatgpt.subtitle,
     },
     {
-      icon: "/assets/images/aiAgent.svg",
+      icon: "/assets/images/airtable.svg",
       title: t.content.bannerSection.modules.airtable.title,
       subtitle: t.content.bannerSection.modules.airtable.subtitle,
     },

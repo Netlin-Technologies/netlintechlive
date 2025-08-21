@@ -337,6 +337,8 @@ interface Translations {
         word2: string;
         word3: string;
       };
+      ticker1: string;
+      ticker2: string;
     };
     processFlow: {
       recommendation: {
@@ -834,14 +836,16 @@ const translations: Record<string, Translations> = {
         buttonText: 'Learn more'
       },
       bannerInfo: {
-        title: 'Why choose automation?',
+        title: 'Proven Impact Across 99+ Companies',
         description: 'Increase efficiency, reduce costs, and focus on what matters most.',
-        subtitle: 'Over 150 successfully automated business processes speak for themselves:',
+        subtitle: 'Over 230 successfully automated business processes speak for themselves:',
         animatedWords: {
           word1: 'SAVED',
           word2: 'WORKFLOWS',
           word3: 'RESOLVED'
-        }
+        },
+        ticker1: 'Live Results',
+        ticker2: 'Businesses',
       },
       processFlow: {
         recommendation: {
@@ -895,7 +899,7 @@ const translations: Record<string, Translations> = {
         cards: {
           slack: {
             title: 'Slack Module',
-            description: 'Warm lead sends a message'
+            description: 'Team members receive a notification'
           },
           aiAgent: {
             title: 'Customer AI Agent',
@@ -908,8 +912,8 @@ const translations: Record<string, Translations> = {
         },
         modules: {
           chatgpt: {
-            title: 'ChatGPT 4o',
-            subtitle: 'ChatGPT 4o'
+            title: 'ChatGPT 5',
+            subtitle: 'Chat-model'
           },
           airtable: {
             title: 'Airtable',
@@ -917,7 +921,7 @@ const translations: Record<string, Translations> = {
           },
           calendar: {
             title: 'Calendar',
-            subtitle: 'Chat-model'
+            subtitle: 'Appointments'
           },
           hubspot: {
             title: 'Hubspot',
@@ -1396,7 +1400,9 @@ const translations: Record<string, Translations> = {
           word1: 'ERSPART',
           word2: 'WORKFLOWS',
           word3: 'AUFGELÖST'
-        }
+        },
+        ticker1: 'Live Ergebnisse',
+        ticker2: 'Unternehmen',
       },
       processFlow: {
         recommendation: {
