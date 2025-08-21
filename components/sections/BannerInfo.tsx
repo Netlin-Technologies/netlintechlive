@@ -234,7 +234,7 @@ const BannerInfo = () => {
   const word3 = (t.content.bannerInfo.animatedWords.word3 || "RESOLVED").split("");
 
   const num1Arr = formatted4.split("").concat(["", "", "€", ""]);
-  const num2Arr = formatted5.split("").concat(["", "S", "t", "k"]);
+  const num2Arr = formatted5.split("").concat(["", t.content.bannerInfo.desktopUnit.letter1, t.content.bannerInfo.desktopUnit.letter2, t.content.bannerInfo.desktopUnit.letter3]);
   const num3Arr = formatted6.split("").concat(["", "","h",""]);
 
   const makeRow = (leftText: string[], rightText: string[]) => {
@@ -298,8 +298,8 @@ const BannerInfo = () => {
       <div className="lg:hidden px-5 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <MetricCard title="Money Saved" value={formatted4} unit="€" delay={0.6} description="Total cost savings achieved" />
-          <MetricCard title="Workflows Automated" value={formatted5} unit="St." delay={0.7} description="Processes streamlined" />
-          <MetricCard title="Time Resolved" value={formatted6} unit="h  " delay={0.8} description="Hours saved monthly" />
+          <MetricCard title="Workflows Automated" value={formatted5} unit={t.content.bannerInfo.mobileUnit} delay={0.7} description="Processes streamlined" />
+          <MetricCard title="Time Resolved" value={formatted6} unit="h" delay={0.8} description="Hours saved monthly" />
         </div>
       </div>
 

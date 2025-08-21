@@ -339,6 +339,12 @@ interface Translations {
       };
       ticker1: string;
       ticker2: string;
+      mobileUnit: string;
+      desktopUnit: {
+        letter1: string;
+        letter2: string;
+        letter3: string;
+      };
     };
     processFlow: {
       recommendation: {
@@ -846,6 +852,12 @@ const translations: Record<string, Translations> = {
         },
         ticker1: 'Live Results',
         ticker2: 'Businesses',
+        mobileUnit: 'pcs',
+        desktopUnit: {
+          letter1: 'p',
+          letter2: 'c',
+          letter3: 's',
+      }
       },
       processFlow: {
         recommendation: {
@@ -1403,6 +1415,12 @@ const translations: Record<string, Translations> = {
         },
         ticker1: 'Live Ergebnisse',
         ticker2: 'Unternehmen',
+        mobileUnit: 'Stk',
+        desktopUnit: {
+          letter1: 'S',
+          letter2: 't',
+          letter3: 'k',
+      }
       },
       processFlow: {
         recommendation: {
