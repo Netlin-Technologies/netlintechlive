@@ -838,7 +838,7 @@ const translations: Record<string, Translations> = {
       bannerInfo: {
         title: 'Proven Impact Across 99+ Companies',
         description: 'Increase efficiency, reduce costs, and focus on what matters most.',
-        subtitle: 'Over 230 successfully automated business processes speak for themselves:',
+        subtitle: 'Over 300 successfully automated business processes speak for themselves:',
         animatedWords: {
           word1: 'SAVED',
           word2: 'WORKFLOWS',
@@ -1395,7 +1395,7 @@ const translations: Record<string, Translations> = {
       bannerInfo: {
         title: 'Warum Automatisierung wählen?',
         description: 'Steigern Sie die Effizienz, reduzieren Sie Kosten und konzentrieren Sie sich auf das Wesentliche.',
-        subtitle: 'Über 150 erfolgreich automatisierte Geschäftsprozesse sprechen für sich:',
+        subtitle: 'Über 300 erfolgreich automatisierte Geschäftsprozesse sprechen für sich:',
         animatedWords: {
           word1: 'ERSPART',
           word2: 'WORKFLOWS',
