@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { getSiteUrl } from '@/lib/utils'
 import { t } from '@/lib/locales'
 import { supabase } from '@/lib/supabase'
+import { listUseCases } from './uses/config'
 
 async function getBlogPosts() {
   try {
@@ -39,6 +40,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
+      url: `${baseUrl}/uses`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}${routes.automation}`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
@@ -73,8 +80,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   })
 
+  // Use-case landing pages
+  const useCaseEntries: MetadataRoute.Sitemap = listUseCases().map((uc) => ({
+    url: `${baseUrl}/uses/${uc.slug}`,
+    lastModified: uc.updatedAt ? new Date(uc.updatedAt) : new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
   return [
     ...staticEntries,
     ...blogEntries,
+    ...useCaseEntries,
   ]
 }
