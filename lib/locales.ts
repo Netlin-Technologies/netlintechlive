@@ -1537,3 +1537,334 @@ const locale = process.env.NEXT_PUBLIC_LOCALE || 'en'
 
 export const t = translations[locale]
 export const currentLocale = locale
+
+// =============================
+// Use-case landing localization
+// =============================
+export type UseCaseSection = {
+  id: string
+  heading: string
+  paragraphs: string[]
+  image?: string
+  imageAlt?: string
+  layout?: 'imageLeft' | 'imageRight' | 'full' | 'imageBelow' | 'twoUp'
+  imageCaption?: string
+  imageCaptionMode?: 'below' | 'overlay'
+  columns?: { left: string[]; right: string[] }
+}
+
+export type UseCaseFeatureGroup = {
+  title: string
+  items: string[]
+  icon?: string
+}
+
+export type UseCaseFAQ = { q: string; a: string }
+
+export type UseCaseConfig = {
+  slug: string
+  name: string
+  title: string
+  subtitle: string
+  tags?: string[]
+  heroHighlights?: string[]
+  stats?: { label: string; value: string }[]
+  heroImage?: string
+  heroBackdrop?: string
+  sections: UseCaseSection[]
+  features?: UseCaseFeatureGroup[]
+  faq?: UseCaseFAQ[]
+  gallery?: { title: string; items: { image: string; title?: string; description?: string }[] }
+  updatedAt?: string
+}
+
+// Localized index page meta (keep outside of translations typing to avoid breaking existing interface)
+const usesIndexMeta: Record<string, { title: string; description: string }> = {
+  en: {
+    title: 'Use cases — Netlin Technologies',
+    description: 'Explore practical AI automation use cases and implementation playbooks.',
+  },
+  de: {
+    title: 'Use Cases — Netlin Technologies',
+    description: 'Praktische KI-Automatisierungs-Use-Cases und Umsetzungs-Playbooks entdecken.',
+  },
+}
+
+export function getUsesIndexMeta(loc?: string) {
+  const l = loc || currentLocale
+  return usesIndexMeta[l] || usesIndexMeta.en
+}
+
+// Localized use-case catalog per locale
+const useCasesByLocale: Record<string, Record<string, UseCaseConfig>> = {
+  en: {
+    'lead-enrichment': {
+      slug: 'lead-enrichment',
+      name: 'Lead Enrichment',
+      title: 'Lead Enrichment Automation — turn raw leads into revenue-ready profiles',
+      subtitle:
+        'Auto-enrich every inbound lead with company data, titles, emails, LinkedIn, tech stack and buying intent — then route instantly to CRM with zero manual work.',
+      tags: ['lead gen', 'sales ops', 'CRM', 'enrichment'],
+      heroImage: '/assets/uses/placeholder-illustration.svg',
+      heroBackdrop: '/assets/uses/gradient-blob.svg',
+      heroHighlights: ['Real-time data enrichment', 'CRM-ready in seconds', 'Zero manual input'],
+      stats: [
+        { label: 'Manual work reduced', value: '67%' },
+        { label: 'Avg. monthly savings', value: '€3,000+' },
+        { label: 'Time-to-contact', value: '< 2 min' },
+      ],
+      sections: [
+        {
+          id: 'problem',
+          heading: 'The problem with manual lead handling',
+          paragraphs: [
+            'Leads arrive across multiple channels — forms, email, ads, LinkedIn. Your team copies data into spreadsheets, searches for missing fields, and updates the CRM by hand.',
+            'It’s slow, inconsistent, and kills response times. High-intent leads get cold while your team plays data detective.',
+          ],
+          image: '/assets/uses/placeholder-illustration.svg',
+          imageAlt: 'Problem overview',
+          layout: 'imageRight',
+          imageCaption: 'Manual copy-paste across tools creates delays and errors.',
+        },
+        {
+          id: 'solution',
+          heading: 'A system that enriches and routes leads automatically',
+          paragraphs: [
+            'We build an automation that captures each lead, enriches it using best-in-class APIs, validates contact details, scores buying intent, and routes it to the right person — instantly.',
+            'All data is pushed to your CRM and neatly organized. No more spreadsheets. No more dropped leads.',
+          ],
+          image: '/assets/uses/flow-diagram.svg',
+          imageAlt: 'Automation flow',
+          layout: 'imageLeft',
+          imageCaption: 'Automated capture → enrichment → validation → routing.',
+          imageCaptionMode: 'overlay',
+        },
+        {
+          id: 'stack',
+          heading: 'Works with your stack',
+          paragraphs: [
+            'We integrate with your existing tools: HubSpot, Pipedrive, Salesforce, Airtable, Google Sheets, Notion, Slack, Gmail, Make.com, n8n and custom APIs.',
+            'You keep your workflow. We remove the manual parts.',
+          ],
+          image: '/assets/uses/stats-cards.svg',
+          imageAlt: 'Integrations',
+          layout: 'imageBelow',
+          imageCaption: 'Connect your CRM, sheets, inbox, and ad platforms.',
+        },
+        {
+          id: 'implementation',
+          heading: 'Implementation and handoff that sticks',
+          paragraphs: [
+            'We document routing rules, API keys, and failure handling clearly.',
+            'Your team gets a plain-language runbook plus an optional sandbox.',
+            'We can monitor and iterate post-launch for 2–4 weeks to ensure stability.',
+          ],
+          layout: 'twoUp',
+          columns: {
+            left: [
+              'Documentation: playbooks, diagrams, and fallback paths.',
+              'Security: scoped credentials and audit logs.',
+            ],
+            right: [
+              'Ownership: simple admin toggles and alerts.',
+              'Monitoring: metrics and notifications to Slack/Email.',
+            ],
+          },
+          image: '/assets/uses/placeholder-illustration.svg',
+          imageAlt: 'Handoff materials',
+          imageCaption: 'Configuration + handoff kit',
+          imageCaptionMode: 'below',
+        },
+      ],
+      features: [
+        {
+          title: 'What this includes',
+          icon: '/assets/uses/icons/check.svg',
+          items: [
+            'Multi-source capture (forms, ads, chat, LinkedIn)',
+            'Company & role enrichment (industry, size, tech, HQ)',
+            'Email & phone validation (bounce-safe outreach)',
+            'Intent scoring & routing rules',
+            'Automatic CRM sync + deduplication',
+            'Slack/Email alerts with smart summaries',
+          ],
+        },
+        {
+          title: 'Outcomes you can expect',
+          icon: '/assets/uses/icons/spark.svg',
+          items: [
+            '2–5x faster first response time',
+            'Cleaner CRM, less manual admin',
+            'More booked calls from the same traffic',
+            'Reliable reporting with complete lead data',
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: 'Can you enrich leads from LinkedIn or ads? ',
+          a: 'Yes. We can capture and enrich from LinkedIn, paid forms, website chat, Typeform, HubSpot forms, and more — then sync all fields into your CRM.',
+        },
+        {
+          q: 'Do we need to change our CRM?',
+          a: 'No. We integrate with your current CRM and only change the manual steps. Your team keeps the tools they know.',
+        },
+        {
+          q: 'How long does it take to implement?',
+          a: 'Simple versions: 3–5 days. Advanced scoring/routing with multiple data providers: 1–2 weeks.',
+        },
+      ],
+      gallery: {
+        title: 'Snapshots of the system in action',
+        items: [
+          { image: '/assets/uses/placeholder-illustration.svg', title: 'Lead profile', description: 'Unified view with enriched fields.' },
+          { image: '/assets/uses/flow-diagram.svg', title: 'Routing logic', description: 'Smart branching by territory and intent.' },
+          { image: '/assets/uses/stats-cards.svg', title: 'Ops metrics', description: 'Monitor throughput and response time.' },
+        ],
+      },
+      updatedAt: new Date().toISOString(),
+    },
+  },
+  // For now, mirror EN content for DE; replace with translations later
+  de: {
+    'lead-enrichment': {
+      slug: 'lead-enrichment',
+      name: 'Lead Enrichment',
+      title: 'Lead Enrichment Automatisierung — rohe Leads in vertriebsbereite Profile verwandeln',
+      subtitle:
+        'Jeden eingehenden Lead automatisch mit Firmendaten, Titeln, E-Mails, LinkedIn, Tech-Stack und Kaufintention anreichern — und ohne manuellen Aufwand direkt ins CRM routen.',
+      tags: ['lead gen', 'sales ops', 'CRM', 'enrichment'],
+      heroImage: '/assets/uses/placeholder-illustration.svg',
+      heroBackdrop: '/assets/uses/gradient-blob.svg',
+      heroHighlights: ['Echtzeit-Datenanreicherung', 'In Sekunden CRM-ready', 'Null manueller Input'],
+      stats: [
+        { label: 'Manuelle Arbeit reduziert', value: '67%' },
+        { label: 'Ø monatliche Einsparungen', value: '€3.000+' },
+        { label: 'Time-to-Contact', value: '< 2 min' },
+      ],
+      sections: [
+        {
+          id: 'problem',
+          heading: 'Das Problem mit manueller Lead-Verarbeitung',
+          paragraphs: [
+            'Leads kommen über mehrere Kanäle — Formulare, E-Mail, Ads, LinkedIn. Ihr Team kopiert Daten in Tabellen, sucht fehlende Felder und aktualisiert das CRM per Hand.',
+            'Es ist langsam, inkonsistent und verlangsamt die Reaktionszeit. Hochintente Leads kühlen ab, während Ihr Team Detektivarbeit leistet.',
+          ],
+          image: '/assets/uses/placeholder-illustration.svg',
+          imageAlt: 'Problemübersicht',
+          layout: 'imageRight',
+          imageCaption: 'Manuelles Copy-Paste über Tools erzeugt Verzögerungen und Fehler.',
+        },
+        {
+          id: 'solution',
+          heading: 'Ein System, das Leads automatisch anreichert und routet',
+          paragraphs: [
+            'Wir bauen eine Automation, die jeden Lead erfasst, mit Best-in-Class-APIs anreichert, Kontaktdaten validiert, Kaufintention scored und unmittelbar an die richtige Person leitet.',
+            'Alle Daten werden in Ihr CRM übertragen und sauber organisiert. Keine Tabellen mehr. Keine verlorenen Leads.',
+          ],
+          image: '/assets/uses/flow-diagram.svg',
+          imageAlt: 'Automations-Flow',
+          layout: 'imageLeft',
+          imageCaption: 'Automatisches Erfassen → Anreichern → Validieren → Routen.',
+          imageCaptionMode: 'overlay',
+        },
+        {
+          id: 'stack',
+          heading: 'Funktioniert mit Ihrem Stack',
+          paragraphs: [
+            'Wir integrieren Ihre bestehenden Tools: HubSpot, Pipedrive, Salesforce, Airtable, Google Sheets, Notion, Slack, Gmail, Make.com, n8n und Custom APIs.',
+            'Sie behalten Ihren Workflow. Wir entfernen die manuellen Teile.',
+          ],
+          image: '/assets/uses/stats-cards.svg',
+          imageAlt: 'Integrationen',
+          layout: 'imageBelow',
+          imageCaption: 'CRM, Tabellen, Inbox und Ad-Plattformen verbinden.',
+        },
+        {
+          id: 'implementation',
+          heading: 'Implementierung und Handover, das hält',
+          paragraphs: [
+            'Wir dokumentieren Routing-Regeln, API-Keys und Fehlerbehandlung klar.',
+            'Ihr Team erhält ein verständliches Runbook plus optional eine Sandbox.',
+            'Wir können 2–4 Wochen nach Launch mit überwachen und iterieren.',
+          ],
+          layout: 'twoUp',
+          columns: {
+            left: [
+              'Dokumentation: Playbooks, Diagramme, Fallback-Pfade.',
+              'Sicherheit: Gescopte Credentials und Audit-Logs.',
+            ],
+            right: [
+              'Ownership: Einfache Admin-Toggles und Alerts.',
+              'Monitoring: Metriken und Benachrichtigungen in Slack/E-Mail.',
+            ],
+          },
+          image: '/assets/uses/placeholder-illustration.svg',
+          imageAlt: 'Übergabematerial',
+          imageCaption: 'Konfiguration + Handover-Kit',
+          imageCaptionMode: 'below',
+        },
+      ],
+      features: [
+        {
+          title: 'Was enthalten ist',
+          icon: '/assets/uses/icons/check.svg',
+          items: [
+            'Multi-Source Capture (Formulare, Ads, Chat, LinkedIn)',
+            'Company & Role Enrichment (Industrie, Größe, Tech, HQ)',
+            'E-Mail & Telefon-Validierung (Bounce-sicheres Outreach)',
+            'Intent Scoring & Routing-Regeln',
+            'Automatisches CRM-Sync + Deduplizierung',
+            'Slack/E-Mail Alerts mit smarten Zusammenfassungen',
+          ],
+        },
+        {
+          title: 'Was Sie erwarten können',
+          icon: '/assets/uses/icons/spark.svg',
+          items: [
+            '2–5x schnellere erste Reaktionszeit',
+            'Saubereres CRM, weniger manuelle Administration',
+            'Mehr gebuchte Calls mit gleichem Traffic',
+            'Zuverlässiges Reporting mit vollständigen Lead-Daten',
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: 'Können Leads aus LinkedIn oder Ads angereichert werden?',
+          a: 'Ja. Wir erfassen und reichern aus LinkedIn, Paid-Formularen, Website-Chat, Typeform, HubSpot-Formularen u. m. an und synchronisieren alle Felder in Ihr CRM.',
+        },
+        {
+          q: 'Müssen wir unser CRM wechseln?',
+          a: 'Nein. Wir integrieren Ihr aktuelles CRM und ändern nur die manuellen Schritte. Ihr Team behält die bekannten Tools.',
+        },
+        {
+          q: 'Wie lange dauert die Implementierung?',
+          a: 'Einfache Varianten: 3–5 Tage. Fortgeschrittenes Scoring/Routing mit mehreren Datenprovidern: 1–2 Wochen.',
+        },
+      ],
+      gallery: {
+        title: 'Snapshots des Systems in Aktion',
+        items: [
+          { image: '/assets/uses/placeholder-illustration.svg', title: 'Lead-Profil', description: 'Vereinheitlichte Ansicht mit angereicherten Feldern.' },
+          { image: '/assets/uses/flow-diagram.svg', title: 'Routing-Logik', description: 'Smartes Branching nach Territorium und Intent.' },
+          { image: '/assets/uses/stats-cards.svg', title: 'Ops-Metriken', description: 'Durchsatz und Reaktionszeit überwachen.' },
+        ],
+      },
+      updatedAt: new Date().toISOString(),
+    },
+  },
+}
+
+export function getUseCases(loc?: string): Record<string, UseCaseConfig> {
+  const l = loc || currentLocale
+  return useCasesByLocale[l] || useCasesByLocale.en
+}
+
+export function listUseCases(loc?: string): UseCaseConfig[] {
+  return Object.values(getUseCases(loc))
+}
+
+export function getUseCase(slug: string, loc?: string): UseCaseConfig | undefined {
+  return getUseCases(loc)[slug]
+}

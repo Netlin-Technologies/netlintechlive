@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { useCases } from '../config'
+import { getUseCase } from '@/lib/locales'
 
 export const runtime = 'edge'
 export const size = { width: 1200, height: 630 }
@@ -11,7 +11,7 @@ interface Props {
 
 export default async function OgImage({ params }: Props) {
   const { slug } = await params
-  const uc = useCases[slug]
+  const uc = getUseCase(slug)
   const title = uc ? uc.name : 'Use case'
   const subtitle = uc ? uc.subtitle : 'Practical automation playbooks'
 

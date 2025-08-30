@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import { NavbarSection } from '@/components/sections/NavbarSection'
 import { FooterSection } from '@/components/sections/FooterSection'
-import { listUseCases } from './config'
+import { getUsesIndexMeta, listUseCases } from '@/lib/locales'
 import { getSiteUrl } from '@/lib/utils'
 import UseCasesIndexClient from '@/components/uses/UseCasesIndexClient'
 
+const meta = getUsesIndexMeta()
 export const metadata: Metadata = {
-  title: 'Use cases — Netlin Technologies',
-  description: 'Explore practical AI automation use cases and implementation playbooks.',
+  title: meta.title,
+  description: meta.description,
 }
 
 export default function UseCasesIndex() {

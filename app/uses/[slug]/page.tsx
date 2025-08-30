@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import UseCaseLanding from '@/components/UseCaseLanding'
-import { useCases, listUseCases } from '../config'
+import { getUseCase, listUseCases as listLocalizedUseCases } from '@/lib/locales'
 import JsonLd from '@/components/JsonLd'
 import { getSiteUrl } from '@/lib/utils'
 import { notFound } from 'next/navigation'
@@ -10,12 +10,12 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return listUseCases().map(uc => ({ slug: uc.slug }))
+  return listLocalizedUseCases().map(uc => ({ slug: uc.slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const uc = useCases[slug]
+  const uc = getUseCase(slug)
   if (!uc) {
     return {
       title: 'Use Case — Netlin Technologies',
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function UseCasePage({ params }: PageProps) {
   const { slug } = await params
-  const uc = useCases[slug]
+  const uc = getUseCase(slug)
   const locale = process.env.NEXT_PUBLIC_LOCALE || 'en'
   const site = getSiteUrl(locale)
   const url = `${site}/uses/${slug}`
