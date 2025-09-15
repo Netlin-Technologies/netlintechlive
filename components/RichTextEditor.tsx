@@ -1,6 +1,11 @@
-import React, { useEffect, useRef } from 'react'
-import ReactQuill from 'react-quill-new'
-import 'react-quill-new/dist/quill.snow.css';
+"use client"
+
+import React, { useRef } from 'react'
+import dynamic from 'next/dynamic'
+import 'react-quill-new/dist/quill.snow.css'
+
+// Dynamically import the editor to avoid SSR usage of document
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 
 interface RichTextEditorProps {
   value: string
@@ -11,9 +16,10 @@ interface RichTextEditorProps {
 export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   value,
   onChange,
-  placeholder = "Write your article content..."
+  placeholder = 'Write your article content...'
 }) => {
-  const quillRef = useRef<ReactQuill>(null)
+  // Using any for ref since dynamically imported component type isn't available at compile time
+  const quillRef = useRef<any>(null)
 
   const modules = {
     toolbar: [
@@ -38,6 +44,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   return (
     <div className="bg-white rounded-lg border border-gray-200">
       <ReactQuill
+        // @ts-expect-error dynamic component ref typing
         ref={quillRef}
         theme="snow"
         value={value}
