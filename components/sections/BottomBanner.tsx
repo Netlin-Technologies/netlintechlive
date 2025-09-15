@@ -265,13 +265,13 @@ const BottomBanner = () => {
         />
       </div>
       <div className="w-full 2xl:max-w-[1288px] xl:max-w-[1075px] mx-auto xl:h-[954px] pt-3.5">
-        <p className="text-center text-base md:text-lg xl:text-xl 2xl:text-2xl font-semibold font-sora text-[#3B84F7]">
+        <p className="text-center lg:text-left text-base md:text-lg xl:text-xl 2xl:text-2xl font-semibold font-sora text-[#3B84F7]">
           {t.content.bottomBanner.problems.heading}
         </p>
-        <h3 className="text-center text-white text-xl md:text-2xl xl:text-3xl 2xl:text-5xl font-semibold font-sora mt-1">
+        <h3 className="text-center lg:text-left text-white text-xl md:text-2xl xl:text-3xl 2xl:text-5xl font-semibold font-sora mt-1">
           {t.content.bottomBanner.problems.subtitle}
         </h3>
-        <p className="text-center w-full max-w-[773px] mt-1 text-[#807F8C]  text-base md:text-lg xl:text-xl 2xl:text-2xl font-normal font-sora leading-normal 2xl:leading-9">
+        <p className="text-center lg:text-left w-full max-w-[773px] mt-1 text-[#807F8C]  text-base md:text-lg xl:text-xl 2xl:text-2xl font-normal font-sora leading-normal 2xl:leading-9">
           {t.content.bottomBanner.problems.description}
         </p>
         <div className="mt-5 xl:mt-8 2xl:mt-12 flex md:flex-row flex-col gap-8 justify-between">

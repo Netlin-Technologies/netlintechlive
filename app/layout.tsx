@@ -5,6 +5,7 @@ import { ClientLayout } from '@/components/ClientLayout'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import JsonLd from '@/components/JsonLd'
 import { getSiteUrl } from '@/lib/utils'
+import { PostHogProvider } from './providers'
 
 // Provide a site-wide metadata base so OG/Twitter images resolve to absolute URLs
 const buildLocale = process.env.NEXT_PUBLIC_LOCALE || 'en'
@@ -33,21 +34,23 @@ export default function RootLayout({
   return (
     <html lang={layoutLocale}>
       <body className={`${montserrat.variable} ${sora.variable}`}>
-        <JsonLd
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'Netlin Technologies',
-            url: siteUrl,
-            logo: `${siteUrl}/logo.png`,
-            sameAs: [
-              'https://www.linkedin.com/company/netlin-technologies',
-            ]
-          }}
-        />
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <PostHogProvider>
+          <JsonLd
+            data={{
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Netlin Technologies',
+              url: siteUrl,
+              logo: `${siteUrl}/logo.png`,
+              sameAs: [
+                'https://www.linkedin.com/company/netlin-technologies',
+              ]
+            }}
+          />
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </PostHogProvider>
       </body>
       <GoogleAnalytics gaId="G-LRJNGV7EWL" />
     </html>
