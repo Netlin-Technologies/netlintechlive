@@ -169,7 +169,7 @@ export default function CustomerServiceAutomationPage() {
             <div className="w-full">
               <div className="max-w-[1360px] px-6 mx-auto">
                 <p className="mt-[75px] opacity-50 text-center text-white text-sm md:text-base font-normal font-sora uppercase leading-normal tracking-widest">
-                  {((t as any)?.content?.home?.bannerSection?.trustText as string)?.toUpperCase?.() || 'THOSE WHO ALREADY TRUST US'}
+                  {t.content.bannerSection.trustText}
                 </p>
               </div>
             </div>

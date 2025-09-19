@@ -212,9 +212,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: t.metaData.automationDesc
     },
     customer_service_automation: {
-      // Reuse automation metadata unless specialized metadata is added to locales
-      title: t.metaData.automationTitle,
-      description: t.metaData.automationDesc,
+      // Prefer specialized CSA metadata when available
+      title: t.metaData.customerServiceAutomationTitle || t.metaData.automationTitle,
+      description: t.metaData.customerServiceAutomationDesc || t.metaData.automationDesc,
     },
   }
   
