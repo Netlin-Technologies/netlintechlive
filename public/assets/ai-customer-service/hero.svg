@@ -1,0 +1,39 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3D89F9"/>
+      <stop offset="1" stop-color="#2762BA"/>
+    </linearGradient>
+    <radialGradient id="r1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 100) rotate(45) scale(500 300)">
+      <stop stop-color="#4D9AFF" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#4D9AFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="600" fill="#0F1017"/>
+  <circle cx="1000" cy="120" r="260" fill="url(#r1)"/>
+  <g opacity="0.15">
+    <path d="M100 500 C 200 300, 400 300, 500 500 S 800 700, 1000 500" stroke="url(#g1)" stroke-width="6" fill="none"/>
+    <path d="M100 420 C 220 240, 420 240, 540 420 S 860 620, 1080 420" stroke="#4D9AFF" stroke-opacity="0.6" stroke-width="3" fill="none"/>
+  </g>
+  <g transform="translate(120,140)">
+    <rect x="0" y="0" rx="16" ry="16" width="360" height="240" fill="#161B26" stroke="#4D9AFF33"/>
+    <circle cx="60" cy="70" r="28" fill="#1B2230" stroke="#4D9AFF66"/>
+    <rect x="110" y="50" width="210" height="12" fill="#2A3242"/>
+    <rect x="110" y="70" width="180" height="10" fill="#2A3242"/>
+    <rect x="30" y="120" width="300" height="10" fill="#2A3242"/>
+    <rect x="30" y="142" width="260" height="10" fill="#2A3242"/>
+    <rect x="30" y="164" width="280" height="10" fill="#2A3242"/>
+  </g>
+  <g transform="translate(520,220)">
+    <rect x="0" y="0" rx="16" ry="16" width="360" height="200" fill="#161B26" stroke="#4D9AFF33"/>
+    <rect x="30" y="40" width="300" height="12" fill="#2A3242"/>
+    <rect x="30" y="62" width="260" height="10" fill="#2A3242"/>
+    <rect x="30" y="84" width="200" height="10" fill="#2A3242"/>
+  </g>
+  <g transform="translate(920,120)">
+    <rect x="0" y="0" rx="16" ry="16" width="220" height="160" fill="#161B26" stroke="#4D9AFF33"/>
+    <rect x="20" y="40" width="180" height="12" fill="#2A3242"/>
+    <rect x="20" y="62" width="160" height="10" fill="#2A3242"/>
+  </g>
+  <text x="120" y="520" fill="#E6F0FF" font-size="28" font-family="Sora, Arial, sans-serif" opacity="0.9">AI Customer Service • Automated Routing • Knowledge-Grounded Replies</text>
+</svg>

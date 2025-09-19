@@ -10,6 +10,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        primaryGradient:
+          "rounded border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] text-white font-sora font-semibold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(77,154,255,0.28)] hover:border-[#69aaff] hover:bg-[linear-gradient(90deg,rgba(77,154,255,1)_0%,rgba(66,121,203,1)_100%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7fb4ff]/60 active:translate-y-0",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

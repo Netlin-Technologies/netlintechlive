@@ -6,6 +6,7 @@ import { Button } from './ui/button'
 import { LocalizedLink } from './LocalizedLink'
 import { motion, useInView } from 'framer-motion'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion'
+import { t } from '@/lib/locales'
 
 type Stat = { label: string; value: string }
 
@@ -14,12 +15,19 @@ interface Props {
   subtitle: string
   highlights?: string[]
   stats?: Stat[]
-  sections: { id: string; heading: string; paragraphs: string[]; image?: string; imageAlt?: string; imageCaption?: string; imageCaptionMode?: 'below' | 'overlay'; layout?: 'imageLeft' | 'imageRight' | 'full' | 'imageBelow' | 'twoUp'; columns?: { left: string[]; right: string[] } }[]
+  sections: { id: string; heading: string; paragraphs: string[]; image?: string; imageAlt?: string; imageCaption?: string; imageCaptionMode?: 'below' | 'overlay'; layout?: 'imageLeft' | 'imageRight' | 'full' | 'imageBelow' | 'twoUp' | 'custom'; columns?: { left: string[]; right: string[] }; customContent?: React.ReactNode; customInsertIndex?: number }[]
   features?: { title: string; items: string[]; icon?: string }[]
   heroImage?: string
   heroBackdrop?: string
   gallery?: { title: string; items: { image: string; title?: string; description?: string }[] }
   faq?: { q: string; a: string }[]
+  heroCustom?: React.ReactNode
+  faqSubtitle?: string
+  footerCtaTitle?: string
+  footerCtaDescription?: string
+  footerCtaButtonText?: string
+  preSections?: React.ReactNode
+  preSectionsFullBleed?: boolean
 }
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -38,13 +46,13 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
   )
 }
 
-export default function UseCaseLanding({ title, subtitle, highlights = [], stats = [], sections, features = [], heroImage = '/assets/uses/placeholder-illustration.svg', heroBackdrop = '/assets/uses/gradient-blob.svg', gallery, faq = [] }: Props) {
+export default function UseCaseLanding({ title, subtitle, highlights = [], stats = [], sections, features = [], heroImage = '/assets/uses/placeholder-illustration.svg', heroBackdrop = '/assets/uses/gradient-blob.svg', gallery, faq = [], heroCustom, faqSubtitle, footerCtaTitle, footerCtaDescription, footerCtaButtonText, preSections, preSectionsFullBleed }: Props) {
   return (
     <div className="min-h-screen bg-[#0c0e14]">
       <NavbarSection />
       <main className="w-full bg-[#0D0C14]">
         {/* Hero */}
-        <section className="relative overflow-hidden px-5 pt-16 md:pt-24">
+  <section className="relative overflow-hidden px-5 pt-16 md:pt-24 pb-16 md:pb-24">
           <div className="max-w-[1100px] mx-auto text-center relative z-10">
             <FadeIn>
               <h1 className="text-white font-sora font-semibold text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-tight">
@@ -70,30 +78,42 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
             )}
 
             <FadeIn delay={0.15}>
-              <div className="flex items-center justify-center gap-4 mt-8">
+              <div className="w-full max-w-[520px] mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mt-8">
                 <LocalizedLink route="contact">
-                  <Button className="px-5 h-11 rounded border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] text-white text-base font-sora font-semibold">
-                    Request a free audit
+                  <Button variant="primaryGradient" className="w-full sm:w-auto px-5 h-11 text-base">
+                    {t.content.hero.freeAnalysisButton}
                   </Button>
                 </LocalizedLink>
-                <LocalizedLink route="automation">
-                  <Button className="px-5 h-11 rounded border border-[#555555] bg-[linear-gradient(90deg,rgba(36,36,36,1)_0%,rgba(79,79,79,1)_100%)] text-white text-base font-sora font-semibold">
-                    How it works
-                  </Button>
-                </LocalizedLink>
+                <Button
+                  onClick={() => {
+                    const el = document.getElementById('usecase-stats')
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
+                  }}
+                  className="w-full sm:w-auto px-5 h-11 rounded border border-[#555555] bg-[linear-gradient(90deg,rgba(36,36,36,1)_0%,rgba(79,79,79,1)_100%)] text-white text-base font-sora font-semibold"
+                >
+                  {t.content.hero.howItWorksButton}
+                </Button>
               </div>
             </FadeIn>
 
             {/* Hero visual */}
             <div className="relative mt-10 md:mt-12">
-              <motion.img
-                src={heroImage}
-                alt="Illustration"
-                className="w-full max-w-[1000px] mx-auto rounded-[16px] border border-[#1E2A42] shadow-[0px_10px_30px_rgba(0,0,0,0.25)]"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
-              />
+              {heroCustom ? (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}>
+                  {heroCustom}
+                </motion.div>
+              ) : (
+                <motion.img
+                  src={heroImage}
+                  alt="Illustration"
+                  className="w-full max-w-[1000px] mx-auto rounded-[16px] border border-[#1E2A42] shadow-[0px_10px_30px_rgba(0,0,0,0.25)]"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                />
+              )}
             </div>
           </div>
 
@@ -117,7 +137,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
 
         {/* Stats */}
         {stats.length > 0 && (
-          <section className="px-5 mt-6">
+          <section id="usecase-stats" className="px-5 mt-6 scroll-mt-24">
             <div className="max-w-[1100px] mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
               {stats.map((s, i) => (
                 <FadeIn key={i} delay={i * 0.05}>
@@ -130,12 +150,62 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
             </div>
           </section>
         )}
+          {/* Full-width inserts between hero and sections (no card wrapper) */}
+          {preSections ? (
+            preSectionsFullBleed ? (
+              <div className="mt-6 md:mt-8 w-screen relative left-1/2 ml-[-50vw]">
+                {preSections}
+              </div>
+            ) : (
+              <div className="mt-6 md:mt-8">
+                {preSections}
+              </div>
+            )
+          ) : null}
+
 
         {/* Content sections */}
         <section className="px-5 mt-10 md:mt-14">
           <div className="max-w-[1100px] mx-auto flex flex-col gap-10">
             {sections.map((sec, idx) => {
               const layout = sec.layout || 'full'
+              if (layout === 'custom' && sec.customContent) {
+                return (
+                  <FadeIn key={sec.id}>
+                    <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
+                      <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
+                      {(() => {
+                        const paras = sec.paragraphs || []
+                        const insertIndex = typeof sec.customInsertIndex === 'number'
+                          ? Math.min(Math.max(0, sec.customInsertIndex), paras.length)
+                          : paras.length
+                        const before = paras.slice(0, insertIndex)
+                        const after = paras.slice(insertIndex)
+                        return (
+                          <>
+                            {before.length > 0 && (
+                              <div className="mt-4 flex flex-col gap-4">
+                                {before.map((p, i) => (
+                                  <p key={`before-${i}`} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{p}</p>
+                                ))}
+                              </div>
+                            )}
+                            <div className="mt-6">{sec.customContent}</div>
+                            {after.length > 0 && (
+                              <div className="mt-6 flex flex-col gap-4">
+                                {after.map((p, i) => (
+                                  <p key={`after-${i}`} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{p}</p>
+                                ))}
+                              </div>
+                            )}
+                          </>
+                        )
+                      })()}
+                      <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
+                    </article>
+                  </FadeIn>
+                )
+              }
               const hasImage = Boolean(sec.image)
               if (!hasImage || layout === 'full') {
                 return (
@@ -283,10 +353,10 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
         {/* Feature lists */}
         {features.length > 0 && (
           <section className="px-5 mt-10 md:mt-14">
-            <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 gap-6">
+            <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 items-stretch gap-6">
               {features.map((group, idx) => (
-                <FadeIn key={idx}>
-                  <div className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8">
+                <FadeIn key={idx} className="h-full">
+                  <div className="h-full rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 flex flex-col">
                     <h3 className="text-white font-sora font-semibold text-xl md:text-2xl mb-4">{group.title}</h3>
                     <div className="space-y-3">
                       {group.items.map((li, i) => (
@@ -339,10 +409,10 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
 
         {/* FAQ */}
         {faq && faq.length > 0 && (
-          <section className="px-5 mt-12 md:mt-18">
+          <section className="px-5 mt-12 md:mt-18 mb-14 md:mb-20 lg:mb-24">
             <div className="max-w-[1100px] mx-auto">
-              <h3 className="text-white font-sora font-semibold text-2xl md:text-3xl mb-4">Frequently asked questions</h3>
-              <p className="text-[#C6D5DD] mb-6">Short, practical answers to common questions about this use case.</p>
+              <h3 className="text-white font-sora font-semibold text-2xl md:text-3xl mb-4">{t.content.faq.title}</h3>
+              <p className="text-[#C6D5DD] mb-6">{faqSubtitle || t.content.faq.subtitle}</p>
               <Accordion type="single" collapsible className="w-full">
                 {faq.map((item, i) => (
                   <AccordionItem key={`faq-${i}`} value={`item-${i}`} className="border-b border-[#ffffff26] py-4 md:py-6">
@@ -363,27 +433,10 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
           </section>
         )}
 
-        {/* CTA */}
-        <section className="px-5 mt-14 md:mt-20 pb-12">
-          <div className="max-w-[1100px] mx-auto text-center">
-            <FadeIn>
-              <div className="inline-flex flex-col items-center gap-4 rounded-[18px] border border-[#1E2A42] bg-[#0e1118] px-6 md:px-10 py-8 w-full">
-                <h3 className="text-white font-sora font-semibold text-2xl md:text-3xl">Ready to ship this in your stack?</h3>
-                <p className="text-[#C6D5DD] text-base md:text-lg max-w-3xl">
-                  Book a free audit. We’ll map your current flow, identify ROI hotspots, and implement an enrichment system that runs while you sleep.
-                </p>
-                <LocalizedLink route="contact">
-                  <Button className="mt-2 px-6 h-11 rounded border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] text-white text-base font-sora font-semibold">
-                    Talk to builders
-                  </Button>
-                </LocalizedLink>
-              </div>
-            </FadeIn>
-          </div>
-        </section>
+        {/* CTA removed: rely on per-page footer CTA */}
 
       </main>
-      <FooterSection />
+      <FooterSection ctaTitle={footerCtaTitle} ctaDescription={footerCtaDescription} ctaButtonText={footerCtaButtonText} />
     </div>
   )
 }

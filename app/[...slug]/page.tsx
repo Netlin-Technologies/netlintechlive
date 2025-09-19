@@ -14,6 +14,7 @@ import BlogPage from '@/app/_pages/blog/page'
 import AutomationPage from '@/app/_pages/automation/page'
 import BlogArticlePage from '@/app/_pages/blog/[slug]/page'
 import AdminPage from '@/app/_pages/admin/page'
+import CustomerServiceAutomationPage from '@/app/_pages/customer-service-automation/page'
 
 const pageComponents = {
   about: AboutPage,
@@ -22,6 +23,7 @@ const pageComponents = {
   blog: BlogPage,
   automation: AutomationPage,
   admin: AdminPage,
+  customer_service_automation: CustomerServiceAutomationPage,
 }
 
 // Define translations directly to avoid import issues at build time
@@ -33,6 +35,7 @@ const translations = {
       services: '/services',
       blog: '/blog',
       automation: '/automation',
+      customer_service_automation: '/customer-service-automation',
       admin: '/admin'
     }
   },
@@ -43,6 +46,7 @@ const translations = {
       services: '/dienstleistungen',
       blog: '/blog',
       automation: '/automatisierung',
+      customer_service_automation: '/kundenservice-automatisierung',
       admin: '/admin'
     }
   }
@@ -206,7 +210,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     automation: {
       title: t.metaData.automationTitle,
       description: t.metaData.automationDesc
-    }
+    },
+    customer_service_automation: {
+      // Reuse automation metadata unless specialized metadata is added to locales
+      title: t.metaData.automationTitle,
+      description: t.metaData.automationDesc,
+    },
   }
   
   const pageMetadata = metadataMap[routeKey] || {
@@ -333,6 +342,7 @@ export async function generateStaticParams() {
         services: '/services',
         blog: '/blog',
         automation: '/automation',
+        customer_service_automation: '/customer-service-automation',
         // admin: '/admin' // Exclude admin from static generation
       }
     },
@@ -343,6 +353,7 @@ export async function generateStaticParams() {
         services: '/dienstleistungen',
         blog: '/blog',
         automation: '/automatisierung',
+        customer_service_automation: '/kundenservice-automatisierung',
         // admin: '/admin' // Exclude admin from static generation
       }
     }

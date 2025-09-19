@@ -181,7 +181,7 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
           {/* Desktop Contact Button */}
           <div className="hidden lg:flex items-center">
             <LocalizedLink route="contact">
-              <Button className="px-4 py-2 rounded border border-solid border-[#4d9aff] shadow-[0px_4px_6px_#0000000d,0px_10px_15px_#0000001a] bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] font-sora font-semibold text-white text-lg tracking-[0] leading-6">
+              <Button variant="primaryGradient" className="px-4 py-2 text-lg leading-6">
                 {t.content.navigation.contact}
               </Button>
             </LocalizedLink>
@@ -248,7 +248,7 @@ export const NavbarSection = ({ theme = 'dark' }: NavbarSectionProps): JSX.Eleme
                 </div>
               ))}
               <LocalizedLink route="contact">
-                <Button className="w-full mt-4 px-4 py-2 rounded border border-solid border-[#4d9aff] shadow-[0px_4px_6px_#0000000d,0px_10px_15px_#0000001a] bg-[linear-gradient(90deg,rgba(61,137,249,1)_0%,rgba(39,98,186,1)_100%)] font-sora font-semibold text-white text-lg tracking-[0] leading-6">
+                <Button variant="primaryGradient" className="w-full mt-4 px-4 py-2 text-lg leading-6">
                   {t.content.navigation.contact}
                 </Button>
               </LocalizedLink>

@@ -3,6 +3,7 @@ interface Translations {
     home: string;
     contact: string;
     automation: string;
+    customer_service_automation: string;
     blog: string;
     services: string;
   };
@@ -17,6 +18,8 @@ interface Translations {
     contactDesc: string;
     aboutTitle: string;
     aboutDesc: string;
+    customerServiceAutomationTitle?: string;
+    customerServiceAutomationDesc?: string;
   },
   content: {
     aboutUsTitle: string;
@@ -26,9 +29,10 @@ interface Translations {
       home: string;
       about: string;
       contact: string;
-       services: string;
-        automation: string;
-        blog: string;
+      services: string;
+      automation: string;
+      customer_service_automation: string;
+      blog: string;
     };
     whatWeDo: {
       title: string;
@@ -100,6 +104,64 @@ interface Translations {
       description: string;
       freeAnalysisButton: string;
       howItWorksButton: string;
+    };
+    customerServiceAutomation?: {
+      landing: {
+        title: string;
+        subtitle: string;
+        highlights: string[];
+        stats: { label: string; value: string }[];
+        sections: { id: string; heading: string; paragraphs: string[] }[];
+        features: { title: string; items: string[] }[];
+        faq: { q: string; a: string }[];
+      };
+      // Page-specific overrides
+      faqSubtitle?: string;
+      heroChat: {
+        chatHeader: string;
+        chatItems: { side: 'user' | 'ai'; text: string }[];
+        typingText: string;
+        voiceHeader: string;
+        voiceStatus: string;
+        callDuration: string;
+        mute: string;
+        end: string;
+      };
+      heroGraphic: {
+        title?: string;
+        subtitle?: string;
+        channelsHeading: string;
+        channels: string[];
+        aiHeading: string;
+        aiBullets: string[];
+        outcomesHeading: string;
+        outcomes: string[];
+      };
+      flow: {
+        labels: {
+          captureTitle: string;
+          captureDesc1: string;
+          captureDesc2: string;
+          understandTitle: string;
+          understandDesc1: string;
+          understandDesc2: string;
+          actTitle: string;
+          actDesc1: string;
+          actDesc2: string;
+          measureTitle: string;
+          measureDesc1: string;
+          measureDesc2: string;
+          channels: string[];
+          kpiHeading: string;
+          kpiLine: string;
+        };
+      };
+      statsChart: {
+        title: string;
+        description: string;
+        notes: string;
+        kpis: { label: string; before: number; after: number; unit?: string; betterIsLower?: boolean }[];
+      };
     };
     footer: {
       ctaSection: {
@@ -411,6 +473,7 @@ const translations: Record<string, Translations> = {
       home: '/',
       contact: '/contact',
       automation: '/automation',
+      customer_service_automation: '/customer-service-automation',
       services: '/services',
       blog: '/blog'
     },
@@ -425,6 +488,9 @@ const translations: Record<string, Translations> = {
       contactDesc: "Have a problem worth solving? Let's fix it. No sales scripts. Just straight answers, proven systems and ROI-focused execution.",
       aboutTitle: 'Who Builds the Systems that Print ROI? | About Us | NETLINTECH',
       aboutDesc: "We're builders who solve real problems with real automation. This is the crew that solves the chaos. Built different. Built by NETLINTECH.",
+      customerServiceAutomationTitle: 'Customer Service Automation with AI — AI Customer Service | NETLINTECH',
+      customerServiceAutomationDesc:
+        'Customer service automation and AI customer service that answers instantly, routes tickets, and scales support without hiring.',
     },
     content: {
       aboutUsTitle: 'About Us',
@@ -435,6 +501,7 @@ const translations: Record<string, Translations> = {
         about: 'About Us',
         contact: 'Contact',
         services: 'Services',
+        customer_service_automation: 'Customer Service Automation',
         automation: 'Automation',
         blog: 'Blog'
       },
@@ -603,6 +670,248 @@ const translations: Record<string, Translations> = {
         description: 'We develop custom AI-powered systems that eliminate manual work, save time, and keep your business running... even when you\'re offline.',
         freeAnalysisButton: 'Free analysis',
         howItWorksButton: 'How it works'
+      },
+      customerServiceAutomation: {
+        faqSubtitle: "Didn't find an answer to your question regarding customer service automation?",
+        landing: {
+          title: 'Customer Service Automation',
+          subtitle:
+            'Customer service automation powered by AI customer service that resolves repetitive inquiries, cuts response times, and scales your support without hiring.',
+          highlights: ['24/7 AI customer service', 'Reduce response times by up to 67%', 'Deflect 50–70% of tickets'],
+          stats: [
+            { label: 'Avg. response time', value: '-67%' },
+            { label: 'First-contact resolution', value: '+35%' },
+            { label: 'Support cost / ticket', value: '-40%' },
+          ],
+          sections: [
+            {
+              id: 'what-is',
+              heading: 'What is customer service automation?',
+              paragraphs: [
+                'Customer service automation uses AI customer service agents, workflows, and integrations to answer common questions, qualify requests, and route or resolve tickets instantly.',
+                'Instead of long queues and manual triage, AI understands intent, references your knowledge base and policies, then drafts or sends accurate responses, handing edge cases to humans with full context.',
+                'Modern AI customer service can handle 60–80% of repetitive tasks: FAQs, order status, cancellations, returns, simple billing, appointment scheduling, onboarding steps, and account updates. With Guardrails, tone controls, and escalation logic, your brand remains consistent and safe.',
+              ],
+            },
+            {
+              id: 'hero-graphic',
+              heading: 'From chaos to clarity',
+              paragraphs: [
+                'Customer service today is chaotic: emails, live chat, WhatsApp, forms, and CRM events all land in different inboxes. Agents copy data between tools, macros are outdated, and answers vary by person. Queues pile up, after-hours backlogs grow, and customers ask the same questions again and again.',
+                'Tickets get routed manually (or not at all), SLAs slip, and context is lost across threads. Knowledge lives in scattered docs, wikis, and spreadsheets — so even experienced agents search instead of solving. Duplicates, wrong priorities, and hidden dependencies make operations slow and expensive.',
+                'Customer service automation fixes this by unifying all channels into one intake, classifying intent and priority, deduplicating threads, and enriching each case with customer and order data. It pulls the right answer from your knowledge base and policies, then drafts on‑brand replies instantly.',
+                'With customer service automation, routine tickets are resolved automatically, complex cases are escalated with full context, and workflows in your stack (CRM, helpdesk, billing, logistics) are triggered reliably. Guardrails keep tone and policy compliant, while humans approve where needed.',
+                'You gain measurable outcomes: faster responses, higher first‑contact resolution, lower cost per ticket, and 24/7 coverage — all while the system learns from every interaction and improves weekly.',
+                'In short: customer service automation turns scattered tools and constant firefighting into a clear, measurable system that protects SLAs, scales support, and keeps answers consistent.',
+              ],
+            },
+            {
+              id: 'why-now',
+              heading: 'Why invest now',
+              paragraphs: [
+                'Service teams are under pressure: rising volume, shrinking budgets, and higher customer expectations. Customer service automation is the fastest lever to protect margins and improve CSAT.',
+                'Launch an AI customer service layer that handles routine work and lets your experts focus on relationship-building and complex issues.',
+                'Companies that adopt customer service automation outpace competitors by responding faster, resolving more issues on first contact, and operating around the clock without burning out their team.',
+              ],
+            },
+            {
+              id: 'how-it-works',
+              heading: 'How AI customer service works',
+              paragraphs: [
+                'AI customer service operates in two primary forms: in chat and on phone calls. In chat, AI customer service receives messages across email, live chat, WhatsApp, forms and CRM events. It classifies intent and priority, pulls accurate answers from your knowledge base and policies, and drafts on‑brand replies—resolving the vast majority of repetitive cases instantly.',
+                'On phone calls, AI customer service greets the caller, captures their request in natural language, verifies details, and follows compliant scripts. It can update records, trigger workflows, and provide real‑time answers. If the situation is nuanced or sensitive, AI customer service escalates to a human agent with full context (summary, detected intent, priority, and proposed next steps).',
+                'This dual‑channel AI customer service model ensures customers get immediate help whether they type or call, while your team only handles the minority of complex exceptions. Result: lower wait times, higher first‑contact resolution, and consistent, policy‑aligned answers across every channel.',
+                '1) Capture: Email, chat, phone, WhatsApp, forms, webhooks, and CRM events are ingested in real time.',
+                '2) Understand: Classify intent, detect sentiment and priority, enrich with customer/order data, and retrieve relevant knowledge.',
+                '3) Act: Draft/send the response, update systems, trigger workflows, or hand off to an agent with complete context.',
+              ],
+            },
+            {
+              id: 'process-flow',
+              heading: 'Automation flow snapshot',
+              paragraphs: ['A high-level view of the customer service automation pipeline from capture to measurement.'],
+            },
+            {
+              id: 'use-cases',
+              heading: 'High-ROI automations',
+              paragraphs: [
+                'Start with the top 10 intents: order status, appointment scheduling, billing questions, onboarding logistics, and password/account issues.',
+                'Customer service automation tackles the repetitive 60–80% while your team owns the nuanced 20–40%.',
+              ],
+            },
+            {
+              id: 'proof',
+              heading: 'Proven impact from real deployments',
+              paragraphs: [
+                'Shopify DTC brand (apparel): 72% ticket deflection in 8 weeks, 58% faster responses, and +12 NPS after deploying AI customer service grounded in product/return policies.',
+                'B2B SaaS (developer tools): 41% less backlog, 34% improvement in first-contact resolution, and full 24/7 coverage with automated routing, on-call schedules, and clean handoffs.',
+                'Healthcare provider group: 65% reduction in scheduling calls and 99.4% accuracy on eligibility checks using secure EHR retrieval, redaction, and policy guardrails.',
+                'Marketplace operator: 44% fewer "where is my order" contacts after automated tracking updates and proactive status notifications across email and WhatsApp.',
+              ],
+            },
+            {
+              id: 'implementation',
+              heading: 'Implementation plan',
+              paragraphs: [
+                'Week 1: Discovery and data collection (intents, macros, KB, policies).',
+                'Week 2: Build flows, integrate systems, and configure escalation.',
+                'Week 3: Soft launch with human-in-the-loop, measure, and iterate.',
+                'Ongoing: Optimization, new intents, and training data improvements, plus quarterly reviews and performance tuning.',
+              ],
+            },
+            {
+              id: 'outcomes',
+              heading: 'What you get',
+              paragraphs: [
+                'A production-ready customer service automation layer tailored to your brand and systems.',
+                'Dashboards for SLAs, deflection, CSAT proxies, and agent assist usage.',
+                'Clear governance: escalation rules, change management, and audit logs.',
+              ],
+            },
+            {
+              id: 'visual-impact',
+              heading: 'Before vs After',
+              paragraphs: ['See how customer service automation compresses queues and accelerates resolution time while preserving quality and brand voice.'],
+            },
+            {
+              id: 'security',
+              heading: 'Security, compliance, and controls',
+              paragraphs: [
+                'Your customer data stays protected. Our customer service automation follows least-privilege access, encrypts data in transit, and supports regional hosting. We can mask or exclude sensitive fields and apply redaction at capture.',
+                'We implement role-based approvals, content guardrails, and audit logging. For regulated environments, we align with your DPA, data retention, and incident response procedures.',
+              ],
+            },
+            {
+              id: 'ongoing',
+              heading: 'Maintenance and roadmap',
+              paragraphs: [
+                'We maintain your AI customer service with monthly performance reviews, intent expansion, and knowledge updates. As your products and policies evolve, the system evolves with you.',
+                'We can add agent assist, multilingual support, and proactive outreach to further increase automation and conversions.',
+              ],
+            },
+            {
+              id: 'cta',
+              heading: 'Ready to deploy customer service automation?',
+              paragraphs: [
+                'Book a free analysis. We will review your current customer service setup, identify the top intents, and design a rollout plan that delivers quick wins within weeks.',
+              ],
+            },
+          ],
+          features: [
+            {
+              title: 'Core capabilities',
+              items: [
+                'AI customer service assistant grounded in your KB',
+                'Auto-tagging, prioritization, and classification',
+                'Human-in-the-loop review and approvals',
+              ],
+            },
+            {
+              title: 'Integrations',
+              items: [
+                'Zendesk, Freshdesk, Intercom, HubSpot, Salesforce',
+                'Gmail/Outlook, Slack, WhatsApp (Twilio), webhooks',
+                'Make.com, n8n, custom APIs',
+              ],
+            },
+            {
+              title: 'Compliance & control',
+              items: [
+                'GDPR-ready data handling',
+                'Role-based approvals and guardrails',
+                'Audit logs and analytics dashboard',
+              ],
+            },
+            {
+              title: 'Our guarantee',
+              items: [
+                'Clear, measurable targets (deflection, response time, FCR)',
+                'If the MVP misses targets, we iterate at no extra cost until it does',
+                'No lock‑in: you own the stack, workflows, and knowledge base',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Will AI customer service replace my agents?',
+              a: 'No. AI customer service is designed to automate repetitive, high‑volume requests and assist agents—not replace them. With customer service automation we resolve FAQs, order status, returns and simple billing instantly, while nuanced or policy‑sensitive cases are escalated to a human with full context (intent, priority, history and a suggested reply). The result is a hybrid model where AI customer service handles the 60–80% routine work and your team focuses on complex conversations and relationship building.'
+            },
+            {
+              q: 'Which channels are supported?',
+              a: 'AI customer service listens across email, live chat, WhatsApp, web forms and CRM/webhooks. Customer service automation keeps every interaction synchronized with your help desk and CRM (Zendesk, Freshdesk, Intercom, HubSpot, Salesforce), including tags, status, assignments and audit trails. You get one unified queue with SLAs, regardless of the channel the customer chooses.'
+            },
+            {
+              q: 'How do you ensure on-brand answers?',
+              a: 'Responses are retrieval‑grounded in your knowledge base and policies, with tone and formatting rules. We add guardrails (allowed topics, wording, escalation thresholds) and human‑in‑the‑loop review where needed. Customer service automation continuously learns from approved answers and outcomes, so AI customer service becomes more consistent and on‑brand over time.'
+            },
+            {
+              q: 'How fast can we launch?',
+              a: 'Most teams ship an MVP in 2–3 weeks. We start with the top intents and wire up the critical systems, then track hard metrics for customer service automation: deflection rate, average response time and first‑contact resolution. As results stabilize, we expand coverage and add phone workflows to your AI customer service.'
+            },
+            {
+              q: 'Is it secure and compliant?',
+              a: 'We follow least‑privilege access, encrypt data in transit and at rest where supported, and offer regional hosting. PII can be masked or redacted at capture. Customer service automation respects your retention policies and DPA; we integrate with SSO/SCIM and maintain audit logs. AI customer service operates behind policy guardrails and can be configured to require human approvals in regulated steps.'
+            },
+            {
+              q: 'What ROI can we expect?',
+              a: 'Typical outcomes: 40–70% ticket deflection, 30–60% faster replies and 24/7 coverage within the first months. Customer service automation reduces cost per ticket and backlog while improving CSAT. AI customer service also increases agent throughput by drafting accurate replies and keeping records up to date automatically.'
+            },
+          ],
+        },
+        heroChat: {
+          chatHeader: 'Chat with AI Customer Service',
+          chatItems: [
+            { side: 'user', text: 'I’d like to cancel my order.' },
+            { side: 'ai', text: 'Sure. Let me check the status. Could you share your order number?' },
+            { side: 'user', text: '#A10293' },
+            { side: 'ai', text: 'Cancellation is possible. I’ve initiated the refund, confirmation is on the way.' },
+          ],
+          typingText: 'AI is typing…',
+          voiceHeader: 'Call with AI Customer Service',
+          voiceStatus: 'Speech recognition on · Routing by intent',
+          callDuration: '00:42',
+          mute: 'Mute',
+          end: 'End',
+        },
+        heroGraphic: {
+          title: 'Unify, understand, and act',
+          subtitle: 'Channels funnel into an AI core that understands intent and delivers outcomes.',
+          channelsHeading: 'Channels',
+          channels: ['Email', 'Live Chat', 'WhatsApp', 'Forms/API', 'CRM Events'],
+          aiHeading: 'AI Customer Service Core',
+          aiBullets: ['Intent, priority, sentiment detection', 'Knowledge-grounded responses', 'Policy & tone guardrails', 'Smart routing & escalations'],
+          outcomesHeading: 'Outcomes',
+          outcomes: ['Faster responses', 'Higher FCR', 'Lower cost/ticket', '24/7 coverage'],
+        },
+        flow: {
+          labels: {
+            captureTitle: 'Capture',
+            captureDesc1: 'Email / Chat / WhatsApp / Forms / Webhooks',
+            captureDesc2: 'From CRM, helpdesk, website',
+            understandTitle: 'Understand',
+            understandDesc1: 'Intent / Priority / Sentiment / KB',
+            understandDesc2: 'Grounded in policies & knowledge',
+            actTitle: 'Act',
+            actDesc1: 'Reply / Route / Update / Schedule',
+            actDesc2: 'Create tasks, update CRM, escalate',
+            measureTitle: 'Measure',
+            measureDesc1: 'SLA / FCR / Deflection / CSAT',
+            measureDesc2: 'Iterate weekly',
+            channels: ['Gmail / Outlook', 'Live Chat', 'WhatsApp', 'Forms / API'],
+            kpiHeading: 'Typical impact after 6–8 weeks',
+            kpiLine: '-67% response time / +35% FCR / 50–70% deflection',
+          },
+        },
+        statsChart: {
+          title: 'Operational impact',
+          description: 'Normalized bars per KPI show relative improvement after automation.',
+          notes: 'Illustrative values across deployments; actuals vary by volume mix and policy complexity.',
+          kpis: [
+            { label: 'Avg. response time', before: 30, after: 10, unit: ' min', betterIsLower: true },
+            { label: 'First-contact resolution', before: 45, after: 60, unit: '%', betterIsLower: false },
+            { label: 'Support cost / ticket', before: 10, after: 6, unit: ' €', betterIsLower: true },
+          ],
+        },
       },
       footer: {
         ctaSection: {
@@ -974,6 +1283,7 @@ const translations: Record<string, Translations> = {
       contact: '/kontakt', 
       services: '/dienstleistungen',
       automation: '/automatisierung',
+      customer_service_automation: '/kundenservice-automatisierung',
       blog: '/blog'
     },
     metaData: {
@@ -991,6 +1301,9 @@ const translations: Record<string, Translations> = {
       
       aboutTitle: 'Wer baut die Systeme, die ROI drucken? | Über uns | NETLINTECH',
       aboutDesc: "Wir sind Builder, die echte Probleme mit echter Automatisierung lösen. Das ist das Team hinter dem Chaos. Built different. Built by NETLINTECH.",
+      customerServiceAutomationTitle: 'Kundenservice Automatisierung mit KI — KI Kundenservice | NETLINTECH',
+      customerServiceAutomationDesc:
+        'Kundenservice Automatisierung mit KI Kundenservice: Antworten in Sekunden, Tickets automatisch routen und Support skalieren, ohne mehr Personal.',
     },
 
     content: {
@@ -1003,6 +1316,7 @@ const translations: Record<string, Translations> = {
         contact: 'Kontakt',
         services: 'Dienstleistungen',
         automation: 'Automatisierung',
+        customer_service_automation: 'Kundenservice-Automatisierung',
         blog: 'Blog'
       },
       whatWeDo: {
@@ -1170,6 +1484,247 @@ const translations: Record<string, Translations> = {
         description: 'Wir entwickeln maßgeschneiderte KI-gestützte Systeme, die manuelle Arbeit eliminieren, Zeit sparen und Ihr Geschäft am Laufen halten... auch wenn Sie offline sind.',
         freeAnalysisButton: 'Kostenlose Analyse',
         howItWorksButton: 'Wie es funktioniert'
+      },
+      customerServiceAutomation: {
+        faqSubtitle: 'Keine Antwort zu Ihrer Frage zur Kundenservice-Automatisierung gefunden?',
+        landing: {
+          title: 'Kundenservice Automatisierung',
+          subtitle:
+            'Kundenservice Automatisierung mit KI Kundenservice: Standardanfragen automatisiert beantworten, Antwortzeiten drastisch senken und Support ohne zusätzliches Personal skalieren.',
+          highlights: ['24/7 KI Kundenservice', 'Antwortzeiten um bis zu 67% senken', '50–70% Ticket-Deflection'],
+          stats: [
+            { label: 'Ø Antwortzeit', value: '-67%' },
+            { label: 'First-Contact-Resolution', value: '+35%' },
+            { label: 'Kosten pro Ticket', value: '-40%' },
+          ],
+          sections: [
+            {
+              id: 'was-ist',
+              heading: 'Was ist Kundenservice Automatisierung?',
+              paragraphs: [
+                'Kundenservice Automatisierung nutzt KI Kundenservice, Workflows und Integrationen, um häufige Anfragen sofort zu beantworten, Anfragen zu qualifizieren und Tickets automatisch zu routen oder zu lösen.',
+                'Statt langer Warteschlangen erkennt KI Absichten, nutzt Ihr Wissensmanagement und Ihre Richtlinien und erstellt präzise Antworten – Sonderfälle gehen mit vollem Kontext an Mitarbeitende.',
+                'Moderne KI Kundenservice-Lösungen bearbeiten 60–80% repetitiver Aufgaben: FAQs, Bestellstatus, Stornierungen, Retouren, einfache Abrechnungen, Terminplanung, Onboarding-Schritte und Konto-Updates – stets markenkonform und sicher.',
+              ],
+            },
+            {
+              id: 'hero-graphic',
+              heading: 'Von Chaos zu Klarheit',
+              paragraphs: [
+                'Der heutige Kundenservice ist chaotisch: E‑Mails, Live‑Chat, WhatsApp, Formulare und CRM‑Ereignisse landen in unterschiedlichen Postfächern. Mitarbeitende kopieren Daten zwischen Tools, Makros sind veraltet und Antworten variieren je nach Person. Warteschlangen wachsen, Backlogs nach Feierabend ebenso – und die immer gleichen Fragen kommen erneut.',
+                'Tickets werden manuell (oder gar nicht) geroutet, SLAs rutschen durch und Kontext geht über Threads hinweg verloren. Wissen verteilt sich auf Docs, Wikis und Tabellen – selbst erfahrene Mitarbeitende suchen statt zu lösen. Duplikate, falsche Prioritäten und verdeckte Abhängigkeiten verlangsamen und verteuern den Betrieb.',
+                'Kundenservice Automatisierung löst das, indem sie alle Kanäle in einem Intake bündelt, Intent und Priorität klassifiziert, Duplikate zusammenführt und jeden Fall mit Kunden‑ und Bestelldaten anreichert. Die richtige Antwort wird aus Wissensdatenbank und Richtlinien gezogen und in markenkonformer Tonalität sofort vorgeschlagen.',
+                'Mit Kundenservice Automatisierung werden Routine‑Tickets automatisch gelöst, komplexe Fälle mit vollem Kontext eskaliert und Workflows in deinem Stack (CRM, Helpdesk, Abrechnung, Logistik) zuverlässig ausgelöst. Guardrails sichern Ton und Policy‑Compliance ab – mit optionaler menschlicher Freigabe.',
+                'Die Ergebnisse sind messbar: schnellere Antworten, höhere First‑Contact‑Resolution, geringere Kosten pro Ticket und echte 24/7‑Abdeckung – während das System aus jeder Interaktion lernt und wöchentlich besser wird.',
+                'Kurz: Kundenservice Automatisierung verwandelt verstreute Tools und ständiges Feuerlöschen in ein klares, messbares System, das SLAs schützt, Support skaliert und konsistente Antworten sicherstellt.',
+              ],
+            },
+            {
+              id: 'warum-jetzt',
+              heading: 'Warum jetzt investieren',
+              paragraphs: [
+                'Mehr Volumen, weniger Budget, höhere Erwartungen: Kundenservice Automatisierung ist der schnellste Hebel für bessere Margen und höhere Zufriedenheit.',
+                'Ein KI Kundenservice übernimmt Routine, Ihr Team fokussiert sich auf Beziehungspflege und komplexe Fälle.',
+                'Unternehmen mit Kundenservice Automatisierung reagieren schneller, lösen mehr Fälle beim ersten Kontakt und bieten 24/7 Erreichbarkeit – ohne Team-Überlastung.',
+              ],
+            },
+            {
+              id: 'so-funktioniert-es',
+              heading: 'So funktioniert KI Kundenservice',
+              paragraphs: [
+                'KI Kundenservice arbeitet in zwei Hauptformen: im Chat und am Telefon. Im Chat empfängt KI Kundenservice Nachrichten über E‑Mail, Live‑Chat, WhatsApp, Formulare und CRM‑Ereignisse. Es klassifiziert Intent und Priorität, zieht präzise Antworten aus Wissensdatenbank und Richtlinien und erstellt markenkonforme Antworten – die große Mehrheit repetitiver Fälle wird sofort gelöst.',
+                'Am Telefon begrüßt KI Kundenservice Anrufende, erfasst das Anliegen in natürlicher Sprache, verifiziert Details und folgt konformen Skripten. Es kann Datensätze aktualisieren, Workflows auslösen und Antworten in Echtzeit geben. Wenn der Fall nuanciert oder sensibel ist, eskaliert KI Kundenservice mit vollem Kontext (Zusammenfassung, erkannter Intent, Priorität, empfohlene nächste Schritte) an Mitarbeitende.',
+                'Dieses Dual‑Channel‑Modell sorgt dafür, dass Kund:innen sofort Hilfe bekommen – ob getippt oder gesprochen – während Ihr Team nur die Minderheit komplexer Ausnahmen übernimmt. Ergebnis: kürzere Wartezeiten, höhere First‑Contact‑Resolution und konsistente, richtlinienkonforme Antworten über alle Kanäle.',
+                '1) Erfassung: E‑Mail, Chat, Telefon, WhatsApp, Formulare, Webhooks und CRM‑Ereignisse in Echtzeit.',
+                '2) Verstehen: Intent, Stimmung und Priorität erkennen, mit Kunden-/Bestelldaten anreichern und relevantes Wissen abrufen.',
+                '3) Handeln: Antwort verfassen/senden, Systeme aktualisieren, Workflows auslösen oder mit vollständigem Kontext an Mitarbeitende übergeben.',
+              ],
+            },
+            {
+              id: 'prozess-flow',
+              heading: 'Ablauf auf einen Blick',
+              paragraphs: ['Ein Überblick über die Kundenservice Automatisierung: von Erfassung bis Optimierung.'],
+            },
+            {
+              id: 'use-cases',
+              heading: 'Use Cases mit hohem ROI',
+              paragraphs: [
+                'Starten Sie mit den Top-Intents: Bestellstatus, Terminvereinbarung, Rechnungen, Onboarding und Konto-/Passwortthemen.',
+                'Kundenservice Automatisierung übernimmt die repetitiven 60–80%, Ihr Team die anspruchsvollen 20–40%.',
+              ],
+            },
+            {
+              id: 'beweise',
+              heading: 'Nachweise aus echten Projekten',
+              paragraphs: [
+                'Shopify DTC (Apparel): 72% Ticket-Deflection in 8 Wochen, 58% schnellere Antworten und +12 NPS – dank KI Kundenservice mit Produkt- & Retourenrichtlinien.',
+                'B2B SaaS (Developer-Tools): 41% weniger Backlog, +34% First-Contact-Resolution und echte 24/7 Abdeckung mit automatischem Routing, On-Call und sauberem Handover.',
+                'Healthcare-Verbund: 65% weniger Termin-Anrufe, 99,4% Genauigkeit bei Eligibility-Checks – mit sicherer EHR-Abfrage, Redaction und Policy-Guardrails.',
+                'Marketplace-Betreiber: 44% weniger „Wo ist meine Bestellung“-Anfragen durch automatisierte Tracking-Updates und proaktive Status-Benachrichtigungen via E-Mail & WhatsApp.',
+              ],
+            },
+            {
+              id: 'implementierung',
+              heading: 'Implementierungsplan',
+              paragraphs: [
+                'Woche 1: Analyse & Datensammlung (Intents, Makros, Wissensdatenbank, Richtlinien).',
+                'Woche 2: Flows bauen, Systeme integrieren, Eskalationen konfigurieren.',
+                'Woche 3: Soft Launch mit Human-in-the-loop, messen und iterieren.',
+                'Kontinuierlich: Optimierung, neue Intents, Trainingsdaten – plus Quartalsreviews und Performance-Tuning.',
+              ],
+            },
+            {
+              id: 'ergebnisse',
+              heading: 'Ihr Ergebnis',
+              paragraphs: [
+                'Eine produktionsreife Kundenservice Automatisierung, maßgeschneidert auf Marke und Systeme.',
+                'Dashboards für SLAs, Deflection, CSAT-Proxies und Agent Assist.',
+                'Klare Governance: Eskalationsregeln, Change-Management, Audit-Logs.',
+              ],
+            },
+            {
+              id: 'visueller-effekt',
+              heading: 'Vorher vs. Nachher',
+              paragraphs: ['So komprimiert Kundenservice Automatisierung Warteschlangen und beschleunigt die Bearbeitung – bei gleichbleibender Qualität und Markenstimme.'],
+            },
+            {
+              id: 'sicherheit',
+              heading: 'Sicherheit, Compliance & Kontrolle',
+              paragraphs: [
+                'Ihre Kundendaten bleiben geschützt. Unsere Kundenservice Automatisierung arbeitet mit Least-Privilege-Zugriff, verschlüsselt Daten in Transit und unterstützt regionale Hosting-Optionen. Sensible Felder können maskiert oder ausgeschlossen werden.',
+                'Wir implementieren rollenbasierte Freigaben, Inhalts-Guardrails und Audit-Logging. In regulierten Umgebungen richten wir uns nach Ihrem Auftragsverarbeitungsvertrag, Datenaufbewahrung und Incident-Prozessen.',
+              ],
+            },
+            {
+              id: 'betrieb',
+              heading: 'Betrieb & Weiterentwicklung',
+              paragraphs: [
+                'Wir betreiben Ihren KI Kundenservice mit monatlichen Performance-Reviews, Intent-Erweiterungen und Wissenspflege. Wenn sich Produkte und Richtlinien ändern, ändert sich das System mit.',
+                'Bei Bedarf ergänzen wir Agent Assist, Mehrsprachigkeit und proaktive Ansprache – für noch mehr Automatisierung und Conversions.',
+              ],
+            },
+            {
+              id: 'cta',
+              heading: 'Bereit für Kundenservice Automatisierung?',
+              paragraphs: ['Buchen Sie eine kostenlose Analyse. Wir prüfen Ihren Support, identifizieren Top-Intents und entwerfen einen Rollout-Plan mit schnellen Erfolgen in wenigen Wochen.'],
+            },
+          ],
+          features: [
+            {
+              title: 'Kernfunktionen',
+              items: [
+                'KI Kundenservice-Assistent auf Basis Ihres Wissens',
+                'Auto-Tagging, Priorisierung & Klassifizierung',
+                'Human-in-the-loop Freigaben',
+              ],
+            },
+            {
+              title: 'Integrationen',
+              items: [
+                'Zendesk, Freshdesk, Intercom, HubSpot, Salesforce',
+                'Gmail/Outlook, Slack, WhatsApp (Twilio), Webhooks',
+                'Make.com, n8n, Custom APIs',
+              ],
+            },
+            {
+              title: 'Compliance & Kontrolle',
+              items: [
+                'DSGVO-konforme Verarbeitung',
+                'Rollenbasierte Freigaben & Guardrails',
+                'Audit-Logs & Analytics-Dashboard',
+              ],
+            },
+            {
+              title: 'Unsere Garantie',
+              items: [
+                'MVP in 2–3 Wochen live für definierte Top‑Intents',
+                'Klare, messbare Ziele (Deflection, Antwortzeit, FCR)',
+                'Wenn das MVP die Ziele verfehlt, iterieren wir ohne Mehrkosten bis es passt',
+                'Kein Lock‑in: Sie besitzen Stack, Workflows und Wissensbasis',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Ersetzt KI Kundenservice mein Team?',
+              a: 'Nein. Ki Kundenservice automatisiert wiederkehrende, volumenstarke Anfragen und unterstützt Mitarbeitende – ersetzt sie aber nicht. Mit Kundenservice Automatisierung lösen wir FAQs, Bestellstatus, Retouren und einfache Abrechnungen sofort, während sensible oder komplexe Fälle mit vollem Kontext (Intent, Priorität, Historie, Antwortvorschlag) an Mitarbeitende übergeben werden. So übernimmt ki kundenservice die repetitiven 60–80%, Ihr Team konzentriert sich auf Beziehungsarbeit und komplexe Gespräche.'
+            },
+            {
+              q: 'Welche Kanäle werden unterstützt?',
+              a: 'Ki kundenservice arbeitet kanalübergreifend: E‑Mail, Live‑Chat, WhatsApp, Webformulare und CRM/Webhooks. Kundenservice Automatisierung hält alle Interaktionen in Helpdesk und CRM (z. B. Zendesk, Freshdesk, Intercom, HubSpot, Salesforce) synchron – inklusive Tags, Status, Verantwortlichen und Audit‑Trail. Ergebnis: eine einheitliche Warteschlange mit SLAs – unabhängig vom Eingangskanal.'
+            },
+            {
+              q: 'Wie bleiben Antworten markenkonform?',
+              a: 'Antworten werden retrieval‑basiert in Ihrem Wissen und Ihren Richtlinien verankert, mit Steuerung für Tonalität und Format. Guardrails (erlaubte Themen, Wortwahl, Eskalationsschwellen) und Human‑in‑the‑loop sichern Qualität. Kundenservice Automatisierung lernt aus freigegebenen Antworten und Ergebnissen – so wird ki kundenservice über die Zeit konsistenter und markenkonformer.'
+            },
+            {
+              q: 'Wie schnell starten wir?',
+              a: 'Ein MVP für kundenservice automatisierung startet meist in 2–3 Wochen. Wir beginnen mit Top‑Intents und binden die wichtigsten Systeme an, dann messen wir harte Kennzahlen: Deflection‑Rate, Ø Antwortzeit und First‑Contact‑Resolution. Stabilisieren sich die Ergebnisse, erweitern wir die Abdeckung und ergänzen bei Bedarf Telefon‑Workflows im ki kundenservice.'
+            },
+            {
+              q: 'Ist das sicher und DSGVO-konform?',
+              a: 'Least‑Privilege, Verschlüsselung in Transit (und at rest, sofern unterstützt), regionale Hosting‑Optionen. Personenbezogene Daten können bereits bei der Erfassung maskiert/redigiert werden. Kundenservice Automatisierung folgt Ihren Aufbewahrungsrichtlinien und Ihrem AVV; SSO/SCIM und Audit‑Logs sind möglich. Ki kundenservice arbeitet hinter Policy‑Guardrails und kann in regulierten Schritten menschliche Freigaben erzwingen.'
+            },
+            {
+              q: 'Welchen ROI kann ich erwarten?',
+              a: 'Typische Ergebnisse: 40–70% Ticket‑Deflection, 30–60% schnellere Antworten und echte 24/7‑Abdeckung in den ersten Monaten. Kundenservice Automatisierung senkt die Kosten pro Ticket und reduziert Backlogs bei steigender Zufriedenheit. Zusätzlich erhöht ki kundenservice die Agent‑Produktivität durch präzise Antwortvorschläge und automatische Datensynchronisation.'
+            },
+          ],
+        },
+        heroChat: {
+          chatHeader: 'KI Kundenservice',
+          chatItems: [
+            { side: 'user', text: 'Ich möchte meine Bestellung stornieren.' },
+            { side: 'ai', text: 'Gern. Ich prüfe den Status. Bestellnummer bitte?' },
+            { side: 'user', text: '#A10293' },
+            { side: 'ai', text: 'Storno möglich. Ich habe die Rückerstattung eingeleitet – Bestätigung per E-Mail.' },
+          ],
+          typingText: 'KI tippt …',
+          voiceHeader: 'Anruf mit KI Kundenservice',
+          voiceStatus: 'Spracherkennung aktiv · Routing nach Intent',
+          callDuration: '00:42',
+          mute: 'Stumm',
+          end: 'Beenden',
+        },
+        heroGraphic: {
+          title: 'Bündeln, verstehen, handeln',
+          subtitle: 'Kanäle fließen in einen KI-Kern, der Intents versteht und Ergebnisse liefert.',
+          channelsHeading: 'Kanäle',
+          channels: ['E-Mail', 'Live-Chat', 'WhatsApp', 'Formulare/API', 'CRM-Ereignisse'],
+          aiHeading: 'KI Kundenservice Kern',
+          aiBullets: ['Intent, Priorität, Stimmung', 'Wissensbasierte Antworten', 'Richtlinien & Tonalität', 'Smartes Routing & Eskalation'],
+          outcomesHeading: 'Ergebnisse',
+          outcomes: ['Schnellere Antworten', 'Höhere FCR', 'Geringere Kosten/Ticket', '24/7 Abdeckung'],
+        },
+        flow: {
+          labels: {
+            captureTitle: 'Erfassen',
+            captureDesc1: 'E-Mail / Chat / WhatsApp / Formulare / Webhooks',
+            captureDesc2: 'Aus CRM, Helpdesk, Website',
+            understandTitle: 'Verstehen',
+            understandDesc1: 'Intent / Priorität / Stimmung / Wissen',
+            understandDesc2: 'Verankert in Richtlinien & Wissen',
+            actTitle: 'Handeln',
+            actDesc1: 'Antworten / Routen / Aktualisieren / Terminieren',
+            actDesc2: 'Aufgaben erstellen, CRM updaten, eskalieren',
+            measureTitle: 'Messen',
+            measureDesc1: 'SLA / FCR / Deflection / CSAT',
+            measureDesc2: 'Wöchentlich iterieren',
+            channels: ['Gmail / Outlook', 'Live-Chat', 'WhatsApp', 'Formulare / API'],
+            kpiHeading: 'Typische Wirkung nach 6–8 Wochen',
+            kpiLine: '-67% Antwortzeit / +35% FCR / 50–70% Deflection',
+          },
+        },
+        statsChart: {
+          title: 'Operative Wirkung',
+          description: 'Pro KPI normierte Balken zeigen die relative Verbesserung nach der Automatisierung.',
+          notes: 'Richtwerte aus Projekten; tatsächliche Werte variieren je nach Volumen-Mix und Richtlinien-Komplexität.',
+          kpis: [
+            { label: 'Ø Antwortzeit', before: 30, after: 10, unit: ' Min', betterIsLower: true },
+            { label: 'First-Contact-Resolution', before: 45, after: 60, unit: '%', betterIsLower: false },
+            { label: 'Kosten pro Ticket', before: 10, after: 6, unit: ' €', betterIsLower: true },
+          ],
+        },
       },
       footer: {
         ctaSection: {
@@ -1603,7 +2158,7 @@ const useCasesByLocale: Record<string, Record<string, UseCaseConfig>> = {
       name: 'Lead Enrichment',
       title: 'Lead Enrichment Automation — turn raw leads into revenue-ready profiles',
       subtitle:
-        'Auto-enrich every inbound lead with company data, titles, emails, LinkedIn, tech stack and buying intent — then route instantly to CRM with zero manual work.',
+        'Auto-enrich every inbound lead with company data, titles, emails, LinkedIn, tech stack and buying intent, then route instantly to CRM with zero manual work.',
       tags: ['lead gen', 'sales ops', 'CRM', 'enrichment'],
       heroImage: '/assets/uses/placeholder-illustration.svg',
       heroBackdrop: '/assets/uses/gradient-blob.svg',
@@ -1618,7 +2173,7 @@ const useCasesByLocale: Record<string, Record<string, UseCaseConfig>> = {
           id: 'problem',
           heading: 'The problem with manual lead handling',
           paragraphs: [
-            'Leads arrive across multiple channels — forms, email, ads, LinkedIn. Your team copies data into spreadsheets, searches for missing fields, and updates the CRM by hand.',
+            'Leads arrive across multiple channels, forms, email, ads, LinkedIn. Your team copies data into spreadsheets, searches for missing fields, and updates the CRM by hand.',
             'It’s slow, inconsistent, and kills response times. High-intent leads get cold while your team plays data detective.',
           ],
           image: '/assets/uses/placeholder-illustration.svg',
@@ -1630,7 +2185,7 @@ const useCasesByLocale: Record<string, Record<string, UseCaseConfig>> = {
           id: 'solution',
           heading: 'A system that enriches and routes leads automatically',
           paragraphs: [
-            'We build an automation that captures each lead, enriches it using best-in-class APIs, validates contact details, scores buying intent, and routes it to the right person — instantly.',
+            'We build an automation that captures each lead, enriches it using best-in-class APIs, validates contact details, scores buying intent, and routes it to the right person, instantly.',
             'All data is pushed to your CRM and neatly organized. No more spreadsheets. No more dropped leads.',
           ],
           image: '/assets/uses/flow-diagram.svg',
@@ -1703,7 +2258,7 @@ const useCasesByLocale: Record<string, Record<string, UseCaseConfig>> = {
       faq: [
         {
           q: 'Can you enrich leads from LinkedIn or ads? ',
-          a: 'Yes. We can capture and enrich from LinkedIn, paid forms, website chat, Typeform, HubSpot forms, and more — then sync all fields into your CRM.',
+          a: 'Yes. We can capture and enrich from LinkedIn, paid forms, website chat, Typeform, HubSpot forms, and more, then sync all fields into your CRM.',
         },
         {
           q: 'Do we need to change our CRM?',
@@ -1732,7 +2287,7 @@ const useCasesByLocale: Record<string, Record<string, UseCaseConfig>> = {
       name: 'Lead Enrichment',
       title: 'Lead Enrichment Automatisierung — rohe Leads in vertriebsbereite Profile verwandeln',
       subtitle:
-        'Jeden eingehenden Lead automatisch mit Firmendaten, Titeln, E-Mails, LinkedIn, Tech-Stack und Kaufintention anreichern — und ohne manuellen Aufwand direkt ins CRM routen.',
+        'Jeden eingehenden Lead automatisch mit Firmendaten, Titeln, E-Mails, LinkedIn, Tech-Stack und Kaufintention anreichern und ohne manuellen Aufwand direkt ins CRM routen.',
       tags: ['lead gen', 'sales ops', 'CRM', 'enrichment'],
       heroImage: '/assets/uses/placeholder-illustration.svg',
       heroBackdrop: '/assets/uses/gradient-blob.svg',
