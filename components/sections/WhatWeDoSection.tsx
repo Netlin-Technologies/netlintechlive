@@ -26,7 +26,7 @@ export const WhatWeDoSection = (): JSX.Element => {
 
             <div className="flex flex-col items-start gap-6">
               <div className="flex flex-col items-start gap-2.5">
-                {t.content.whatWeDo.businessSystems.items.map((system, index) => (
+                {t.content.whatWeDo.businessSystems.items.map((system: string, index: number) => (
                   <div
                     key={`system-${index}`}
                     className="flex w-full items-center gap-2.5"
@@ -71,7 +71,7 @@ export const WhatWeDoSection = (): JSX.Element => {
 
             <div className="flex flex-col items-start gap-6">
               <div className="flex flex-col items-start gap-2.5">
-                {t.content.whatWeDo.businessProcesses.items.map((process, index) => (
+                {t.content.whatWeDo.businessProcesses.items.map((process: string, index: number) => (
                   <div
                     key={`process-${index}`}
                     className="flex w-full items-center gap-2.5"

@@ -15,6 +15,7 @@ import AutomationPage from '@/app/_pages/automation/page'
 import BlogArticlePage from '@/app/_pages/blog/[slug]/page'
 import AdminPage from '@/app/_pages/admin/page'
 import CustomerServiceAutomationPage from '@/app/_pages/customer-service-automation/page'
+import MarketingAutomationPage from '@/app/_pages/marketing-automation/page'
 
 const pageComponents = {
   about: AboutPage,
@@ -24,6 +25,7 @@ const pageComponents = {
   automation: AutomationPage,
   admin: AdminPage,
   customer_service_automation: CustomerServiceAutomationPage,
+  marketing_automation: MarketingAutomationPage,
 }
 
 // Define translations directly to avoid import issues at build time
@@ -36,6 +38,7 @@ const translations = {
       blog: '/blog',
       automation: '/automation',
       customer_service_automation: '/customer-service-automation',
+      marketing_automation: '/marketing-automation',
       admin: '/admin'
     }
   },
@@ -47,6 +50,7 @@ const translations = {
       blog: '/blog',
       automation: '/automatisierung',
       customer_service_automation: '/kundenservice-automatisierung',
+      marketing_automation: '/marketing-automatisierung',
       admin: '/admin'
     }
   }
@@ -216,6 +220,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: t.metaData.customerServiceAutomationTitle || t.metaData.automationTitle,
       description: t.metaData.customerServiceAutomationDesc || t.metaData.automationDesc,
     },
+    marketing_automation: {
+      title: t.metaData.marketingAutomationTitle || t.metaData.automationTitle,
+      description: t.metaData.marketingAutomationDesc || t.metaData.automationDesc,
+    },
   }
   
   const pageMetadata = metadataMap[routeKey] || {
@@ -343,6 +351,7 @@ export async function generateStaticParams() {
         blog: '/blog',
         automation: '/automation',
         customer_service_automation: '/customer-service-automation',
+        marketing_automation: '/marketing-automation',
         // admin: '/admin' // Exclude admin from static generation
       }
     },
@@ -354,6 +363,7 @@ export async function generateStaticParams() {
         blog: '/blog',
         automation: '/automatisierung',
         customer_service_automation: '/kundenservice-automatisierung',
+        marketing_automation: '/marketing-automatisierung',
         // admin: '/admin' // Exclude admin from static generation
       }
     }

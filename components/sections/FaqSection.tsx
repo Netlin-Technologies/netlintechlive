@@ -27,7 +27,7 @@ export const FaqSection = (): JSX.Element => {
 
       <div className="flex flex-col w-full max-w-[705px] items-start relative">
         <Accordion type="single" collapsible className="w-full">
-          {t.content.faq.items.map((item, index) => (
+          {t.content.faq.items.map((item: { question: string; answer?: string }, index: number) => (
             <AccordionItem
               key={`faq-${index}`}
               value={`item-${index}`}

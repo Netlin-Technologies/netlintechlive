@@ -287,7 +287,7 @@ const BottomBanner = () => {
                 {t.content.bottomBanner.problems.cards.scaling.description}
               </p>
               <div className="mt-8 lg:mt-6 2xl:mt-12 flex flex-col gap-3">
-                {t.content.bottomBanner.problems.cards.scaling.issues.map((issue, index) => (
+                {t.content.bottomBanner.problems.cards.scaling.issues.map((issue: string, index: number) => (
                   <div key={index} className="flex items-center gap-3">
                     <img src="/assets/images/dislike.svg" alt="dislike" />
                     <p className="text-white 2xl:text-base text-xs font-semibold font-sora leading-[16px]">
@@ -315,7 +315,7 @@ const BottomBanner = () => {
                 {t.content.bottomBanner.problems.cards.support.description}
               </p>
               <div className="mt-8 lg:mt-6 2xl:mt-12 flex flex-col gap-3">
-                {t.content.bottomBanner.problems.cards.support.issues.map((issue, index) => (
+                {t.content.bottomBanner.problems.cards.support.issues.map((issue: string, index: number) => (
                   <div key={index} className="flex items-center gap-3">
                     <img src="/assets/images/dislike.svg" alt="dislike" />
                     <p className="text-white 2xl:text-base text-xs font-semibold font-sora leading-[16px]">

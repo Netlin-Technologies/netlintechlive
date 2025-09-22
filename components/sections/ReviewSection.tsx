@@ -77,7 +77,7 @@ const ReviewSection = () => {
             className="flex w-max items-center animationControl2"
           >
             {[...Array(9)].flatMap((_, i) =>
-              t.content.reviews.items.map((review, idx) => (
+              t.content.reviews.items.map((review: { name: string; text: string; image: string }, idx: number) => (
                 <ReviewCard
                   key={`${review.text}${i}-${idx}`}
                   name={review.name}

@@ -12,7 +12,7 @@ export const HowItWorksSection = (): JSX.Element => {
         </h2>
 
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start flex-wrap">
-          {t.content.howItWorks.features.map((feature, index) => (
+          {t.content.howItWorks.features.map((feature: string, index: number) => (
             <div key={index} className="flex items-center gap-2.5">
               <img
                 className="w-6 h-[17px] flex-shrink-0"
@@ -30,7 +30,7 @@ export const HowItWorksSection = (): JSX.Element => {
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full gap-8">
         {/* Steps */}
         <div className="flex flex-col items-start gap-0 flex-1">
-          {t.content.howItWorks.steps.map((step, index) => (
+          {t.content.howItWorks.steps.map((step: { number: string | number; title: string; description: string }, index: number) => (
             <React.Fragment key={index}>
               <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 w-full">
                 <div className="relative w-[102px] h-[100px] flex-shrink-0">

@@ -39,6 +39,7 @@ export const FooterSection = ({ theme = 'dark', ctaTitle, ctaDescription, ctaBut
   // Define sub-links for the "Automation" service (can be expanded later)
   const automationSubLinks: Array<{ route: keyof typeof t.routes; name: string }> = [
     { route: 'customer_service_automation', name: t.content.navigation.customer_service_automation },
+    { route: 'marketing_automation', name: t.content.navigation.marketing_automation },
   ];
 
   return (
@@ -135,7 +136,7 @@ export const FooterSection = ({ theme = 'dark', ctaTitle, ctaDescription, ctaBut
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:flex xl:flex-wrap w-auto gap-10 md:gap-12 lg:gap-[80px] items-start relative">
-            {footerNavigation.map((category, index) => (
+            {footerNavigation.map((category: any, index: number) => (
               <div
                 key={`category-${index}`}
                 className="inline-flex flex-col items-start justify-center gap-4 md:gap-6 relative group min-w-[180px]"
@@ -145,7 +146,7 @@ export const FooterSection = ({ theme = 'dark', ctaTitle, ctaDescription, ctaBut
                 </div>
 
                 <div className="inline-flex flex-col items-start gap-3 md:gap-4 relative">
-                  {category.links.map((footerLink, linkIndex) => {
+                  {category.links.map((footerLink: any, linkIndex: number) => {
                     const isAutomation = footerLink.route === 'automation';
                     if (!isAutomation) {
                       return (

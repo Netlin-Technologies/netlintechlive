@@ -4,10 +4,11 @@ interface Translations {
     contact: string;
     automation: string;
     customer_service_automation: string;
+    marketing_automation: string;
     blog: string;
     services: string;
   };
-  metaData:{
+  metaData: {
     homeTitle: string;
     homeDesc: string;
     automationTitle: string;
@@ -20,451 +21,11 @@ interface Translations {
     aboutDesc: string;
     customerServiceAutomationTitle?: string;
     customerServiceAutomationDesc?: string;
-  },
-  content: {
-    aboutUsTitle: string;
-    aboutUsDescription: string;
-    homeTitle: string;
-    navigation: {
-      home: string;
-      about: string;
-      contact: string;
-      services: string;
-      automation: string;
-      customer_service_automation: string;
-      blog: string;
-    };
-    whatWeDo: {
-      title: string;
-      description: string;
-      businessSystems: {
-        title: string;
-        items: string[];
-        moreText: string;
-        buttonText: string;
-      };
-      businessProcesses: {
-        title: string;
-        items: string[];
-        moreText: string;
-        buttonText: string;
-        automateProcessText: string;
-        analyzeText: string;
-      };
-    };
-    toolsOverview: {
-      tools: {
-        title: string;
-        description: string;
-      }[];
-    };
-    tools: {
-      automation: string;
-      webDevelopment: string;
-      seo: string;
-    };
-    reviews: {
-      title: string;
-      items: {
-        image: string;
-        name: string;
-        text: string;
-      }[];
-    };
-    ourClients: {
-      title: string;
-      description: string;
-      buttonText: string;
-      clients: {
-        name: string;
-        website: string;
-        description: string;
-      }[];
-    };
-    howItWorks: {
-      title: string;
-      features: string[];
-      steps: {
-        number: string;
-        title: string;
-        description: string;
-      }[];
-    };
-    homeHero: {
-      title: string;
-      subtitle: string;
-      savings: string;
-      reduction: string;
-      automateButton: string;
-      howItWorksButton: string;
-    };
-    hero: {
-      badge: string;
-      title: string;
-      description: string;
-      freeAnalysisButton: string;
-      howItWorksButton: string;
-    };
-    customerServiceAutomation?: {
-      landing: {
-        title: string;
-        subtitle: string;
-        highlights: string[];
-        stats: { label: string; value: string }[];
-        sections: { id: string; heading: string; paragraphs: string[] }[];
-        features: { title: string; items: string[] }[];
-        faq: { q: string; a: string }[];
-      };
-      // Page-specific overrides
-      faqSubtitle?: string;
-      heroChat: {
-        chatHeader: string;
-        chatItems: { side: 'user' | 'ai'; text: string }[];
-        typingText: string;
-        voiceHeader: string;
-        voiceStatus: string;
-        callDuration: string;
-        mute: string;
-        end: string;
-      };
-      heroGraphic: {
-        title?: string;
-        subtitle?: string;
-        channelsHeading: string;
-        channels: string[];
-        aiHeading: string;
-        aiBullets: string[];
-        outcomesHeading: string;
-        outcomes: string[];
-      };
-      flow: {
-        labels: {
-          captureTitle: string;
-          captureDesc1: string;
-          captureDesc2: string;
-          understandTitle: string;
-          understandDesc1: string;
-          understandDesc2: string;
-          actTitle: string;
-          actDesc1: string;
-          actDesc2: string;
-          measureTitle: string;
-          measureDesc1: string;
-          measureDesc2: string;
-          channels: string[];
-          kpiHeading: string;
-          kpiLine: string;
-        };
-      };
-      statsChart: {
-        title: string;
-        description: string;
-        notes: string;
-        kpis: { label: string; before: number; after: number; unit?: string; betterIsLower?: boolean }[];
-      };
-    };
-    footer: {
-      ctaSection: {
-        title: string;
-        description: string;
-        buttonText: string;
-      };
-      categories: {
-        title: string;
-        links: {
-          name: string;
-          route: string;
-        }[];      }[];
-      copyright: string;
-    };
-    faq: {
-      title: string;
-      subtitle: string;
-      items: {
-        question: string;
-        answer: string;
-      }[];
-    };
-    contactHero: {
-      title: string;
-      subtitle: string;
-    };
-    contactForm: {
-      form: {
-        firstName: {
-          label: string;
-          placeholder: string;
-        };
-        lastName: {
-          label: string;
-          placeholder: string;
-        };
-        workEmail: {
-          label: string;
-          placeholder: string;
-        };
-        service: {
-          label: string;
-          placeholder: string;
-          options: {
-            webDevelopment: string;
-            aiAutomation: string;
-            consulting: string;
-            customSolutions: string;
-          };
-        };
-        message: {
-          label: string;
-          placeholder: string;
-        };
-      };
-      discoveryCall: {
-        title: string;
-        description: {
-          part1: string;
-          highlight1: string;
-          part2: string;
-          highlight2: string;
-          part3: string;
-        };
-      };
-      submitButton: string;
-      agreement: {
-        text: string;
-        terms: string;
-        and: string;
-        privacy: string;
-      };
-      contactInfo: {
-        title: string;
-        phone: {
-          label: string;
-          value: string;
-        };
-        email: {
-          label: string;
-          value: string;
-        };
-        linkedin: {
-          label: string;
-          value: string;
-        };
-      };
-      // Added localized validation errors
-      errors: {
-        firstNameRequired: string;
-        lastNameRequired: string;
-        emailRequired: string;
-        messageRequired: string;
-        serviceRequired: string;
-      };
-      // Added success texts
-      success: {
-        title: string;
-        description: string;
-        anotherMessageButton: string;
-      };
-      // Added booking labels
-      booking: {
-        openInNewTab: string;
-        notConfigured: string;
-      };
-      // Added transient UI states
-      states: {
-        sending: string;
-      };
-    };
-    blogArticles: {
-      title: string;
-      subtitle: string;
-      searchPlaceholder: string;
-      categories: {
-        all: string;
-        automation: string;
-        seo: string;
-        webDevelopment: string;
-        news: string;
-      };
-      sampleArticle: {
-        date: string;
-        title: string;
-        excerpt: string;
-      };
-      learnMore: string;
-    };
-    bottomBanner: {
-      title: string;
-      description: string;
-      buttonText: string;
-      problems: {
-        heading: string;
-        subtitle: string;
-        description: string;
-        cards: {
-          scaling: {
-            title: string;
-            description: string;
-            issues: string[];
-            solution: string;
-          };
-          support: {
-            title: string;
-            description: string;
-            issues: string[];
-            solution: string;
-          };
-          efficiency: {
-            title: string;
-            description: string;
-            issues: string[];
-            solution: string;
-          };
-        };
-      };
-      solution: {
-        subtitle: string;
-        title: string;
-        description: string;
-        learnMore: string;
-        toolsLabel: string;
-      };
-      finalSection: {
-        subtitle: string;
-        title: string;
-        description: string;
-        learnMore: string;
-        toolsLabel: string;
-      };
-    };
-    blogHero: {
-      title: string;
-      subtitle: string;
-    };
-    banner: {
-      title: string;
-      description: string;
-      buttonText: string;
-    };
-    bannerSection: {
-      cards: {
-        slack: {
-          title: string;
-          description: string;
-        };
-        aiAgent: {
-          title: string;
-          description: string;
-        };
-        gmail: {
-          title: string;
-          description: string;
-        };
-      };
-      modules: {
-        chatgpt: {
-          title: string;
-          subtitle: string;
-        };
-        airtable: {
-          title: string;
-          subtitle: string;
-        };
-        calendar: {
-          title: string;
-          subtitle: string;
-        };
-        hubspot: {
-          title: string;
-          subtitle: string;
-        };
-      };
-      steps: {
-        messageAnalyzed: string;
-        answerReceived: string;
-        appointmentAdded: string;
-        appointmentAddedAgain: string;
-      };
-      testimonial: {
-        author: string;
-        quote: string;
-      };
-      trustText: string;
-    };
-    bannerInfo: {
-      title: string;
-      description: string;
-      subtitle: string;
-      animatedWords: {
-        word1: string;
-        word2: string;
-        word3: string;
-      };
-      ticker1: string;
-      ticker2: string;
-      mobileUnit: string;
-      desktopUnit: {
-        letter1: string;
-        letter2: string;
-        letter3: string;
-      };
-    };
-    processFlow: {
-      recommendation: {
-        text1: string;
-        text2: string;
-      };
-      steps: {
-        roleIdentification: {
-          title: string;
-          description: {
-            line1: string;
-            line2: string;
-            line3: string;
-          };
-        };
-        initialAnalysis: {
-          title: string;
-          description: {
-            line1: string;
-            line2: string;
-            line3: string;
-          };
-        };
-        workflowMapping: {
-          title: string;
-          description: {
-            line1: string;
-            line2: string;
-            line3: string;
-          };
-        };
-        bottlenecksHurdles: {
-          title: string;
-          description: {
-            line1: string;
-            line2: string;
-            line3: string;
-          };
-        };
-        analysisReport: {
-          title: string;
-          description: {
-            line1: string;
-            line2: string;
-            line3: string;
-          };
-        };
-      };
-    };
-    aiTools: {
-      title: string;
-      description: string;
-      tools: {
-        name: string;
-        description: string;
-      }[];
-    };
+    marketingAutomationTitle?: string;
+    marketingAutomationDesc?: string;
   };
+  // Keep content flexible to accommodate page-specific structures
+  content: any;
 }
 
 const translations: Record<string, Translations> = {
@@ -474,12 +35,13 @@ const translations: Record<string, Translations> = {
       contact: '/contact',
       automation: '/automation',
       customer_service_automation: '/customer-service-automation',
+      marketing_automation: '/marketing-automation',
       services: '/services',
       blog: '/blog'
     },
     metaData: {
       homeTitle: 'Automate workflows for your business | No-Code AI Automation',
-      homeDesc: "We turn your biz into a system that runs itself. Custom AI workflows that slash overhead, kill manual tasks and scale hard. Built to win. Built by NETLINTECH.",
+      homeDesc: "We turn your business into a system that runs itself. Custom AI workflows that kill overhead, eliminate manual work, and scale hard. Built to win. Built by NETLINTECH.",
       automationTitle: 'Automate your business with AI | Print Cash | NETLINTECH',
       automationDesc: 'We build scalable automations that kill busywork and print ROI. No BS. No code. Just scalable systems that run while you sleep. Built by NETLINTECH.',
       blogTitle: 'Proven systems. Real ROI. | Learn no-code AI Automation | NETLINTECH',
@@ -491,6 +53,9 @@ const translations: Record<string, Translations> = {
       customerServiceAutomationTitle: 'Customer Service Automation with AI — AI Customer Service | NETLINTECH',
       customerServiceAutomationDesc:
         'Customer service automation and AI customer service that answers instantly, routes tickets, and scales support without hiring.',
+      marketingAutomationTitle: 'Marketing automation that converts, multi-channel and data-driven | NETLINTECH',
+      marketingAutomationDesc:
+        'Marketing automation that orchestrates email, social, ads and CRM with data-driven journeys, lead scoring and personalization to lift conversions.',
     },
     content: {
       aboutUsTitle: 'About Us',
@@ -502,6 +67,7 @@ const translations: Record<string, Translations> = {
         contact: 'Contact',
         services: 'Services',
         customer_service_automation: 'Customer Service Automation',
+        marketing_automation: 'Marketing Automation',
         automation: 'Automation',
         blog: 'Blog'
       },
@@ -698,10 +264,10 @@ const translations: Record<string, Translations> = {
               heading: 'From chaos to clarity',
               paragraphs: [
                 'Customer service today is chaotic: emails, live chat, WhatsApp, forms, and CRM events all land in different inboxes. Agents copy data between tools, macros are outdated, and answers vary by person. Queues pile up, after-hours backlogs grow, and customers ask the same questions again and again.',
-                'Tickets get routed manually (or not at all), SLAs slip, and context is lost across threads. Knowledge lives in scattered docs, wikis, and spreadsheets — so even experienced agents search instead of solving. Duplicates, wrong priorities, and hidden dependencies make operations slow and expensive.',
+                'Tickets get routed manually (or not at all), SLAs slip, and context is lost across threads. Knowledge lives in scattered docs, wikis, and spreadsheets, so even experienced agents search instead of solving. Duplicates, wrong priorities, and hidden dependencies make operations slow and expensive.',
                 'Customer service automation fixes this by unifying all channels into one intake, classifying intent and priority, deduplicating threads, and enriching each case with customer and order data. It pulls the right answer from your knowledge base and policies, then drafts on‑brand replies instantly.',
                 'With customer service automation, routine tickets are resolved automatically, complex cases are escalated with full context, and workflows in your stack (CRM, helpdesk, billing, logistics) are triggered reliably. Guardrails keep tone and policy compliant, while humans approve where needed.',
-                'You gain measurable outcomes: faster responses, higher first‑contact resolution, lower cost per ticket, and 24/7 coverage — all while the system learns from every interaction and improves weekly.',
+                'You gain measurable outcomes: faster responses, higher first‑contact resolution, lower cost per ticket, and 24/7 coverage, all while the system learns from every interaction and improves weekly.',
                 'In short: customer service automation turns scattered tools and constant firefighting into a clear, measurable system that protects SLAs, scales support, and keeps answers consistent.',
               ],
             },
@@ -910,6 +476,302 @@ const translations: Record<string, Translations> = {
             { label: 'Avg. response time', before: 30, after: 10, unit: ' min', betterIsLower: true },
             { label: 'First-contact resolution', before: 45, after: 60, unit: '%', betterIsLower: false },
             { label: 'Support cost / ticket', before: 10, after: 6, unit: ' €', betterIsLower: true },
+          ],
+        },
+      },
+      marketingAutomation: {
+        faqSubtitle: "Didn't find an answer to your question regarding marketing automation?",
+        landing: {
+          title: 'Marketing Automation',
+          subtitle:
+            'Marketing automation orchestrates email, ads, social and CRM so the right message reaches the right audience at the right time — scoring intent, segmenting precisely and personalizing at scale to lift ROI.',
+          highlights: ['Lead scoring and routing', 'Personalized nurture at scale', 'Lower CPL and CAC'],
+          stats: [
+            { label: 'Lead response time', value: '-80%' },
+            { label: 'MQL → SQL conversion', value: '+28%' },
+            { label: 'Cost per lead (CPL)', value: '-35%' },
+          ],
+          sections: [
+            {
+              id: 'what-is',
+              heading: 'What is marketing automation?',
+              paragraphs: [
+                'Marketing automation centralizes and automates core tasks such as email campaigns, social scheduling, lead scoring and retargeting. By coordinating channels and data, it ensures the right content reaches the right person at the right time, improving conversion and marketing ROI.',
+                'Rather than manual list pulls and ad‑hoc blasts, marketing automation listens for behavior (page views, form fills, email engagement), scores intent, segments audiences and triggers the next best step automatically.',
+                'A key advantage is lead nurturing: through targeted content and automated segmentation, leads move from awareness to consideration and into qualified conversations for sales.',
+                'Effective marketing automation tools also integrate natively with your CRM. This enables tight sales‑marketing alignment, continuous nurturing and precise tracking of interactions, saving time while increasing personalization and timing accuracy.',
+              ],
+            },
+            {
+              id: 'hero-graphic',
+              heading: 'From scattered tools to one orchestrated system',
+              paragraphs: [
+                'Most teams juggle disconnected tools: ads, email, website, webinars and CRM. Data sits in silos, timing is off and follow‑ups get missed. Leads go cold before sales ever sees them.',
+                'Marketing automation unifies touchpoints, enriches leads with firmographic and behavioral data, then delivers timely, personalized follow‑ups that move prospects forward.',
+                'Your team gets clean, scored and routed leads; your CRM stays accurate; your campaigns optimize week over week.',
+              ],
+            },
+            {
+              id: 'why-now',
+              heading: 'Why invest now',
+              paragraphs: [
+                'Acquisition costs are rising while attention spans shrink. Teams that adopt marketing automation win by reacting faster, personalizing deeper and spending smarter.',
+                'Ship an automation backbone that captures demand 24/7, nurtures automatically and hands off sales‑ready leads at the right moment.',
+              ],
+            },
+            {
+              id: 'lead-vs-prospect',
+              heading: 'Lead vs. prospect: what’s the difference?',
+              paragraphs: [
+                'A lead is someone who has expressed initial interest, often just a name and an email captured through a form. A prospect is a lead that has engaged further and shows stronger buying intent.',
+                'Marketing automation helps teams nurture leads with personalized content and timely follow‑ups. As engagement rises, leads become prospects and are qualified for sales (SQLs). Clear definitions keep pipeline stages honest and measurable.',
+              ],
+            },
+            {
+              id: 'benefits',
+              heading: 'Benefits of marketing automation',
+              paragraphs: [
+                'Holistic customer views and pipeline optimization: behavioral data feeds a complete picture of each account and contact, enabling precise targeting and nurture until purchase‑ready.',
+                'Time savings: repetitive tasks run in the background so teams focus on strategy and relationship‑building.',
+                'Cost efficiency: scale programs without linear headcount growth, lower CPL and CAC with better orchestration.',
+                'Better personalization and faster revenue: segmentation, A/B testing and retargeting deliver relevant messages at the right moment, lifting conversion rates and revenue velocity.',
+                'Content prioritization: analytics surface what works so budgets move to the highest‑impact assets and journeys.',
+                'Strategic timing: triggers based on behavior keep your brand present at key moments across the journey.',
+              ],
+            },
+            {
+              id: 'how-it-works',
+              heading: 'How marketing automation works',
+              paragraphs: [
+                '1) Capture: Collect signals from ads, website, forms, webinars and social to build a real‑time view of engagement.',
+                '2) Understand: Score intent, segment by profile and behavior, and enrich with data from your CRM and product.',
+                '3) Act: Trigger personalized emails, ads and messages; update CRM; route to sales with full context; and iterate constantly with analytics.',
+              ],
+            },
+            {
+              id: 'process-flow',
+              heading: 'Automation flow snapshot',
+              paragraphs: ['A high‑level view from capture to measurement in marketing automation.'],
+            },
+            {
+              id: 'use-cases',
+              heading: 'High‑ROI automations',
+              paragraphs: [
+                'Lead scoring and routing · Multi‑step nurture sequences · Abandoned cart recovery · Webinar signup → reminder → replay · Trial activation nudges · Retargeting by segment · Pipeline hygiene and SLAs.',
+              ],
+            },
+            {
+              id: 'proof',
+              heading: 'Proven impact from real deployments',
+              paragraphs: [
+                'B2B SaaS: +31% MQL→SQL, -22% CPL after intent scoring and behavior‑based nurture.',
+                'E‑commerce: +18% repeat purchases, -26% CAC using segmented email + dynamic retargeting.',
+                'Professional services: 2.4× more booked calls from automated webinar and lead‑magnet funnels.',
+              ],
+            },
+            {
+              id: 'cx-impact',
+              heading: 'How marketing automation improves customer experience',
+              paragraphs: [
+                'Omni‑channel relevance: track interactions across channels and deliver fresh, non‑repetitive content at each stage of the journey.',
+                'Cross‑team continuity: align marketing, sales and support so customers receive consistent, coordinated communication no matter who they speak to.',
+                'Personalized, authentic experiences: use insights to deliver messages tailored to preferences, customers expect relevance and reward it with higher engagement and loyalty.',
+              ],
+            },
+            {
+              id: 'best-practices',
+              heading: 'Marketing automation best practices',
+              paragraphs: [
+                'Align marketing and sales: shared definitions and SLAs produce smoother handoffs and cleaner measurement.',
+                'Design around the customer journey: plan content and triggers by stage to maintain context from lead to loyal customer.',
+                'Set clear goals and metrics: measure what matters, adapt fast and prove ROI through disciplined attribution.',
+                'Use customer data to optimize: maintain clean CRM data, segment effectively and apply multi‑touch attribution to refine investment.',
+                'Automate the highest‑impact tasks first: demonstrate value early, then expand coverage across journeys and channels.',
+                'Choose the right tools: select marketing automation that fits your stack and use cases, email, social, lead management and beyond.',
+                'Work cross‑functionally: enable all teams touching the journey to contribute data and maintain message consistency.',
+              ],
+            },
+            {
+              id: 'implementation',
+              heading: 'Implementation plan',
+              paragraphs: [
+                'Week 1: Audit channels, map journeys, define segments and scoring.',
+                'Week 2: Build journeys, connect tools, set up tracking and attribution.',
+                'Week 3: Launch with measurement plan, iterate copy and offers.',
+                'Ongoing: A/B tests, segment expansion, ROAS optimization and CRM hygiene.',
+              ],
+            },
+            {
+              id: 'outcomes',
+              heading: 'What you get',
+              paragraphs: [
+                'A production‑ready marketing automation backbone tailored to your stack.',
+                'Dashboards for MQL→SQL, CPL, CAC, open/click rates and pipeline velocity.',
+                'Governance for segments, scoring, consent and campaign change management.',
+              ],
+            },
+            {
+              id: 'visual-impact',
+              heading: 'Before vs After',
+              paragraphs: ['See how marketing automation increases conversion rates while reducing CPL and time‑to‑first‑touch.'],
+            },
+            {
+              id: 'security',
+              heading: 'Security, consent and compliance',
+              paragraphs: [
+                'We respect consent and regional requirements (GDPR). We implement data minimization, secure transport and retention controls. Sensitive attributes can be masked and excluded from exports.',
+                'Role‑based access, audit trails and change approvals keep your automation safe as it scales.',
+              ],
+            },
+            {
+              id: 'ongoing',
+              heading: 'Maintenance and roadmap',
+              paragraphs: [
+                'We maintain your marketing automation with monthly reviews, segment and journey updates and continuous optimization of offers and messaging.',
+              ],
+            },
+            {
+              id: 'tailored',
+              heading: 'Every company is unique, so is your marketing automation',
+              paragraphs: [
+                'No two businesses share the same audience, data or sales motion. That’s why our marketing automation systems are built individually: journeys, scoring models, segments and integrations are tailored to your stack and goals.',
+                'We design a marketing automation strategy around your funnel, not a template, aligning with your CRM, channels and compliance needs, then iterating with weekly analytics to keep lifting ROI.',
+              ],
+            },
+            {
+              id: 'cta',
+              heading: 'Ready to deploy marketing automation?',
+              paragraphs: [
+                'Book a free analysis. We will review your funnel, define segments and scoring, and design journeys that lift conversions within weeks.',
+              ],
+            },
+          ],
+          features: [
+            {
+              title: 'Core capabilities',
+              items: [
+                'Behavior‑based segmentation and lead scoring',
+                'Automated nurture sequences and retargeting',
+                'CRM enrichment, routing and lifecycle updates',
+              ],
+            },
+            {
+              title: 'Integrations',
+              items: [
+                'HubSpot, Salesforce, Pipedrive',
+                'Mailchimp, Klaviyo, Customer.io',
+                'Meta/Google Ads, LinkedIn, Segment',
+              ],
+            },
+            {
+              title: 'Compliance & control',
+              items: [
+                'GDPR‑ready consent and preferences',
+                'Role‑based approvals and guardrails',
+                'Attribution and audit logging',
+              ],
+            },
+            {
+              title: 'Our guarantee',
+              items: [
+                'Clear targets (MQL→SQL, CPL, CAC)',
+                'If the MVP misses targets, we iterate at no extra cost until it does',
+                'No lock‑in: you own your data, segments and journeys',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Will marketing automation replace my marketers?',
+              a: 'No. Marketing automation handles repetitive orchestration, scoring, segmenting, triggering messages and updating CRM, so your team can focus on strategy, creative and offers. It boosts throughput and consistency without replacing human judgment.'
+            },
+            {
+              q: 'Which channels are supported?',
+              a: 'Email, website, ads, social, webinars and CRM. We connect your existing tools (HubSpot, Salesforce, Mailchimp, Klaviyo, Meta/Google Ads, LinkedIn) and custom APIs.'
+            },
+            {
+              q: 'How do you ensure on‑brand messaging?',
+              a: 'We define tone, guardrails and templates for each segment and journey. Messaging is tested and iterated with A/B frameworks to stay on‑brand and effective.'
+            },
+            {
+              q: 'How fast can we launch?',
+              a: 'Most teams ship an MVP in 2–3 weeks. We start with the highest‑impact journeys and instruments, then expand based on results.'
+            },
+            {
+              q: 'Is it compliant and privacy‑safe?',
+              a: 'Yes. We implement consent management, data minimization and regional compliance (e.g., GDPR). We honor unsubscribe and preferences across channels.'
+            },
+            {
+              q: 'What ROI can we expect?',
+              a: 'Typical outcomes: +15–35% MQL→SQL, -20–40% CPL and faster time‑to‑first‑touch. Results vary by industry, data quality and offer‑market fit.'
+            },
+          ],
+        },
+        heroChat: {
+          chatHeader: 'Journey Orchestrator',
+          chatSub: 'Build the steps that move leads from capture to handoff',
+          stages: [
+            { name: 'Capture', detail: 'Ads · Website · Forms · Webinars' },
+            { name: 'Score', detail: 'Behavior + Firmographic intent' },
+            { name: 'Segment', detail: 'ICP · Stage · Interest' },
+            { name: 'Nurture', detail: 'Email · Retarget · Message' },
+            { name: 'Handoff', detail: 'Route to Sales with context' },
+          ],
+          chatItems: [
+            { side: 'user', text: 'The lead downloaded our guide but didn’t book a call.' },
+            { side: 'ai', text: 'Segment matched: Founder · High intent. Triggering a 3‑step nurture with case studies and a calendar CTA.' },
+            { side: 'user', text: 'Add LinkedIn retargeting for this cohort.' },
+            { side: 'ai', text: 'Done. Audience synced. Budget set to €30/day for 10 days; exclusions applied to booked leads.' },
+          ],
+          typingText: 'AI is typing…',
+          voiceHeader: 'Audiences & Metrics',
+          voiceSub: 'Who you target and how performance improves',
+          audienceTags: ['High Intent', 'Cold', 'ICP', 'Retarget'],
+          audienceSyncLabel: 'Audience Sync',
+          metricsLabels: { mqlToSql: 'MQL → SQL', cpl: 'CPL' },
+          runningLabel: 'Journeys running · Auto‑optimize',
+          voiceStatus: 'Attribution mapped · Journeys active',
+          callDuration: '00:37',
+          mute: 'Mute',
+          end: 'End',
+        },
+        heroGraphic: {
+          title: 'Capture, score and convert',
+          subtitle: 'Channels feed a marketing AI core that segments, scores and acts across journeys.',
+          channelsHeading: 'Channels',
+          channels: ['Ads', 'Website', 'Email', 'Social', 'Webinars', 'CRM'],
+          aiHeading: 'Marketing AI Orchestrator',
+          aiBullets: ['Behavior + firmographic scoring', 'Segment + personalize journeys', 'Guardrails for tone and consent', 'Smart routing and attribution'],
+          outcomesHeading: 'Outcomes',
+          outcomes: ['Higher conversions', 'Lower CPL & CAC', 'Faster handoffs', 'Cleaner CRM'],
+        },
+        flow: {
+          labels: {
+            captureTitle: 'Capture',
+            captureDesc1: 'Ads / Website / Forms / Webinars',
+            captureDesc2: 'CRM & product events',
+            understandTitle: 'Understand',
+            understandDesc1: 'Score intent · Segment audience',
+            understandDesc2: 'Enrich with CRM & product data',
+            actTitle: 'Act',
+            actDesc1: 'Trigger emails · Sync audiences',
+            actDesc2: 'Update CRM · Route to sales',
+            measureTitle: 'Measure',
+            measureDesc1: 'CPL / CAC / MQL→SQL / ROAS',
+            measureDesc2: 'Iterate weekly',
+            channels: ['Mailchimp / Klaviyo', 'Meta/Google Ads', 'LinkedIn', 'HubSpot / Salesforce'],
+            kpiHeading: 'Typical impact after 6–8 weeks',
+            kpiLine: '+28% MQL→SQL / -35% CPL / Faster TTF',
+          },
+        },
+        statsChart: {
+          title: 'Funnel impact',
+          description: 'Normalized bars per KPI show relative improvement after automation.',
+          notes: 'Illustrative values; actuals vary by market and offer.',
+          kpis: [
+            { label: 'Lead response time', before: 50, after: 10, unit: ' min', betterIsLower: true },
+            { label: 'MQL → SQL conversion', before: 22, after: 30, unit: '%', betterIsLower: false },
+            { label: 'Cost per lead (CPL)', before: 20, after: 13, unit: ' €', betterIsLower: true },
           ],
         },
       },
@@ -1284,6 +1146,7 @@ const translations: Record<string, Translations> = {
       services: '/dienstleistungen',
       automation: '/automatisierung',
       customer_service_automation: '/kundenservice-automatisierung',
+      marketing_automation: '/marketing-automatisierung',
       blog: '/blog'
     },
     metaData: {
@@ -1304,6 +1167,9 @@ const translations: Record<string, Translations> = {
       customerServiceAutomationTitle: 'Kundenservice Automatisierung mit KI — KI Kundenservice | NETLINTECH',
       customerServiceAutomationDesc:
         'Kundenservice Automatisierung mit KI Kundenservice: Antworten in Sekunden, Tickets automatisch routen und Support skalieren, ohne mehr Personal.',
+      marketingAutomationTitle: 'Marketing-Automatisierung, die konvertiert, kanalübergreifend und datengetrieben | NETLINTECH',
+      marketingAutomationDesc:
+        'Marketing-Automatisierung, die E-Mail, Social, Ads und CRM orchestriert mit datengetriebenen Journeys, Lead Scoring und Personalisierung für höhere Conversions.',
     },
 
     content: {
@@ -1316,6 +1182,7 @@ const translations: Record<string, Translations> = {
         contact: 'Kontakt',
         services: 'Dienstleistungen',
         automation: 'Automatisierung',
+        marketing_automation: 'Marketing-Automatisierung',
         customer_service_automation: 'Kundenservice-Automatisierung',
         blog: 'Blog'
       },
@@ -1350,6 +1217,302 @@ const translations: Record<string, Translations> = {
           automateProcessText: 'PROZESS AUTOMATISIEREN',
           analyzeText: 'ANALYSIEREN'
         }
+      },
+      marketingAutomation: {
+        faqSubtitle: 'Keine Antwort auf deine Frage zur Marketing Automatisierung gefunden?',
+        landing: {
+          title: 'Marketing Automatisierung',
+          subtitle:
+            'Marketing Automatisierung verbindet E‑Mail, Ads, Social und CRM zu einem System, das Leads automatisch segmentiert, scored und mit personalisierten Journeys konvertiert – damit die richtige Botschaft zur richtigen Zeit bei der richtigen Zielgruppe ankommt und der Marketing‑ROI steigt.',
+          highlights: ['Lead Scoring & Routing', 'Personalisierte Nurture‑Strecken', 'Niedrigere CPL & CAC'],
+          stats: [
+            { label: 'Reaktionszeit auf Leads', value: '-80%' },
+            { label: 'MQL → SQL Conversion', value: '+28%' },
+            { label: 'Kosten pro Lead (CPL)', value: '-35%' },
+          ],
+          sections: [
+            {
+              id: 'what-is',
+              heading: 'Was ist Marketing Automatisierung?',
+              paragraphs: [
+                'Marketing Automatisierung erleichtert die Verwaltung und Optimierung von Kundeninteraktionen, indem Aufgaben wie E‑Mail‑Kampagnen, Social‑Posts, Lead Scoring, Segmentierung und Retargeting automatisiert werden. So trifft relevanter Content zur richtigen Zeit auf die richtige Zielgruppe – und der Marketing‑ROI steigt.',
+                'Anstatt manuell Listen zu exportieren und Einmal‑Kampagnen zu verschicken, lauscht Marketing Automatisierung auf Signale (Seitenbesuche, Formular‑Sends, E‑Mail‑Interaktionen), bewertet die Kaufabsicht, segmentiert Zielgruppen und löst die nächste beste Aktion automatisch aus.',
+                'Ein wichtiger Vorteil: Leads lassen sich pflegen und in potenzielle Kundschaft entwickeln. Durch personalisierten Content und automatisierte Segmentierung leitet Marketing Automatisierung Interessenten durch den Trichter – bis zur qualifizierten Übergabe an Sales.',
+                'Wirksame Marketing Automatisierung integriert sich nahtlos mit dem CRM. Das ermöglicht die enge Verzahnung von Marketing und Vertrieb, kontinuierliches Lead‑Nurturing und präzises Tracking aller Interaktionen – bei weniger Aufwand und besserem Timing.',
+              ],
+            },
+            {
+              id: 'hero-graphic',
+              heading: 'Von Tool‑Chaos zu einer orchestrierten Plattform',
+              paragraphs: [
+                'Die meisten Teams jonglieren getrennte Tools: Ads, E‑Mail, Website, Webinare und CRM. Daten sind isoliert, Timing passt nicht und Follow‑ups werden verpasst. Leads kühlen ab, bevor Sales sie sieht.',
+                'Marketing Automatisierung vereint Touchpoints, reichert Leads mit firmografischen und Verhaltensdaten an und liefert dann pünktliche, personalisierte Follow‑ups, die Interessenten voranbringen.',
+                'Dein Team erhält saubere, gescorte und geroutete Leads; das CRM bleibt aktuell; Kampagnen verbessern sich Woche für Woche.',
+              ],
+            },
+            {
+              id: 'why-now',
+              heading: 'Warum jetzt investieren',
+              paragraphs: [
+                'Akquisitionskosten steigen, Aufmerksamkeit sinkt. Teams mit Marketing Automatisierung reagieren schneller, personalisieren tiefer und investieren effizienter.',
+                'Baue ein Rückgrat, das Nachfrage 24/7 einfängt, automatisch nurtured und Sales‑Ready Leads im richtigen Moment übergibt.',
+              ],
+            },
+            {
+              id: 'lead-vs-prospect',
+              heading: 'Was ist ein Lead – was ist potenzielle Kundschaft?',
+              paragraphs: [
+                'Ein Lead ist eine Person mit erstem Interesse – oft nur Name und E‑Mail aus einem Formular. Potenzielle Kundschaft entsteht, wenn ein Lead weiter mit eurer Marke interagiert und eine stärkere Kaufabsicht zeigt.',
+                'Marketing Automatisierung pflegt Leads mit personalisiertem Content und rechtzeitigem Nachfassen. Mit steigender Interaktion werden Leads zu Prospects und als Sales‑Qualified Leads (SQL) an den Vertrieb übergeben. Klare Definitionen halten die Pipeline sauber und messbar.',
+              ],
+            },
+            {
+              id: 'benefits',
+              heading: 'Vorteile von Marketing Automatisierung',
+              paragraphs: [
+                'Ganzheitliche Kundenansichten und Pipeline‑Optimierung: Verhaltensdaten ergeben ein vollständiges Bild und ermöglichen präzises Targeting und Nurturing bis zur Kaufbereitschaft.',
+                'Zeiteinsparungen: Wiederkehrende Aufgaben laufen im Hintergrund, Teams fokussieren sich auf Strategie und Beziehungen.',
+                'Kosteneffizienz: Programme skalieren ohne linearen Personalaufbau – niedrigere CPL und CAC durch bessere Orchestrierung.',
+                'Bessere Personalisierung und schnelleres Umsatzwachstum: Segmentierung, A/B‑Tests und Retargeting liefern relevante Botschaften im richtigen Moment – Conversions und Umsatz steigen.',
+                'Content‑Priorisierung: Analytics zeigen, was wirkt – Budgets fließen in die wirkungsvollsten Inhalte und Journeys.',
+                'Strategisches Timing: Trigger auf Basis von Verhalten halten die Marke in Schlüsselmomenten präsent – über die gesamte Journey.',
+              ],
+            },
+            {
+              id: 'how-it-works',
+              heading: 'So funktioniert Marketing Automatisierung',
+              paragraphs: [
+                '1) Erfassen: Signale aus Ads, Website, Formularen, Webinaren und Social einsammeln – es entsteht ein Echtzeit‑Bild der Interaktion.',
+                '2) Verstehen: Kaufabsicht scoren, nach Profil und Verhalten segmentieren und mit CRM‑ sowie Produktdaten anreichern.',
+                '3) Handeln: Personalisierte E‑Mails, Ads und Messages auslösen; CRM aktualisieren; an Sales mit vollem Kontext übergeben und mit Analytics kontinuierlich iterieren.',
+              ],
+            },
+            {
+              id: 'prozess-flow',
+              heading: 'Automations‑Flow Übersicht',
+              paragraphs: ['Ein Überblick von Erfassung bis Messung in der Marketing Automatisierung.'],
+            },
+            {
+              id: 'use-cases',
+              heading: 'High‑ROI Automationen',
+              paragraphs: [
+                'Lead Scoring & Routing · Mehrstufige Nurture‑Strecken · Warenkorb‑Rückgewinnung · Webinar‑Trichter · Trial‑Aktivierung · Segment‑Retargeting · Pipeline‑Hygiene & SLAs.',
+              ],
+            },
+            {
+              id: 'proof',
+              heading: 'Bewiesene Wirkung aus echten Projekten',
+              paragraphs: [
+                'B2B SaaS: +31% MQL→SQL, -22% CPL nach Intent‑Scoring und verhaltensbasierter Nurture.',
+                'E‑Commerce: +18% Wiederkäufe, -26% CAC mit segmentierter E‑Mail + dynamischem Retargeting.',
+                'Dienstleister: 2,4× mehr gebuchte Calls durch automatisierte Webinar‑ & Lead‑Magnet‑Trichter.',
+              ],
+            },
+            {
+              id: 'cx-impact',
+              heading: 'Wie Marketing Automatisierung die Customer Experience verbessert',
+              paragraphs: [
+                'Omni‑Channel‑Relevanz: Interaktionen kanalübergreifend tracken und in jeder Journey‑Stufe frischen, nicht repetitiven Content liefern.',
+                'Abteilungsübergreifende Kontinuität: Marketing, Vertrieb und Support aufeinander abstimmen – so bleibt die Kommunikation konsistent und koordiniert.',
+                'Personalisierte, authentische Erlebnisse: Erkenntnisse nutzen, um Botschaften auf Präferenzen abzustimmen – Kund:innen erwarten Relevanz und danken mit höherem Engagement und Loyalität.',
+              ],
+            },
+            {
+              id: 'best-practices',
+              heading: 'Best Practices für Marketing Automatisierung',
+              paragraphs: [
+                'Marketing und Vertrieb ausrichten: Gemeinsame Definitionen und SLAs sorgen für saubere Übergaben und klare Messung.',
+                'An der Customer Journey ausrichten: Inhalte und Trigger nach Stufe planen – Kontext von Lead bis loyale Kundschaft erhalten.',
+                'Klare Ziele und Metriken setzen: Das Wesentliche messen, schnell anpassen und ROI mit sauberer Attribution belegen.',
+                'Kundendaten nutzen: CRM aktuell halten, sauber segmentieren und Multi‑Touch‑Attribution nutzen, um Investitionen zu verfeinern.',
+                'Zuerst die größten Hebel automatisieren: Frühe Erfolge zeigen, dann systematisch ausweiten.',
+                'Die richtigen Tools wählen: Marketing Automatisierung passend zu Stack und Use‑Cases auswählen – E‑Mail, Social, Lead‑Management u. v. m.',
+                'Team‑übergreifend arbeiten: Alle Journey‑Teams einbinden, Datenqualität erhöhen und konsistente Botschaften sicherstellen.',
+              ],
+            },
+            {
+              id: 'implementation',
+              heading: 'Implementierungsplan',
+              paragraphs: [
+                'Woche 1: Kanäle auditieren, Journeys mappen, Segmente & Scoring definieren.',
+                'Woche 2: Journeys bauen, Tools verbinden, Tracking & Attribution aufsetzen.',
+                'Woche 3: Launch mit Messplan, Copy & Offers iterieren.',
+                'Fortlaufend: A/B‑Tests, Segment‑Ausbau, ROAS‑Optimierung und CRM‑Hygiene.',
+              ],
+            },
+            {
+              id: 'outcomes',
+              heading: 'Was ihr bekommt',
+              paragraphs: [
+                'Ein produktionsreifes Rückgrat für Marketing Automatisierung – passend zu eurem Stack.',
+                'Dashboards für MQL→SQL, CPL, CAC, Open/Click Rates und Pipeline‑Velocity.',
+                'Governance für Segmente, Scoring, Consent und Änderungen an Kampagnen.',
+              ],
+            },
+            {
+              id: 'visual-impact',
+              heading: 'Vorher vs. Nachher',
+              paragraphs: ['So steigert Marketing Automatisierung Conversions und senkt CPL sowie Time‑to‑First‑Touch.'],
+            },
+            {
+              id: 'security',
+              heading: 'Sicherheit, Consent & Compliance',
+              paragraphs: [
+                'Wir respektieren Einwilligungen und regionale Anforderungen (z. B. DSGVO). Wir setzen Datensparsamkeit, sichere Übertragung und Aufbewahrungsrichtlinien um. Sensible Attribute können maskiert werden.',
+                'Rollenbasierte Zugriffe, Audit Trails und Änderungsfreigaben halten eure Automatisierung sicher – auch bei Wachstum.',
+              ],
+            },
+            {
+              id: 'ongoing',
+              heading: 'Betrieb & Roadmap',
+              paragraphs: [
+                'Wir betreuen eure Marketing Automatisierung mit monatlichen Reviews, Segment‑ & Journey‑Updates und kontinuierlicher Optimierung von Offers und Messaging.',
+              ],
+            },
+            {
+              id: 'tailored',
+              heading: 'Jedes Unternehmen ist individuell, eure Marketing Automatisierung auch',
+              paragraphs: [
+                'Kein Unternehmen hat die gleiche Zielgruppe, Datenbasis oder Sales‑Motion. Deshalb bauen wir Marketing Automatisierung immer individuell: Journeys, Scoring‑Modelle, Segmente und Integrationen passen wir an euren Stack und eure Ziele an.',
+                'Wir entwickeln eine Marketing Automatisierung, die zu eurem Funnel passt – nicht zu einer Vorlage. Sie fügt sich nahtlos in CRM, Kanäle und Compliance ein und wird mit wöchentlichen Analytics iterativ verbessert, um den ROI kontinuierlich zu steigern.',
+              ],
+            },
+            {
+              id: 'cta',
+              heading: 'Bereit für Marketing Automatisierung?',
+              paragraphs: [
+                'Buche eine kostenlose Analyse. Wir prüfen euren Funnel, definieren Segmente & Scoring und designen Journeys, die Conversions in wenigen Wochen steigern.',
+              ],
+            },
+          ],
+          features: [
+            {
+              title: 'Kern‑Funktionen',
+              items: [
+                'Verhaltensbasierte Segmentierung & Lead Scoring',
+                'Automatisierte Nurture‑Strecken & Retargeting',
+                'CRM‑Anreicherung, Routing & Lifecycle‑Updates',
+              ],
+            },
+            {
+              title: 'Integrationen',
+              items: [
+                'HubSpot, Salesforce, Pipedrive',
+                'Mailchimp, Klaviyo, Customer.io',
+                'Meta/Google Ads, LinkedIn, Segment',
+              ],
+            },
+            {
+              title: 'Compliance & Kontrolle',
+              items: [
+                'DSGVO‑konformes Consent & Präferenzen',
+                'Rollenbasierte Freigaben & Guardrails',
+                'Attribution & Audit Logging',
+              ],
+            },
+            {
+              title: 'Unsere Garantie',
+              items: [
+                'Klare Ziele (MQL→SQL, CPL, CAC)',
+                'Wenn das MVP Ziele verfehlt, iterieren wir ohne Mehrkosten – bis es sitzt',
+                'Kein Lock‑in: Ihr besitzt Daten, Segmente und Journeys',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Ersetzt Marketing Automatisierung mein Team?',
+              a: 'Nein. Marketing Automatisierung übernimmt wiederkehrende Orchestrierung – Scoring, Segmentierung, Trigger und CRM‑Updates. Euer Team konzentriert sich auf Strategie, Creative und Angebote. Mehr Durchsatz, mehr Konsistenz – ohne menschliches Urteilsvermögen zu ersetzen.'
+            },
+            {
+              q: 'Welche Kanäle werden unterstützt?',
+              a: 'E‑Mail, Website, Ads, Social, Webinare und CRM. Wir verbinden eure Tools (HubSpot, Salesforce, Mailchimp, Klaviyo, Meta/Google Ads, LinkedIn) und Custom‑APIs.'
+            },
+            {
+              q: 'Wie bleibt Messaging on‑brand?',
+              a: 'Wir definieren Tonalität, Guardrails und Templates pro Segment & Journey. Messaging wird mit A/B‑Tests optimiert – wirksam und markenkonform.'
+            },
+            {
+              q: 'Wie schnell können wir starten?',
+              a: 'Ein MVP geht meist in 2–3 Wochen live. Wir beginnen mit den größten Hebeln und bauen danach aus – datenbasiert.'
+            },
+            {
+              q: 'Ist es compliant und datenschutzsicher?',
+              a: 'Ja. Wir implementieren Consent‑Management, Datensparsamkeit und regionale Anforderungen (z. B. DSGVO). Unsubscribes & Präferenzen gelten kanalübergreifend.'
+            },
+            {
+              q: 'Welchen ROI können wir erwarten?',
+              a: 'Typisch: +15–35% MQL→SQL, -20–40% CPL und schnellere Time‑to‑First‑Touch. Ergebnisse variieren je nach Branche, Datenqualität und Offer‑Market‑Fit.'
+            },
+          ],
+        },
+        heroChat: {
+          chatHeader: 'Journey‑Orchestrator',
+          chatSub: 'Leads vom Erfassen bis zur Übergabe steuern',
+          stages: [
+            { name: 'Erfassen', detail: 'Anzeigen · Website · Formulare · Webinare' },
+            { name: 'Bewerten', detail: 'Verhalten + firmografische Signale' },
+            { name: 'Segmentieren', detail: 'ICP · Phase · Interesse' },
+            { name: 'Pflegen', detail: 'E‑Mail · Retargeting · Nachricht' },
+            { name: 'Übergabe', detail: 'Mit Kontext an Vertrieb übergeben' },
+          ],
+          chatItems: [
+            { side: 'user', text: 'Der Lead hat den Guide geladen, aber keinen Call gebucht.' },
+            { side: 'ai', text: 'Segment erkannt: Gründer · Hohe Kaufabsicht. Starte 3‑stufige Nurture mit Case Studies und Kalender‑CTA.' },
+            { side: 'user', text: 'Bitte LinkedIn‑Retargeting für diese Kohorte hinzufügen.' },
+            { side: 'ai', text: 'Erledigt. Audience synchronisiert. Budget: 30 €/Tag für 10 Tage; Ausschlüsse für gebuchte Leads aktiv.' },
+          ],
+          typingText: 'KI tippt…',
+          voiceHeader: 'Zielgruppen & Metriken',
+          voiceSub: 'Wen ihr ansprecht und wie die Performance steigt',
+          audienceTags: ['Hohe Kaufabsicht', 'Kalt', 'ICP', 'Retargeting'],
+          audienceSyncLabel: 'Zielgruppen‑Sync',
+          metricsLabels: { mqlToSql: 'MQL → SQL', cpl: 'CPL' },
+          runningLabel: 'Journeys aktiv · Auto‑Optimierung',
+          voiceStatus: 'Attribution gemappt · Journeys aktiv',
+          callDuration: '00:37',
+          mute: 'Stumm',
+          end: 'Beenden',
+        },
+        heroGraphic: {
+          title: 'Erfassen, scoren, konvertieren',
+          subtitle: 'Kanäle speisen einen Marketing‑AI‑Kern, der segmentiert, scored und Journeys ausspielt.',
+          channelsHeading: 'Kanäle',
+          channels: ['Ads', 'Website', 'E‑Mail', 'Social', 'Webinare', 'CRM'],
+          aiHeading: 'Marketing‑AI‑Orchestrator',
+          aiBullets: ['Verhalten + Firmografien', 'Segmente + personalisierte Journeys', 'Guardrails für Ton & Consent', 'Smartes Routing & Attribution'],
+          outcomesHeading: 'Ergebnisse',
+          outcomes: ['Höhere Conversions', 'Niedrigere CPL & CAC', 'Schnellere Übergaben', 'Sauberes CRM'],
+        },
+        flow: {
+          labels: {
+            captureTitle: 'Erfassen',
+            captureDesc1: 'Ads / Website / Formulare / Webinare',
+            captureDesc2: 'CRM‑ & Produkt‑Events',
+            understandTitle: 'Verstehen',
+            understandDesc1: 'Kaufabsicht scoren · Audience segmentieren',
+            understandDesc2: 'Mit CRM‑ & Produktdaten anreichern',
+            actTitle: 'Handeln',
+            actDesc1: 'E‑Mails auslösen · Audiences syncen',
+            actDesc2: 'CRM updaten · An Sales routen',
+            measureTitle: 'Messen',
+            measureDesc1: 'CPL / CAC / MQL→SQL / ROAS',
+            measureDesc2: 'Wöchentlich iterieren',
+            channels: ['Mailchimp / Klaviyo', 'Meta/Google Ads', 'LinkedIn', 'HubSpot / Salesforce'],
+            kpiHeading: 'Typische Wirkung nach 6–8 Wochen',
+            kpiLine: '+28% MQL→SQL / -35% CPL / Schnellere TTF',
+          },
+        },
+        statsChart: {
+          title: 'Funnel‑Wirkung',
+          description: 'Normierte Balken pro KPI zeigen die Verbesserung nach Automatisierung.',
+          notes: 'Beispielwerte; echte Zahlen variieren je nach Markt und Angebot.',
+          kpis: [
+            { label: 'Reaktionszeit auf Leads', before: 50, after: 10, unit: ' min', betterIsLower: true },
+            { label: 'MQL → SQL Conversion', before: 22, after: 30, unit: '%', betterIsLower: false },
+            { label: 'Kosten pro Lead (CPL)', before: 20, after: 13, unit: ' €', betterIsLower: true },
+          ],
+        },
       },
       toolsOverview: {
         tools: [
