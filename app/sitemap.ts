@@ -51,6 +51,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    // Newly added automation subpages (localized via routes)
+    {
+      url: `${baseUrl}${routes.customer_service_automation}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}${routes.marketing_automation}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
     {
       url: `${baseUrl}${routes.contact}`,
       lastModified: new Date(),
