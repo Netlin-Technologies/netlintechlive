@@ -5,6 +5,7 @@ interface Translations {
     automation: string;
     customer_service_automation: string;
     marketing_automation: string;
+    lead_response_automation?: string;
     blog: string;
     services: string;
   };
@@ -23,6 +24,8 @@ interface Translations {
     customerServiceAutomationDesc?: string;
     marketingAutomationTitle?: string;
     marketingAutomationDesc?: string;
+    leadResponseAutomationTitle?: string;
+    leadResponseAutomationDesc?: string;
   };
   // Keep content flexible to accommodate page-specific structures
   content: any;
@@ -36,6 +39,7 @@ const translations: Record<string, Translations> = {
       automation: '/automation',
       customer_service_automation: '/customer-service-automation',
       marketing_automation: '/marketing-automation',
+      lead_response_automation: '/lead-response-automation',
       services: '/services',
       blog: '/blog'
     },
@@ -56,6 +60,9 @@ const translations: Record<string, Translations> = {
       marketingAutomationTitle: 'Marketing automation that converts, multi-channel and data-driven | NETLINTECH',
       marketingAutomationDesc:
         'Marketing automation that orchestrates email, social, ads and CRM with data-driven journeys, lead scoring and personalization to lift conversions.',
+      leadResponseAutomationTitle: 'Lead Response Automation — Respond in minutes, book more calls | NETLINTECH',
+      leadResponseAutomationDesc:
+        'Lead response automation that captures, qualifies, and follows up across channels automatically. Cut response time, boost bookings, and stop leads from slipping away.',
     },
     content: {
       aboutUsTitle: 'About Us',
@@ -229,6 +236,106 @@ const translations: Record<string, Translations> = {
         reduction: '67%',
         automateButton: 'Automate now',
         howItWorksButton: 'How it works'
+      },
+      // Lead response focused new home landing copy
+      homeLead: {
+        hero: {
+          title: 'Your Leads Go Cold in 30 Minutes. We Make Sure They Never Go Cold Again.',
+          paragraphs: [
+            "You spend thousands every month on ads and outreach. But here's the truth: most of your leads are gone before your team even replies.",
+            'By the time your SDR opens the CRM tomorrow, your competitors have already booked the deal.',
+            'We fix that.'
+          ],
+          primaryCta: 'Book free lead flow audit',
+          secondaryCta: 'How it works'
+        },
+        definition: {
+          title: 'What Is Lead Response Automation?',
+          intro: 'Think of it as your 24/7 AI sales rep that never sleeps.',
+          bullets: [
+            'A lead fills out your LinkedIn form.',
+            'Within 60 seconds they get a personalized WhatsApp message.',
+            'If they’re qualified, it routes instantly to the right rep.',
+            'If they don’t respond, it follows up automatically until they book or say no.'
+          ],
+          closing: 'Meanwhile, your competitor is still “checking the CRM.”'
+        },
+        howItWorksNew: {
+          title: 'How It Works',
+          steps: [
+            { label: 'Capture', description: 'Instantly grab leads from LinkedIn Ads, website forms, WhatsApp, email, chat, or calls.' },
+            { label: 'Qualify', description: 'Apply simple rules (e.g. budget > €5k → senior rep).' },
+            { label: 'Respond', description: 'Send AI-personalized WhatsApp, SMS, or email replies in under 60 seconds.' },
+            { label: 'Follow Up', description: 'Keep nudging until the meeting is booked.' },
+            { label: 'Sync', description: 'Update CRM, assign tasks, log conversations, schedule calls automatically.' }
+          ],
+          closing: 'Your team focuses on closing. The system handles the grind.'
+        },
+        whyMatters: {
+          title: 'Why This Matters',
+            bullets: [
+              'Leads go cold in 30 minutes. After that, the chance of converting drops off a cliff.',
+              'Fast follow-up = more revenue. Clients who cut their lead response time saw 2–3× more booked calls from the same ad spend.',
+              'No-show protection. Automated reminders slash no-shows by up to 25%.'
+            ]
+        },
+        differentiators: {
+          title: 'What Makes Us Different',
+          intro: [
+            'Most agencies give you dashboards.',
+            'Most CRMs just remind you to follow up.',
+            'We actually do it for you.'
+          ],
+          bullets: [
+            'Real-time outreach in under 60 seconds.',
+            'AI personalization that feels human, not robotic.',
+            'Multi-channel follow-up until the meeting is booked.',
+            'Direct ROI link — same ad spend, more deals.'
+          ],
+          closing: 'Not theory. Not vanity metrics. Just booked calls and clean funnels.'
+        },
+        proof: {
+          title: 'Proof That It Works',
+          testimonials: [
+            { quote: 'A SaaS client cut their response time from 2 hours to 45 seconds. Result? 40% more booked calls in the first month.' },
+            { quote: 'An agency client doubled their pipeline conversions simply by automating follow-ups and reminders.' }
+          ],
+          averageResultsHeading: 'Average client results',
+          stats: [
+            { label: 'Response time', value: '-80%' },
+            { label: 'More calls booked', value: '+2–3×' },
+            { label: 'No-shows', value: '-25%' }
+          ]
+        },
+        pricing: {
+          title: 'Simple Pricing',
+          setupFee: 'Setup fee: €1–3k (depending on complexity)',
+          subscription: 'Subscription: €500–1500/month',
+          includedHeading: 'What’s included',
+          included: [
+            'Multi-channel integrations (LinkedIn, WhatsApp, email, SMS, CRM)',
+            'Fully customized sequences',
+            'Optimization & reporting',
+            'Ongoing support'
+          ],
+          note: 'No hidden costs. No lock-in. You own the workflows and the data.'
+        },
+        guarantee: {
+          title: 'The Guarantee',
+          improvementsIntro: 'If you don’t see measurable improvements in:',
+          improvements: ['Response times', 'Booked calls', 'Show rates'],
+          guaranteeText: '…within 30 days, you get 100% of your money back. No risk. No excuses. Just results.'
+        },
+        finalCta: {
+          title: 'Stop Losing Leads Every Day',
+          paragraphs: [
+            'Every day you wait, more leads slip through the cracks. You’re spending money to generate opportunities — and then letting them vanish.',
+            'Find out how many leads you’re losing every week. Book your free lead flow audit today.',
+            'We’ll analyze your funnel, show you the leaks, and deliver an MVP that starts booking calls in weeks, not months.'
+          ],
+          primaryCta: 'Book free audit',
+          secondaryCta: 'Talk to an expert'
+        }
       },
       hero: {
         badge: 'Automation',
@@ -775,6 +882,125 @@ const translations: Record<string, Translations> = {
           ],
         },
       },
+      leadResponseAutomation: {
+        faqSubtitle: "Didn't find an answer to your question regarding lead response automation?",
+        landing: {
+          title: 'Lead Response Automation',
+          subtitle: 'Your Leads Go Cold in 30 Minutes. We Make Sure They Never Go Cold Again.',
+          highlights: ['Respond in under 60s', 'Follow up until booked', 'Clean, measurable funnel'],
+          stats: [
+            { label: 'Response time', value: '-80%' },
+            { label: 'Booked calls', value: '+2–3×' },
+            { label: 'No-shows', value: '-25%' },
+          ],
+          sections: [
+            {
+              id: 'what-is',
+              heading: 'What Is Lead Response Automation?',
+              paragraphs: [
+                'Think of it as your 24/7 AI sales rep that never sleeps.',
+                'A lead fills out your LinkedIn form. Within 60 seconds they get a personalized WhatsApp message. If they’re qualified, it routes instantly to the right rep. If they don’t respond, it follows up automatically until they book or say no.',
+                'Meanwhile, your competitor is still “checking the CRM.”'
+              ]
+            },
+            {
+              id: 'how-it-works',
+              heading: 'How It Works',
+              paragraphs: [
+                '1. Capture – Instantly grab leads from LinkedIn Ads, website forms, WhatsApp, email, chat, or calls.',
+                '2. Qualify – Apply simple rules (e.g. budget > €5k → senior rep).',
+                '3. Respond – Send AI-personalized WhatsApp, SMS, or email replies in under 60 seconds.',
+                '4. Follow Up – Keep nudging until the meeting is booked.',
+                '5. Sync – Update CRM, assign tasks, log conversations, schedule calls automatically.',
+                'Your team focuses on closing. The system handles the grind.'
+              ]
+            },
+            {
+              id: 'why-matters',
+              heading: 'Why This Matters',
+              paragraphs: [
+                'Leads go cold in 30 minutes. After that, the chance of converting drops off a cliff.',
+                'Fast follow-up = more revenue. Clients who cut their lead response time saw 2–3× more booked calls from the same ad spend.',
+                'No-show protection. Automated reminders slash no-shows by up to 25%.'
+              ]
+            },
+            {
+              id: 'difference',
+              heading: 'What Makes Us Different',
+              paragraphs: [
+                'Most agencies give you dashboards. Most CRMs just remind you to follow up. We actually do it for you.',
+                'Real-time outreach in under 60 seconds. AI personalization that feels human. Multi-channel follow-up until the meeting is booked. Direct ROI link — same ad spend, more deals.',
+                'Not theory. Not vanity metrics. Just booked calls and clean funnels.'
+              ]
+            },
+            {
+              id: 'proof',
+              heading: 'Proof That It Works',
+              paragraphs: [
+                'A SaaS client cut their response time from 2 hours to 45 seconds. Result? 40% more booked calls in the first month.',
+                'An agency client doubled their pipeline conversions simply by automating follow-ups and reminders.',
+                'Average client results: -80% response time, 2–3× more calls booked, -25% no-shows.'
+              ]
+            },
+            {
+              id: 'pricing',
+              heading: 'Simple Pricing',
+              paragraphs: [
+                'Setup fee: €1–3k (depending on complexity). Subscription: €500–1500/month.',
+                'Includes: Multi-channel integrations, custom sequences, optimization & reporting, ongoing support.',
+                'No hidden costs. No lock-in. You own the workflows and the data.'
+              ]
+            },
+            {
+              id: 'guarantee',
+              heading: 'The Guarantee',
+              paragraphs: [
+                'If you don’t see measurable improvements in response times, booked calls, and show rates within 30 days, you get 100% of your money back. No risk. No excuses. Just results.'
+              ]
+            },
+            {
+              id: 'cta',
+              heading: 'Stop Losing Leads Every Day',
+              paragraphs: [
+                'Every day you wait, more leads slip through the cracks. Find out how many you’re losing every week—book your free lead flow audit.',
+                'We’ll analyze your funnel, show you the leaks, and deliver an MVP that starts booking calls in weeks, not months.'
+              ]
+            }
+          ],
+          features: [
+            {
+              title: 'Core capabilities',
+              items: [
+                'Under 60s multi-channel response',
+                'Automated follow-up & sequencing',
+                'Qualification, routing & booking'
+              ]
+            },
+            {
+              title: 'Integrations',
+              items: [
+                'HubSpot, Salesforce, Pipedrive',
+                'Mail/SMS providers, WhatsApp via Twilio',
+                'Calendly/Google Calendar, Make.com, n8n',
+              ],
+            },
+            {
+              title: 'Our guarantee',
+              items: [
+                'MVP live in 2–3 weeks with measurable targets',
+                'We iterate at no extra cost until the MVP hits goals',
+                'You own the workflows, data and tooling—no lock‑in',
+              ],
+            },
+          ],
+          faq: [
+            { q: 'Will this replace my SDRs?', a: 'No. It handles timing, copy and logging so your team can focus on qualified conversations. Think of it as a force multiplier for speed and consistency.' },
+            { q: 'Which channels are supported?', a: 'Email and SMS/WhatsApp out of the box. We can also integrate chatbots and phone capture, then sync to your CRM with full context.' },
+            { q: 'How fast can we launch?', a: 'Most MVPs ship in 2–3 weeks. We start with the highest‑impact entry points and follow‑up patterns, then expand as results stabilize.' },
+            { q: 'Is it compliant?', a: 'Yes. We respect opt‑in rules, regional requirements (e.g., GDPR) and provide templates and guardrails for consent and messaging.' },
+          ],
+        },
+      },
       footer: {
         ctaSection: {
             title: 'Ready To Stop Doing And Start Scaling?',
@@ -1147,6 +1373,7 @@ const translations: Record<string, Translations> = {
       automation: '/automatisierung',
       customer_service_automation: '/kundenservice-automatisierung',
       marketing_automation: '/marketing-automatisierung',
+      lead_response_automation: '/lead-response-automatisierung',
       blog: '/blog'
     },
     metaData: {
@@ -1170,6 +1397,9 @@ const translations: Record<string, Translations> = {
       marketingAutomationTitle: 'Marketing-Automatisierung, die konvertiert, kanalübergreifend und datengetrieben | NETLINTECH',
       marketingAutomationDesc:
         'Marketing-Automatisierung, die E-Mail, Social, Ads und CRM orchestriert mit datengetriebenen Journeys, Lead Scoring und Personalisierung für höhere Conversions.',
+      leadResponseAutomationTitle: 'Lead Response Automatisierung — In Minuten reagieren, mehr Termine buchen | NETLINTECH',
+      leadResponseAutomationDesc:
+        'Lead Response Automatisierung, die Leads sofort erfasst, qualifiziert und kanalübergreifend nachfasst. Reaktionszeit senken, Buchungen steigern und keine Leads mehr verlieren.',
     },
 
     content: {
@@ -1514,6 +1744,103 @@ const translations: Record<string, Translations> = {
           ],
         },
       },
+      leadResponseAutomation: {
+        faqSubtitle: 'Keine Antwort auf deine Frage zur Lead Response Automatisierung gefunden?',
+        landing: {
+          title: 'Lead Response Automatisierung',
+          subtitle:
+            'Jeden eingehenden Lead in einen Termin verwandeln. Sofort erfassen, automatisch qualifizieren und per E‑Mail, SMS und WhatsApp nachfassen – ohne Mehraufwand für dein Team.',
+          highlights: ['In Minuten reagieren – 24/7', 'Leads automatisch qualifizieren & routen', 'Mehr gebuchte Termine'],
+          stats: [
+            { label: 'Reaktionszeit auf Leads', value: '-80%' },
+            { label: 'Gebuchte Termine', value: '+2–3×' },
+            { label: 'No‑Shows', value: '-25%' },
+          ],
+          sections: [
+            {
+              id: 'was-ist',
+              heading: 'Was ist Lead Response Automatisierung?',
+              paragraphs: [
+                'Lead Response Automatisierung erfasst eingehende Leads in dem Moment, in dem sie eintreffen, qualifiziert sie nach euren Kriterien und folgt automatisch nach – bis ein Termin gebucht ist oder der Lead klar absagt.',
+                'Statt verpasster Formulare, verspäteter Antworten oder ungleichmäßiger Follow‑ups sorgt ein verlässliches System für Reaktionen in Minuten – immer – egal ob das Team online ist oder nicht.',
+                'Es synchronisiert mit dem CRM, reichert Datensätze an, routet an die richtigen Owner und hält Gespräche mit freigegebenen Textbausteinen und Guardrails am Laufen. Ergebnis: mehr Termine, schnellere Speed‑to‑Lead und ein sauberer, messbarer Funnel.',
+              ],
+            },
+            {
+              id: 'warum-jetzt',
+              heading: 'Warum das zählt',
+              paragraphs: [
+                'Leads werden schnell kalt. Wer innerhalb von 5 Minuten reagiert, hat deutlich höhere Chancen auf Engagement. Wer erst nach Stunden oder Tagen antwortet, verliert sie oft an die Konkurrenz.',
+                'Lead Response Automatisierung reduziert Zeit durch sofortige Ansprache und konsistente Follow‑ups. Dein Team führt die qualifizierten Gespräche – Timing, Copy und Routing übernimmt das System.',
+              ],
+            },
+            {
+              id: 'so-funktioniert-es',
+              heading: 'So funktioniert es',
+              paragraphs: [
+                '1) Erfassen: Website‑Formulare, Ads, Chat, E‑Mail und Anrufe werden in Echtzeit aufgenommen.',
+                '2) Qualifizieren: Mit CRM/Produktdaten anreichern; Regeln für Scoring und Segment anwenden.',
+                '3) Handeln: Mit freigegebener Copy per E‑Mail/SMS/WhatsApp antworten; Kalender anbieten; Owner zuweisen; CRM & Tasks aktualisieren.',
+              ],
+            },
+            {
+              id: 'playbook',
+              heading: 'Das Follow‑up‑Playbook, das Termine bucht',
+              paragraphs: [
+                'Multi‑Channel‑Touches in sinnvollen Abständen: E‑Mail + SMS/WhatsApp‑Sequenz, die sich an Engagement anpasst.',
+                'Snippets für Einwände, Erinnerungen bei No‑Shows und Handover mit vollem Kontext. Immer on‑brand, immer geloggt.',
+              ],
+            },
+            {
+              id: 'ergebnisse',
+              heading: 'Was ihr bekommt',
+              paragraphs: [
+                'Eine produktionsreife Lead Response Automatisierung, die in Minuten reagiert – 24/7.',
+                'Sauberes CRM mit angereicherten, gerouteten und terminierten Leads – plus Dashboards für Reaktionszeit, Buchungsrate und No‑Show‑Reduktion.',
+              ],
+            },
+            {
+              id: 'cta',
+              heading: 'Bereit, keine Leads mehr zu verlieren?',
+              paragraphs: [
+                'Buche eine kostenlose Analyse. Wir auditieren euren Lead‑Flow, designen die passende Sequenz und liefern ein MVP, das in Wochen Termine bucht – nicht in Monaten.',
+              ],
+            },
+          ],
+          features: [
+            {
+              title: 'Kern‑Funktionen',
+              items: [
+                'Sofortige Reaktion über E‑Mail/SMS/WhatsApp',
+                'Qualifizierung, Routing und Terminbuchung',
+                'CRM‑Sync, Task‑Erstellung und Audit Trails',
+              ],
+            },
+            {
+              title: 'Integrationen',
+              items: [
+                'HubSpot, Salesforce, Pipedrive',
+                'Mail/SMS‑Provider, WhatsApp via Twilio',
+                'Calendly/Google Kalender, Make.com, n8n',
+              ],
+            },
+            {
+              title: 'Unsere Garantie',
+              items: [
+                'MVP in 2–3 Wochen mit messbaren Zielen',
+                'Wir iterieren ohne Mehrkosten, bis das MVP Ziele erreicht',
+                'Ihr besitzt Workflows, Daten und Tools – kein Lock‑in',
+              ],
+            },
+          ],
+          faq: [
+            { q: 'Ersetzt das mein SDR‑Team?', a: 'Nein. Das System übernimmt Timing, Copy und Logging, damit euer Team sich auf qualifizierte Gespräche konzentrieren kann. Ein Multiplikator für Tempo und Konsistenz.' },
+            { q: 'Welche Kanäle werden unterstützt?', a: 'E‑Mail und SMS/WhatsApp out‑of‑the‑box. Wir integrieren auf Wunsch Chatbots und Telefon‑Capture und synchronisieren alles mit eurem CRM.' },
+            { q: 'Wie schnell können wir starten?', a: 'Ein MVP geht meist in 2–3 Wochen live. Wir beginnen mit den größten Hebeln (Entry‑Points, Sequenzen) und bauen aus, sobald die Ergebnisse stabil sind.' },
+            { q: 'Ist das compliant?', a: 'Ja. Wir respektieren Opt‑in‑Regeln und regionale Vorgaben (z. B. DSGVO) und liefern Templates & Guardrails für Einwilligung und Messaging.' },
+          ],
+        },
+      },
       toolsOverview: {
         tools: [
           {
@@ -1640,6 +1967,105 @@ const translations: Record<string, Translations> = {
         reduction: '67%',
         automateButton: 'Jetzt automatisieren',
         howItWorksButton: 'Wie funktioniert\'s'
+      },
+      homeLead: {
+        hero: {
+          title: 'Ihre Leads werden in 30 Minuten kalt. Wir sorgen dafür, dass das nie wieder passiert.',
+          paragraphs: [
+            'Sie investieren jeden Monat Tausende in Ads und Outreach. Aber die Wahrheit: Die meisten Leads sind weg, bevor Ihr Team überhaupt antwortet.',
+            'Wenn Ihr SDR morgen das CRM öffnet, hat der Wettbewerber den Termin schon gebucht.',
+            'Wir lösen das.'
+          ],
+          primaryCta: 'Kostenloses Lead-Flow Audit buchen',
+          secondaryCta: 'So funktioniert es'
+        },
+        definition: {
+          title: 'Was ist Lead Response Automation?',
+          intro: 'Stellen Sie sich das als Ihren 24/7 KI‑Vertriebsmitarbeiter vor, der nie schläft.',
+          bullets: [
+            'Ein Lead füllt Ihr LinkedIn Formular aus.',
+            'Innerhalb von 60 Sekunden erhält er eine personalisierte WhatsApp‑Nachricht.',
+            'Wenn qualifiziert, wird er sofort an den richtigen Mitarbeitenden geroutet.',
+            'Wenn keine Antwort kommt, folgen automatische Nachfass‑Sequenzen – bis Termin oder klares Nein.'
+          ],
+          closing: 'Währenddessen “prüft” Ihr Wettbewerber noch das CRM.'
+        },
+        howItWorksNew: {
+          title: 'Wie es funktioniert',
+          steps: [
+            { label: 'Capture', description: 'Leads sofort aus LinkedIn Ads, Website‑Formularen, WhatsApp, E-Mail, Chat oder Anrufen erfassen.' },
+            { label: 'Qualify', description: 'Einfache Regeln anwenden (z. B. Budget > 5k € → Senior Rep).' },
+            { label: 'Respond', description: 'KI‑personalisierte WhatsApp-, SMS- oder E-Mail‑Antworten < 60 Sekunden.' },
+            { label: 'Follow Up', description: 'Dranbleiben, bis der Termin gebucht ist.' },
+            { label: 'Sync', description: 'CRM updaten, Aufgaben zuweisen, Gespräche protokollieren, Calls planen.' }
+          ],
+          closing: 'Ihr Team schließt – das System erledigt den Rest.'
+        },
+        whyMatters: {
+          title: 'Warum das wichtig ist',
+          bullets: [
+            'Leads werden nach 30 Minuten kalt – die Conversion‑Wahrscheinlichkeit stürzt ab.',
+            'Schnelle Reaktion = mehr Umsatz. Kunden, die ihre Antwortzeit senkten, erhielten 2–3× mehr Terminbuchungen bei gleichem Ad Spend.',
+            'No‑Show Schutz: Automatisierte Erinnerungen reduzieren Nichterscheinen um bis zu 25 %.'
+          ]
+        },
+        differentiators: {
+          title: 'Was uns unterscheidet',
+          intro: [
+            'Die meisten Agenturen geben Ihnen Dashboards.',
+            'Die meisten CRMs erinnern nur ans Nachfassen.',
+            'Wir erledigen es wirklich für Sie.'
+          ],
+          bullets: [
+            'Outreach in Echtzeit unter 60 Sekunden.',
+            'KI‑Personalisierung, die menschlich wirkt – nicht roboterhaft.',
+            'Multi‑Channel Follow-up bis der Termin steht.',
+            'Direkter ROI – gleicher Ad Spend, mehr Abschlüsse.'
+          ],
+          closing: 'Keine Theorie. Keine Vanity‑Metriken. Nur gebuchte Termine und saubere Funnels.'
+        },
+        proof: {
+          title: 'Nachweis, dass es funktioniert',
+          testimonials: [
+            { quote: 'Ein SaaS Kunde senkte die Antwortzeit von 2 Stunden auf 45 Sekunden. Ergebnis: 40 % mehr gebuchte Calls im ersten Monat.' },
+            { quote: 'Eine Agentur verdoppelte ihre Pipeline‑Conversion allein durch automatisierte Follow-ups und Erinnerungen.' }
+          ],
+          averageResultsHeading: 'Durchschnittliche Ergebnisse',
+          stats: [
+            { label: 'Antwortzeit', value: '-80%' },
+            { label: 'Mehr gebuchte Calls', value: '+2–3×' },
+            { label: 'No‑Shows', value: '-25%' }
+          ]
+        },
+        pricing: {
+          title: 'Einfache Preisgestaltung',
+          setupFee: 'Setup: 1–3k € (abhängig von Komplexität)',
+          subscription: 'Subscription: 500–1500 €/Monat',
+          includedHeading: 'Enthalten',
+          included: [
+            'Multi-Channel Integrationen (LinkedIn, WhatsApp, E-Mail, SMS, CRM)',
+            'Vollständig angepasste Sequenzen',
+            'Optimierung & Reporting',
+            'Laufender Support'
+          ],
+          note: 'Keine versteckten Kosten. Kein Lock‑in. Sie besitzen Workflows und Daten.'
+        },
+        guarantee: {
+          title: 'Die Garantie',
+          improvementsIntro: 'Wenn Sie keine messbaren Verbesserungen sehen in:',
+          improvements: ['Antwortzeiten', 'Gebuchten Calls', 'Show Rates'],
+          guaranteeText: '…innerhalb von 30 Tagen: 100 % Geld zurück. Kein Risiko. Keine Ausreden. Nur Ergebnisse.'
+        },
+        finalCta: {
+          title: 'Hören Sie auf, Leads zu verlieren',
+          paragraphs: [
+            'Jeder Tag kostet weitere Leads. Sie bezahlen für Nachfrage – und lassen sie dann verschwinden.',
+            'Finden Sie heraus, wie viele Leads Sie wöchentlich verlieren. Buchen Sie Ihr kostenloses Lead-Flow Audit.',
+            'Wir analysieren Ihren Funnel, zeigen Lecks und liefern ein MVP das in Wochen – nicht Monaten – Termine bucht.'
+          ],
+          primaryCta: 'Kostenloses Audit buchen',
+          secondaryCta: 'Mit einem Experten sprechen'
+        }
       },
       hero: {
         badge: 'Automatisierung',
