@@ -86,8 +86,13 @@ function ChatPhone({ labels }: Props) {
 
   const indicatorRole = finished ? undefined : (chatItems[currentIndex]?.side || 'ai')
   const roleLabel = indicatorRole === 'user' ? (typingUserText || 'Customer') : indicatorRole === 'ai' ? (labels.typingAiText ? labels.typingAiText.replace(/\s*is typing…?$/i, '') : 'AI') : ''
+  // Messages already completed
+  const completed = finished ? chatItems : chatItems.slice(0, currentIndex)
+  const currentTyping = !finished ? chatItems[currentIndex] : null
+
   return (
-    <PhoneFrame tilt={-2}
+    <PhoneFrame
+      tilt={-2}
       footer={
         <div className="p-3 border-t border-[#1E2A42] bg-[#0e1118]">
           <div className="flex items-center gap-2 bg-[#11121a] border border-[#1E2A42] rounded-full px-3 py-2">
@@ -110,7 +115,7 @@ function ChatPhone({ labels }: Props) {
         <div className="text-white font-sora font-semibold">{chatHeader}</div>
       </div>
       <ul className="p-4 flex flex-col gap-3 min-h-[260px]" aria-live="polite">
-        {chatItems.slice(0, currentIndex).map((item, i) => (
+        {completed.map((item, i) => (
           <motion.li
             key={i}
             className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
@@ -125,6 +130,23 @@ function ChatPhone({ labels }: Props) {
             {item.text}
           </motion.li>
         ))}
+        {currentTyping ? (
+          <motion.li
+            key="typing"
+            className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
+              currentTyping.side === 'user'
+                ? 'self-end bg-[linear-gradient(90deg,rgba(61,137,249,0.18)_0%,rgba(39,98,186,0.18)_100%)] border border-[#2a4875] text-white'
+                : 'self-start bg-[#141821] border border-[#1E2A42] text-[#DCE9FF]'
+            }`}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            aria-label={typed ? `${roleLabel} typing ${typed}` : `${roleLabel} typing`}
+          >
+            {typed || '‎'}{/* invisible placeholder char keeps height */}
+            {typed.length < ((chatItems[currentIndex]?.text?.length) || 0) && <span className="inline-block w-[6px] animate-pulse">|</span>}
+          </motion.li>
+        ) : null}
       </ul>
     </PhoneFrame>
   )
@@ -163,11 +185,27 @@ function VoicePhone({ labels }: Props) {
 }
 
 export default function HeroAICustomerService({ labels }: Props) {
+  // Provide minimal fallbacks so component always renders visible boxes
+  const safe: Props['labels'] = {
+    chatHeader: labels.chatHeader || 'AI Chat',
+    chatItems: labels.chatItems && labels.chatItems.length ? labels.chatItems : [
+      { side: 'user', text: 'Hey, can you help me with my order?' },
+      { side: 'ai', text: 'Of course! What is your order ID?' }
+    ],
+    typingText: labels.typingText || 'typing…',
+    typingUserText: labels.typingUserText || 'Customer',
+    typingAiText: labels.typingAiText || 'Agent',
+    voiceHeader: labels.voiceHeader || 'Live AI Voice',
+    voiceStatus: labels.voiceStatus || 'Connected to caller',
+    callDuration: labels.callDuration || '00:32',
+    mute: labels.mute || 'Mute',
+    end: labels.end || 'End'
+  }
   return (
     <div className="w-full">
       <div className="grid md:grid-cols-2 gap-6 items-stretch">
-        <ChatPhone labels={labels} />
-        <VoicePhone labels={labels} />
+        <ChatPhone labels={safe} />
+        <VoicePhone labels={safe} />
       </div>
     </div>
   )

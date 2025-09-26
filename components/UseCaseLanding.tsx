@@ -1,12 +1,14 @@
-"use client"
-import React, { useRef } from 'react'
+// Converted to a server component to reduce hydration cost. Interactive / animated islands can be reintroduced via small client subcomponents if needed.
+import React from 'react'
 import { NavbarSection } from './sections/NavbarSection'
 import { FooterSection } from './sections/FooterSection'
 import { Button } from './ui/button'
 import { LocalizedLink } from './LocalizedLink'
-import { motion, useInView } from 'framer-motion'
+// framer-motion removed for performance; simple CSS fade-in utility classes handle appearance.
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion'
 import { t } from '@/lib/locales'
+import { InViewFade } from '@/hooks/useInViewFade'
+import { ScrollToAnchorButton } from './ScrollToAnchorButton'
 
 type Stat = { label: string; value: string }
 
@@ -31,18 +33,11 @@ interface Props {
 }
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  // Simple wrapper applying staggered inline style; actual fade effect handled by global CSS (.fade-in).
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 16 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, ease: 'easeOut', delay }}
-    >
+    <div className={`fade-in translate-y-[16px] opacity-0 ${className}`} style={{ ['--delay' as any]: `${delay}s` }}>
       {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -54,19 +49,19 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
         {/* Hero */}
   <section className="relative overflow-hidden px-5 pt-16 md:pt-24 pb-16 md:pb-24">
           <div className="max-w-[1100px] mx-auto text-center relative z-10">
-            <FadeIn>
+            <InViewFade>
               <h1 className="text-white font-sora font-semibold text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-tight">
                 {title}
               </h1>
-            </FadeIn>
-            <FadeIn delay={0.05}>
+            </InViewFade>
+            <InViewFade delay={0.05}>
               <p className="mt-4 text-[#C6D5DD] text-base md:text-lg xl:text-xl leading-relaxed">
                 {subtitle}
               </p>
-            </FadeIn>
+            </InViewFade>
 
             {highlights.length > 0 && (
-              <FadeIn delay={0.1}>
+              <InViewFade delay={0.1}>
                 <div className="flex flex-wrap gap-2 justify-center mt-6">
                   {highlights.map((h, i) => (
                     <span key={i} className="px-3 py-1 rounded border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,0.15)_0%,rgba(39,98,186,0.15)_100%)] text-white/90 text-sm font-sora">
@@ -74,44 +69,36 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                     </span>
                   ))}
                 </div>
-              </FadeIn>
+              </InViewFade>
             )}
 
-            <FadeIn delay={0.15}>
+            <InViewFade delay={0.15}>
               <div className="w-full max-w-[520px] mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mt-8">
                 <LocalizedLink route="contact">
                   <Button variant="primaryGradient" className="w-full sm:w-auto px-5 h-11 text-base">
                     {t.content.hero.freeAnalysisButton}
                   </Button>
                 </LocalizedLink>
-                <Button
-                  onClick={() => {
-                    const el = document.getElementById('usecase-stats')
-                    if (el) {
-                      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    }
-                  }}
+                <ScrollToAnchorButton
+                  targetId="usecase-stats"
                   className="w-full sm:w-auto px-5 h-11 rounded border border-[#555555] bg-[linear-gradient(90deg,rgba(36,36,36,1)_0%,rgba(79,79,79,1)_100%)] text-white text-base font-sora font-semibold"
                 >
                   {t.content.hero.howItWorksButton}
-                </Button>
+                </ScrollToAnchorButton>
               </div>
-            </FadeIn>
+            </InViewFade>
 
-            {/* Hero visual */}
+            {/* Hero visual / custom graphic */}
             <div className="relative mt-10 md:mt-12">
               {heroCustom ? (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}>
-                  {heroCustom}
-                </motion.div>
+                // Render custom hero exactly (animation handled inside component)
+                heroCustom
               ) : (
-                <motion.img
+                <img
                   src={heroImage}
                   alt="Illustration"
-                  className="w-full max-w-[1000px] mx-auto rounded-[16px] border border-[#1E2A42] shadow-[0px_10px_30px_rgba(0,0,0,0.25)]"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                  className="fade-in translate-y-2 opacity-0 animate-float-slow w-full max-w-[1000px] mx-auto rounded-[16px] border border-[#1E2A42] shadow-[0px_10px_30px_rgba(0,0,0,0.25)]"
+                  style={{ ['--delay' as any]: '0.2s' }}
                 />
               )}
             </div>
@@ -119,18 +106,13 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
 
           {/* Background glows */}
           <div className="pointer-events-none absolute inset-0">
-            <motion.div
-              className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[900px] h-[280px] rounded-full blur-[120px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.4 }}
-              transition={{ duration: 0.8 }}
-            />
-            <motion.img
+            <div className="fade-in opacity-0 absolute -bottom-20 left-1/2 -translate-x-1/2 w-[900px] h-[280px] rounded-full blur-[120px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-40 animate-float-slow" style={{ ['--delay' as any]: '0.3s' }} />
+            {/* Static image to reduce continuous animation cost */}
+            <img
               src={heroBackdrop}
               alt="Decor"
-              className="absolute -top-10 left-1/2 -translate-x-1/2 w-[1200px] opacity-30"
-              animate={{ y: [0, -8, 0, 8, 0] }}
-              transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -top-10 left-1/2 -translate-x-1/2 w-[1200px] opacity-25"
+              loading="lazy"
             />
           </div>
         </section>
@@ -140,12 +122,12 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
           <section id="usecase-stats" className="px-5 mt-6 scroll-mt-24">
             <div className="max-w-[1100px] mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
               {stats.map((s, i) => (
-                <FadeIn key={i} delay={i * 0.05}>
+                <InViewFade key={i} delay={i * 0.05} className="fade-in-observe">
                   <div className="rounded-[14px] border border-[#1E2A42] bg-[#11121a] p-4 text-center">
                     <div className="text-white font-sora text-2xl md:text-3xl font-semibold">{s.value}</div>
                     <div className="text-[#9fb4c4] text-xs md:text-sm mt-1">{s.label}</div>
                   </div>
-                </FadeIn>
+                </InViewFade>
               ))}
             </div>
           </section>
@@ -171,7 +153,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
               const layout = sec.layout || 'full'
               if (layout === 'custom' && sec.customContent) {
                 return (
-                  <FadeIn key={sec.id}>
+                  <InViewFade key={sec.id} className="fade-in-observe">
                     <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
                       <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
                       {(() => {
@@ -203,13 +185,13 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                       })()}
                       <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
                     </article>
-                  </FadeIn>
+                  </InViewFade>
                 )
               }
               const hasImage = Boolean(sec.image)
               if (!hasImage || layout === 'full') {
                 return (
-                  <FadeIn key={sec.id}>
+                  <InViewFade key={sec.id} className="fade-in-observe">
                   <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
                     <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
                     <div className="mt-4 flex flex-col gap-4">
@@ -232,14 +214,14 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                     )}
                     <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
                   </article>
-                  </FadeIn>
+                  </InViewFade>
                 )
               }
 
               // Split layouts
               if (layout === 'imageBelow') {
                 return (
-                  <FadeIn key={sec.id}>
+                  <InViewFade key={sec.id} className="fade-in-observe">
                   <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
                     <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
                     <div className="mt-4 flex flex-col gap-4">
@@ -262,13 +244,13 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                     )}
                     <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
                   </article>
-                  </FadeIn>
+                  </InViewFade>
                 )
               }
 
               if (layout === 'twoUp') {
                 return (
-                  <FadeIn key={sec.id}>
+                  <InViewFade key={sec.id} className="fade-in-observe">
                   <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
                     <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
                     <div className="mt-4 grid md:grid-cols-2 gap-6">
@@ -298,13 +280,13 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                     )}
                     <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
                   </article>
-                  </FadeIn>
+                  </InViewFade>
                 )
               }
 
               const isLeft = layout === 'imageLeft'
               return (
-                <FadeIn key={sec.id}>
+                <InViewFade key={sec.id} className="fade-in-observe">
                 <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
                   <div className={`grid md:grid-cols-2 gap-6 items-center`}>
                     {isLeft && (
@@ -344,7 +326,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                   </div>
                   <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
                 </article>
-                </FadeIn>
+                </InViewFade>
               )
             })}
           </div>
@@ -355,7 +337,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
           <section className="px-5 mt-10 md:mt-14">
             <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 items-stretch gap-6">
               {features.map((group, idx) => (
-                <FadeIn key={idx} className="h-full">
+                <InViewFade key={idx} className="h-full fade-in-observe">
                   <div className="h-full rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 flex flex-col">
                     <h3 className="text-white font-sora font-semibold text-xl md:text-2xl mb-4">{group.title}</h3>
                     <div className="space-y-3">
@@ -371,7 +353,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                       ))}
                     </div>
                   </div>
-                </FadeIn>
+                </InViewFade>
               ))}
             </div>
           </section>
@@ -384,14 +366,10 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
               <h3 className="text-white font-sora font-semibold text-2xl md:text-3xl mb-6">{gallery.title}</h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {gallery.items.map((g, i) => (
-                  <motion.div
+                  <InViewFade
                     key={i}
-                    className="rounded-[16px] border border-[#1E2A42] bg-[#0e1118] overflow-hidden"
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.4, ease: 'easeOut', delay: i * 0.05 }}
-                    whileHover={{ y: -2 }}
+                    className="fade-in-observe translate-y-4 opacity-0 rounded-[16px] border border-[#1E2A42] bg-[#0e1118] overflow-hidden hover:-translate-y-0.5 transition-transform duration-300"
+                    delay={i * 0.05}
                   >
                     <img src={g.image} alt={g.title || 'Gallery image'} className="w-full h-auto" />
                     {(g.title || g.description) && (
@@ -400,7 +378,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                         {g.description && <div className="text-[#9fb4c4] text-sm mt-1">{g.description}</div>}
                       </div>
                     )}
-                  </motion.div>
+                  </InViewFade>
                 ))}
               </div>
             </div>

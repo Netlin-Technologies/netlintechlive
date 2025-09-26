@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Montserrat, Sora } from 'next/font/google';
 import { ClientLayout } from '@/components/ClientLayout'
+import RouteProgress from '@/components/RouteProgress'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import JsonLd from '@/components/JsonLd'
 import { getSiteUrl } from '@/lib/utils'
@@ -48,6 +49,7 @@ export default function RootLayout({
             }}
           />
           <ClientLayout>
+            <RouteProgress />
             {children}
           </ClientLayout>
         </PostHogProvider>

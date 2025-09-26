@@ -163,11 +163,22 @@ function SyncPill({ label }: { label: string }) {
 }
 
 export default function HeroAIMarketingAutomation({ labels }: Props) {
+  const safe = {
+    chatHeader: labels.chatHeader || 'Journey Orchestrator',
+    chatSub: labels.chatSub || 'Auto-build & optimize multi-step journeys',
+    voiceHeader: labels.voiceHeader || 'Audiences & Metrics',
+    voiceSub: labels.voiceSub || 'Real-time sync & performance',
+    stages: labels.stages && labels.stages.length ? labels.stages : undefined,
+    audienceTags: labels.audienceTags && labels.audienceTags.length ? labels.audienceTags : undefined,
+    audienceSyncLabel: labels.audienceSyncLabel || 'Audience Sync',
+    metricsLabels: labels.metricsLabels || { mqlToSql: 'MQL → SQL', cpl: 'CPL' },
+    runningLabel: labels.runningLabel || 'Journeys running · Auto‑optimize'
+  }
   return (
     <div className="w-full">
       <div className="grid md:grid-cols-2 gap-6 items-stretch">
-        <JourneyBuilder title={labels.chatHeader || 'Journey Orchestrator'} subtitle={labels.chatSub} stages={labels.stages} runningLabel={labels.runningLabel} />
-        <AudienceAndMetrics title={labels.voiceHeader || 'Audiences & Metrics'} subtitle={labels.voiceSub} audienceTags={labels.audienceTags} audienceSyncLabel={labels.audienceSyncLabel} metricsLabels={labels.metricsLabels} />
+        <JourneyBuilder title={safe.chatHeader} subtitle={safe.chatSub} stages={safe.stages} runningLabel={safe.runningLabel} />
+        <AudienceAndMetrics title={safe.voiceHeader} subtitle={safe.voiceSub} audienceTags={safe.audienceTags} audienceSyncLabel={safe.audienceSyncLabel} metricsLabels={safe.metricsLabels} />
       </div>
     </div>
   )

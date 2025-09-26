@@ -172,7 +172,11 @@ export default function MarketingAutomationPage() {
           </>
         )}
         preSectionsFullBleed
-        heroCustom={heroChat ? <HeroAIMarketingAutomation labels={heroChat} /> : null}
+        heroCustom={heroChat ? (
+          <div className="fade-in translate-y-[16px] opacity-0" style={{ ['--delay' as any]: '0.05s' }}>
+            <HeroAIMarketingAutomation labels={heroChat} />
+          </div>
+        ) : null}
       />
     </>
   )

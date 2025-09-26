@@ -1,5 +1,6 @@
 import { t } from '@/lib/locales';
 import { LocalizedLink } from '../LocalizedLink';
+import Image from 'next/image';
 
 const HeroSection = () => {
   // Defensive programming: ensure all required strings exist before using split
@@ -14,7 +15,7 @@ const HeroSection = () => {
           {t.content?.homeHero?.title || ''}
         </h1>
         <div className="w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[450px] xl:max-w-[522px] mx-auto">
-          <img src="/assets/images/curveLine.svg" alt="line" />
+          <Image src="/assets/images/curveLine.svg" alt="line" width={522} height={40} priority />
         </div>
         <div className=" mt-3 pt-px text-center justify-start text-base md:text-xl xl:text-2xl font-sora leading-normal xl:leading-8">
           <span className="text-[#C6D5DD] font-normal">

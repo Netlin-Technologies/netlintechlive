@@ -179,7 +179,9 @@ export default function CustomerServiceAutomationPage() {
         preSectionsFullBleed
         heroCustom={
           heroChat ? (
-            <HeroAICustomerService labels={heroChat} />
+            <div className="fade-in translate-y-[16px] opacity-0" style={{ ['--delay' as any]: '0.05s' }}>
+              <HeroAICustomerService labels={heroChat} />
+            </div>
           ) : null
         }
       />

@@ -2,9 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400|Sora:300,600,400,700|Inter:400");
+/* Removed external Google Fonts import (handled by next/font to avoid duplicate requests & layout shifts) */
 /* Prism theme for syntax highlighting */
 @import url("https://cdn.jsdelivr.net/npm/prismjs@1.30.0/themes/prism.min.css");
+
+/* Simple fade-in utility to replace JS-driven per-element observers */
+.fade-in {
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: var(--delay, 0s);
+  will-change: opacity, transform;
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { animation: none; opacity: 1 !important; transform: none !important; }
+  .animationControl, .animationControl2 { animation: none !important; }
+}
+
+/* Subtle vertical float animation (replaces heavy multi-keyframe motion) */
+@keyframes floatSlow {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+.animate-float-slow {
+  animation: floatSlow 14s ease-in-out infinite;
+}
+
+/* IntersectionObserver driven fade-in (JS adds .in-view) */
+.fade-in-observe { opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in-observe.in-view { opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-observe { transition:none; opacity:1; transform:none; }
+}
 
 @layer components {
   .all-\[unset\] {
