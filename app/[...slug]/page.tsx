@@ -208,8 +208,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: t.metaData.contactDesc
     },
     services: {
-      title: t.metaData.homeTitle, // You might want to add servicesTitle to your locales
-      description: t.metaData.homeDesc // You might want to add servicesDesc to your locales
+      title: t.metaData.servicesTitle || t.metaData.homeTitle,
+      description: t.metaData.servicesDesc || t.metaData.homeDesc
     },
     blog: {
       title: t.metaData.blogTitle,
@@ -328,16 +328,67 @@ export default async function DynamicPage({ params }: PageProps) {
   const pageLocale = process.env.NEXT_PUBLIC_LOCALE || 'en'
   const siteUrl = getSiteUrl(pageLocale)
   const pageUrl = `${siteUrl}${requestedPath}`
+  // Page-specific schema meta (avoid generic home meta duplication)
+  const schemaMetaMap: Record<string, { title: string; description: string }> = {
+    about: { title: t.metaData.aboutTitle, description: t.metaData.aboutDesc },
+    contact: { title: t.metaData.contactTitle, description: t.metaData.contactDesc },
+    services: { title: t.metaData.homeTitle, description: t.metaData.homeDesc }, // TODO: create dedicated services meta
+    blog: { title: t.metaData.blogTitle, description: t.metaData.blogDesc },
+    automation: { title: t.metaData.automationTitle, description: t.metaData.automationDesc },
+    customer_service_automation: { title: t.metaData.customerServiceAutomationTitle || t.metaData.automationTitle, description: t.metaData.customerServiceAutomationDesc || t.metaData.automationDesc },
+    marketing_automation: { title: t.metaData.marketingAutomationTitle || t.metaData.automationTitle, description: t.metaData.marketingAutomationDesc || t.metaData.automationDesc },
+    lead_response_automation: { title: t.metaData.leadResponseAutomationTitle || t.metaData.automationTitle, description: t.metaData.leadResponseAutomationDesc || t.metaData.automationDesc },
+    home: { title: t.metaData.homeTitle, description: t.metaData.homeDesc },
+  }
+  const schemaMeta = schemaMetaMap[routeKey] || schemaMetaMap.home
   return (
     <>
       <JsonLd
         data={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
-          name: t.metaData.homeTitle,
-          description: t.metaData.homeDesc,
+          name: schemaMeta.title,
+          description: schemaMeta.description,
           inLanguage: pageLocale,
           url: pageUrl,
+        }}
+      />
+      {(routeKey === 'customer_service_automation' || routeKey === 'marketing_automation' || routeKey === 'lead_response_automation') && (
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: schemaMeta.title,
+            description: schemaMeta.description,
+            provider: {
+              '@type': 'Organization',
+              name: 'Netlin Technologies',
+              url: siteUrl,
+            },
+            areaServed: { '@type': 'Country', name: 'Global' },
+            offers: {
+              '@type': 'Offer',
+              price: '0',
+              priceCurrency: 'EUR',
+              url: pageUrl,
+              availability: 'https://schema.org/InStock'
+            },
+            url: pageUrl,
+          }}
+        />
+      )}
+      <link rel="canonical" href={pageUrl} />
+      <link rel="alternate" hrefLang="en" href={pageUrl.replace('netlintech.de', 'netlintech.com')} />
+      <link rel="alternate" hrefLang="de" href={pageUrl.replace('netlintech.com', 'netlintech.de')} />
+      <link rel="alternate" hrefLang="x-default" href={pageUrl.replace('netlintech.de', 'netlintech.com')} />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+            { '@type': 'ListItem', position: 2, name: schemaMeta.title, item: pageUrl },
+          ],
         }}
       />
       <PageComponent />

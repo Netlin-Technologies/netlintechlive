@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import React from 'react'
 import './globals.css'
 import { Montserrat, Sora } from 'next/font/google';
 import { ClientLayout } from '@/components/ClientLayout'
@@ -25,15 +26,19 @@ const sora = Sora({
   variable: '--font-sora',
   display: 'swap',
 });
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const layoutLocale = process.env.NEXT_PUBLIC_LOCALE || 'en'
   const siteUrl = getSiteUrl(layoutLocale)
   return (
     <html lang={layoutLocale}>
+      <head>
+        <link rel="canonical" href={siteUrl} />
+        {/* Basic hreflang for root pages (per-page overrides can add specific path versions) */}
+        <link rel="alternate" hrefLang="en" href={siteUrl.replace('.de', '.com')} />
+        <link rel="alternate" hrefLang="de" href={siteUrl.replace('.com', '.de')} />
+        <link rel="alternate" hrefLang="x-default" href={siteUrl.replace('.de', '.com')} />
+        <meta name="robots" content="index,follow" />
+      </head>
       <body className={`${montserrat.variable} ${sora.variable}`}>
         <PostHogProvider>
           <JsonLd

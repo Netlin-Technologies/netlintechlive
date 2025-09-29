@@ -30,6 +30,7 @@ interface Props {
   footerCtaButtonText?: string
   preSections?: React.ReactNode
   preSectionsFullBleed?: boolean
+  theme?: 'dark' | 'light'
 }
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -41,32 +42,44 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
   )
 }
 
-export default function UseCaseLanding({ title, subtitle, highlights = [], stats = [], sections, features = [], heroImage = '/assets/uses/placeholder-illustration.svg', heroBackdrop = '/assets/uses/gradient-blob.svg', gallery, faq = [], heroCustom, faqSubtitle, footerCtaTitle, footerCtaDescription, footerCtaButtonText, preSections, preSectionsFullBleed }: Props) {
+export default function UseCaseLanding({ title, subtitle, highlights = [], stats = [], sections, features = [], heroImage = '/assets/uses/placeholder-illustration.svg', heroBackdrop = '/assets/uses/gradient-blob.svg', gallery, faq = [], heroCustom, faqSubtitle, footerCtaTitle, footerCtaDescription, footerCtaButtonText, preSections, preSectionsFullBleed, theme = 'dark' }: Props) {
+  const isLight = theme === 'light'
+  const headingCls = isLight ? 'text-slate-900' : 'text-white'
+  const bodyCls = isLight ? 'text-slate-700' : 'text-[#C6D5DD]'
+  const mutedCls = isLight ? 'text-slate-500' : 'text-[#9fb4c4]'
+  const heroHeadingCls = `${headingCls} font-sora font-semibold text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-tight`
+  const chipCls = isLight
+    ? 'px-3 py-1 rounded border border-blue-500 bg-blue-50 text-blue-700 text-sm font-sora'
+    : 'px-3 py-1 rounded border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,0.15)_0%,rgba(39,98,186,0.15)_100%)] text-white/90 text-sm font-sora'
+  const cardBase = isLight ? 'rounded-[18px] border border-slate-200 bg-white' : 'rounded-[18px] border border-[#1E2A42] bg-[#0e1118]'
+  const statCard = isLight ? 'rounded-[14px] border border-slate-200 bg-white' : 'rounded-[14px] border border-[#1E2A42] bg-[#11121a]'
+  const statValueCls = isLight ? 'text-slate-900' : 'text-white'
+  const statLabelCls = isLight ? 'text-slate-500' : 'text-[#9fb4c4]'
+  const faqItemBorder = isLight ? 'border-slate-200' : 'border-[#ffffff26]'
+  const faqChevronCls = isLight ? 'text-slate-500 group-data-[state=open]:text-slate-700' : 'text-white group-data-[state=open]:text-white'
+  // Shared glow background ("blue bubble") gradient: lighter airy variant for light theme, original deep blue for dark theme
+  const glowGradient = isLight
+    ? 'bg-gradient-to-br from-[#C5E2FF] to-[#A8D4FF]'
+    : 'bg-gradient-to-br from-[#003066] to-[#005ED3]'
   return (
-    <div className="min-h-screen bg-[#0c0e14]">
-      <NavbarSection />
-      <main className="w-full bg-[#0D0C14]">
+    <div className={`min-h-screen ${isLight ? 'bg-white' : 'bg-[#0c0e14]'}`}>
+      <NavbarSection theme={theme} />
+      <main className={`w-full ${isLight ? 'bg-white' : 'bg-[#0D0C14]'}`}>
         {/* Hero */}
   <section className="relative overflow-hidden px-5 pt-16 md:pt-24 pb-16 md:pb-24">
           <div className="max-w-[1100px] mx-auto text-center relative z-10">
             <InViewFade>
-              <h1 className="text-white font-sora font-semibold text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-tight">
-                {title}
-              </h1>
+              <h1 className={heroHeadingCls}>{title}</h1>
             </InViewFade>
             <InViewFade delay={0.05}>
-              <p className="mt-4 text-[#C6D5DD] text-base md:text-lg xl:text-xl leading-relaxed">
-                {subtitle}
-              </p>
+              <p className={`mt-4 ${bodyCls} text-base md:text-lg xl:text-xl leading-relaxed`}>{subtitle}</p>
             </InViewFade>
 
             {highlights.length > 0 && (
               <InViewFade delay={0.1}>
                 <div className="flex flex-wrap gap-2 justify-center mt-6">
                   {highlights.map((h, i) => (
-                    <span key={i} className="px-3 py-1 rounded border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,0.15)_0%,rgba(39,98,186,0.15)_100%)] text-white/90 text-sm font-sora">
-                      {h}
-                    </span>
+                    <span key={i} className={chipCls}>{h}</span>
                   ))}
                 </div>
               </InViewFade>
@@ -106,7 +119,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
 
           {/* Background glows */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="fade-in opacity-0 absolute -bottom-20 left-1/2 -translate-x-1/2 w-[900px] h-[280px] rounded-full blur-[120px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-40 animate-float-slow" style={{ ['--delay' as any]: '0.3s' }} />
+            <div className={`fade-in opacity-0 absolute -bottom-20 left-1/2 -translate-x-1/2 w-[900px] h-[280px] rounded-full blur-[120px] ${glowGradient} opacity-40 animate-float-slow`} style={{ ['--delay' as any]: '0.3s' }} />
             {/* Static image to reduce continuous animation cost */}
             <img
               src={heroBackdrop}
@@ -123,9 +136,9 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
             <div className="max-w-[1100px] mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
               {stats.map((s, i) => (
                 <InViewFade key={i} delay={i * 0.05} className="fade-in-observe">
-                  <div className="rounded-[14px] border border-[#1E2A42] bg-[#11121a] p-4 text-center">
-                    <div className="text-white font-sora text-2xl md:text-3xl font-semibold">{s.value}</div>
-                    <div className="text-[#9fb4c4] text-xs md:text-sm mt-1">{s.label}</div>
+                  <div className={`${statCard} p-4 text-center`}>
+                    <div className={`${statValueCls} font-sora text-2xl md:text-3xl font-semibold`}>{s.value}</div>
+                    <div className={`${statLabelCls} text-xs md:text-sm mt-1`}>{s.label}</div>
                   </div>
                 </InViewFade>
               ))}
@@ -154,8 +167,8 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
               if (layout === 'custom' && sec.customContent) {
                 return (
                   <InViewFade key={sec.id} className="fade-in-observe">
-                    <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
-                      <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
+                    <article id={sec.id} className={`${cardBase} p-6 md:p-8 relative overflow-hidden`}>
+                      <h2 className={`${headingCls} font-sora font-semibold text-2xl md:text-3xl`}>{sec.heading}</h2>
                       {(() => {
                         const paras = sec.paragraphs || []
                         const insertIndex = typeof sec.customInsertIndex === 'number'
@@ -167,23 +180,19 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                           <>
                             {before.length > 0 && (
                               <div className="mt-4 flex flex-col gap-4">
-                                {before.map((p, i) => (
-                                  <p key={`before-${i}`} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{p}</p>
-                                ))}
+                                {before.map((p, i) => (<p key={`before-${i}`} className={`${bodyCls} text-base md:text-lg leading-relaxed`}>{p}</p>))}
                               </div>
                             )}
                             <div className="mt-6">{sec.customContent}</div>
                             {after.length > 0 && (
                               <div className="mt-6 flex flex-col gap-4">
-                                {after.map((p, i) => (
-                                  <p key={`after-${i}`} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{p}</p>
-                                ))}
+                                {after.map((p, i) => (<p key={`after-${i}`} className={`${bodyCls} text-base md:text-lg leading-relaxed`}>{p}</p>))}
                               </div>
                             )}
                           </>
                         )
                       })()}
-                      <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
+                      <div className={`absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] ${glowGradient} opacity-30`} />
                     </article>
                   </InViewFade>
                 )
@@ -192,19 +201,15 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
               if (!hasImage || layout === 'full') {
                 return (
                   <InViewFade key={sec.id} className="fade-in-observe">
-                  <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
-                    <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
+                  <article id={sec.id} className={`${cardBase} p-6 md:p-8 relative overflow-hidden`}>
+                    <h2 className={`${headingCls} font-sora font-semibold text-2xl md:text-3xl`}>{sec.heading}</h2>
                     <div className="mt-4 flex flex-col gap-4">
-                      {sec.paragraphs.map((p, i) => (
-                        <p key={i} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{p}</p>
-                      ))}
+                      {sec.paragraphs.map((p, i) => (<p key={i} className={`${bodyCls} text-base md:text-lg leading-relaxed`}>{p}</p>))}
                     </div>
                     {hasImage && (
                       <div className="mt-6 relative">
                         <img src={sec.image!} alt={sec.imageAlt || `${sec.heading} visual`} className="w-full rounded-[12px] border border-[#1E2A42]" />
-                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (
-                          <p className="text-[#9fb4c4] text-sm mt-2">{sec.imageCaption}</p>
-                        )}
+                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (<p className={`${mutedCls} text-sm mt-2`}>{sec.imageCaption}</p>)}
                         {sec.imageCaption && sec.imageCaptionMode === 'overlay' && (
                           <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-[8px] border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,0.18)_0%,rgba(39,98,186,0.18)_100%)] text-white text-xs font-sora">
                             {sec.imageCaption}
@@ -212,7 +217,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                         )}
                       </div>
                     )}
-                    <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
+                    <div className={`absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] ${glowGradient} opacity-30`} />
                   </article>
                   </InViewFade>
                 )
@@ -222,19 +227,15 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
               if (layout === 'imageBelow') {
                 return (
                   <InViewFade key={sec.id} className="fade-in-observe">
-                  <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
-                    <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
+                  <article id={sec.id} className={`${cardBase} p-6 md:p-8 relative overflow-hidden`}>
+                    <h2 className={`${headingCls} font-sora font-semibold text-2xl md:text-3xl`}>{sec.heading}</h2>
                     <div className="mt-4 flex flex-col gap-4">
-                      {sec.paragraphs.map((p, i) => (
-                        <p key={i} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{p}</p>
-                      ))}
+                      {sec.paragraphs.map((p, i) => (<p key={i} className={`${bodyCls} text-base md:text-lg leading-relaxed`}>{p}</p>))}
                     </div>
                     {hasImage && (
                       <div className="mt-6 relative">
                         <img src={sec.image!} alt={sec.imageAlt || `${sec.heading} visual`} className="w-full rounded-[12px] border border-[#1E2A42]" />
-                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (
-                          <p className="text-[#9fb4c4] text-sm mt-2">{sec.imageCaption}</p>
-                        )}
+                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (<p className={`${mutedCls} text-sm mt-2`}>{sec.imageCaption}</p>)}
                         {sec.imageCaption && sec.imageCaptionMode === 'overlay' && (
                           <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-[8px] border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,0.18)_0%,rgba(39,98,186,0.18)_100%)] text-white text-xs font-sora">
                             {sec.imageCaption}
@@ -242,7 +243,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                         )}
                       </div>
                     )}
-                    <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
+                    <div className={`absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] ${glowGradient} opacity-30`} />
                   </article>
                   </InViewFade>
                 )
@@ -251,26 +252,20 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
               if (layout === 'twoUp') {
                 return (
                   <InViewFade key={sec.id} className="fade-in-observe">
-                  <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
-                    <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
+                  <article id={sec.id} className={`${cardBase} p-6 md:p-8 relative overflow-hidden`}>
+                    <h2 className={`${headingCls} font-sora font-semibold text-2xl md:text-3xl`}>{sec.heading}</h2>
                     <div className="mt-4 grid md:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-3">
-                        {sec.columns?.left?.map((t, i) => (
-                          <p key={i} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{t}</p>
-                        ))}
+                        {sec.columns?.left?.map((t, i) => (<p key={i} className={`${bodyCls} text-base md:text-lg leading-relaxed`}>{t}</p>))}
                       </div>
                       <div className="flex flex-col gap-3">
-                        {sec.columns?.right?.map((t, i) => (
-                          <p key={i} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{t}</p>
-                        ))}
+                        {sec.columns?.right?.map((t, i) => (<p key={i} className={`${bodyCls} text-base md:text-lg leading-relaxed`}>{t}</p>))}
                       </div>
                     </div>
                     {hasImage && (
                       <div className="mt-6 relative">
                         <img src={sec.image!} alt={sec.imageAlt || `${sec.heading} visual`} className="w-full rounded-[12px] border border-[#1E2A42]" />
-                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (
-                          <p className="text-[#9fb4c4] text-sm mt-2">{sec.imageCaption}</p>
-                        )}
+                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (<p className={`${mutedCls} text-sm mt-2`}>{sec.imageCaption}</p>)}
                         {sec.imageCaption && sec.imageCaptionMode === 'overlay' && (
                           <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-[8px] border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,0.18)_0%,rgba(39,98,186,0.18)_100%)] text-white text-xs font-sora">
                             {sec.imageCaption}
@@ -278,7 +273,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                         )}
                       </div>
                     )}
-                    <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
+                    <div className={`absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] ${glowGradient} opacity-30`} />
                   </article>
                   </InViewFade>
                 )
@@ -287,14 +282,12 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
               const isLeft = layout === 'imageLeft'
               return (
                 <InViewFade key={sec.id} className="fade-in-observe">
-                <article id={sec.id} className="rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 relative overflow-hidden">
+                <article id={sec.id} className={`${cardBase} p-6 md:p-8 relative overflow-hidden`}>
                   <div className={`grid md:grid-cols-2 gap-6 items-center`}>
                     {isLeft && (
                       <div>
                         <img src={sec.image!} alt={sec.imageAlt || `${sec.heading} visual`} className="w-full rounded-[12px] border border-[#1E2A42]" />
-                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (
-                          <p className="text-[#9fb4c4] text-sm mt-2">{sec.imageCaption}</p>
-                        )}
+                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (<p className={`${mutedCls} text-sm mt-2`}>{sec.imageCaption}</p>)}
                         {sec.imageCaption && sec.imageCaptionMode === 'overlay' && (
                           <div className="absolute bottom-6 left-6 px-2.5 py-1 rounded-[8px] border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,0.18)_0%,rgba(39,98,186,0.18)_100%)] text-white text-xs font-sora">
                             {sec.imageCaption}
@@ -303,19 +296,15 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                       </div>
                     )}
                     <div>
-                      <h2 className="text-white font-sora font-semibold text-2xl md:text-3xl">{sec.heading}</h2>
+                      <h2 className={`${headingCls} font-sora font-semibold text-2xl md:text-3xl`}>{sec.heading}</h2>
                       <div className="mt-4 flex flex-col gap-4">
-                        {sec.paragraphs.map((p, i) => (
-                          <p key={i} className="text-[#C6D5DD] text-base md:text-lg leading-relaxed">{p}</p>
-                        ))}
+                        {sec.paragraphs.map((p, i) => (<p key={i} className={`${bodyCls} text-base md:text-lg leading-relaxed`}>{p}</p>))}
                       </div>
                     </div>
                     {!isLeft && (
                       <div>
                         <img src={sec.image!} alt={sec.imageAlt || `${sec.heading} visual`} className="w-full rounded-[12px] border border-[#1E2A42]" />
-                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (
-                          <p className="text-[#9fb4c4] text-sm mt-2">{sec.imageCaption}</p>
-                        )}
+                        {sec.imageCaption && sec.imageCaptionMode !== 'overlay' && (<p className={`${mutedCls} text-sm mt-2`}>{sec.imageCaption}</p>)}
                         {sec.imageCaption && sec.imageCaptionMode === 'overlay' && (
                           <div className="absolute bottom-6 right-6 px-2.5 py-1 rounded-[8px] border border-[#4d9aff] bg-[linear-gradient(90deg,rgba(61,137,249,0.18)_0%,rgba(39,98,186,0.18)_100%)] text-white text-xs font-sora">
                             {sec.imageCaption}
@@ -324,7 +313,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                       </div>
                     )}
                   </div>
-                  <div className="absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] bg-gradient-to-br from-[#003066] to-[#005ED3] opacity-30" />
+                  <div className={`absolute -right-20 -bottom-16 w-[340px] h-[220px] rounded-full blur-[80px] ${glowGradient} opacity-30`} />
                 </article>
                 </InViewFade>
               )
@@ -338,8 +327,8 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
             <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 items-stretch gap-6">
               {features.map((group, idx) => (
                 <InViewFade key={idx} className="h-full fade-in-observe">
-                  <div className="h-full rounded-[18px] border border-[#1E2A42] bg-[#0e1118] p-6 md:p-8 flex flex-col">
-                    <h3 className="text-white font-sora font-semibold text-xl md:text-2xl mb-4">{group.title}</h3>
+                  <div className={`h-full ${cardBase} p-6 md:p-8 flex flex-col`}> 
+                    <h3 className={`${headingCls} font-sora font-semibold text-xl md:text-2xl mb-4`}>{group.title}</h3>
                     <div className="space-y-3">
                       {group.items.map((li, i) => (
                         <div key={i} className="flex items-start gap-3">
@@ -348,7 +337,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                           ) : (
                             <span className="mt-1 w-[8px] h-[8px] rounded-full bg-[#4D9AFF] inline-block" />
                           )}
-                          <span className="text-[#C6D5DD]">{li}</span>
+                          <span className={bodyCls}>{li}</span>
                         </div>
                       ))}
                     </div>
@@ -363,7 +352,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
         {gallery && gallery.items?.length > 0 && (
           <section className="px-5 mt-10 md:mt-16">
             <div className="max-w-[1100px] mx-auto">
-              <h3 className="text-white font-sora font-semibold text-2xl md:text-3xl mb-6">{gallery.title}</h3>
+              <h3 className={`${headingCls} font-sora font-semibold text-2xl md:text-3xl mb-6`}>{gallery.title}</h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {gallery.items.map((g, i) => (
                   <InViewFade
@@ -374,8 +363,8 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
                     <img src={g.image} alt={g.title || 'Gallery image'} className="w-full h-auto" />
                     {(g.title || g.description) && (
                       <div className="p-4">
-                        {g.title && <div className="text-white font-sora font-semibold">{g.title}</div>}
-                        {g.description && <div className="text-[#9fb4c4] text-sm mt-1">{g.description}</div>}
+                        {g.title && <div className={`${headingCls} font-sora font-semibold`}>{g.title}</div>}
+                        {g.description && <div className={`${mutedCls} text-sm mt-1`}>{g.description}</div>}
                       </div>
                     )}
                   </InViewFade>
@@ -389,20 +378,18 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
         {faq && faq.length > 0 && (
           <section className="px-5 mt-12 md:mt-18 mb-14 md:mb-20 lg:mb-24">
             <div className="max-w-[1100px] mx-auto">
-              <h3 className="text-white font-sora font-semibold text-2xl md:text-3xl mb-4">{t.content.faq.title}</h3>
-              <p className="text-[#C6D5DD] mb-6">{faqSubtitle || t.content.faq.subtitle}</p>
+              <h3 className={`${headingCls} font-sora font-semibold text-2xl md:text-3xl mb-4`}>{t.content.faq.title}</h3>
+              <p className={`${bodyCls} mb-6`}>{faqSubtitle || t.content.faq.subtitle}</p>
               <Accordion type="single" collapsible className="w-full">
                 {faq.map((item, i) => (
-                  <AccordionItem key={`faq-${i}`} value={`item-${i}`} className="border-b border-[#ffffff26] py-4 md:py-6">
-                    <AccordionTrigger className="flex-1 justify-between py-2 text-left">
-                      <div className="flex-1 font-['Sora',Helvetica] font-normal text-white text-base md:text-lg leading-snug">
-                        {item.q}
-                      </div>
+                  <AccordionItem key={`faq-${i}`} value={`item-${i}`} className={`border-b ${faqItemBorder} py-4 md:py-6`}>
+                    <AccordionTrigger className="flex-1 justify-between py-2 text-left group">
+                      <div className={`flex-1 font-['Sora',Helvetica] font-normal ${headingCls} text-base md:text-lg leading-snug`}>{item.q}</div>
+                      {/* Override chevron color via inherited currentColor using utility span */}
+                      <span className={`${faqChevronCls} inline-flex items-center`}></span>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <div className="pb-2 font-['Sora',Helvetica] font-light text-[#9fb4c4] text-base md:text-lg leading-relaxed">
-                        {item.a}
-                      </div>
+                      <div className={`pb-2 font-['Sora',Helvetica] font-light ${mutedCls} text-base md:text-lg leading-relaxed`}>{item.a}</div>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -414,7 +401,7 @@ export default function UseCaseLanding({ title, subtitle, highlights = [], stats
         {/* CTA removed: rely on per-page footer CTA */}
 
       </main>
-      <FooterSection ctaTitle={footerCtaTitle} ctaDescription={footerCtaDescription} ctaButtonText={footerCtaButtonText} />
+      <FooterSection theme={theme} ctaTitle={footerCtaTitle} ctaDescription={footerCtaDescription} ctaButtonText={footerCtaButtonText} />
     </div>
   )
 }

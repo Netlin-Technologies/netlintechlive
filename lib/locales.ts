@@ -14,6 +14,8 @@ interface Translations {
     homeDesc: string;
     automationTitle: string;
     automationDesc: string;
+    servicesTitle?: string;
+    servicesDesc?: string;
     blogTitle: string;
     blogDesc: string;
     contactTitle: string;
@@ -48,6 +50,8 @@ const translations: Record<string, Translations> = {
       homeDesc: "We turn your business into a system that runs itself. Custom AI workflows that kill overhead, eliminate manual work, and scale hard. Built to win. Built by NETLINTECH.",
       automationTitle: 'Automate your business with AI | Print Cash | NETLINTECH',
       automationDesc: 'We build scalable automations that kill busywork and print ROI. No BS. No code. Just scalable systems that run while you sleep. Built by NETLINTECH.',
+  servicesTitle: 'Automation & AI Implementation Services | Workflow, Integration & AI Agents | NETLINTECH',
+  servicesDesc: 'End-to-end automation & AI implementation: process analysis, no/low-code workflows, AI agent deployment, integration engineering and ongoing optimization.',
       blogTitle: 'Proven systems. Real ROI. | Learn no-code AI Automation | NETLINTECH',
       blogDesc: 'Get real strategies that grow businesses. No theory. Just tested AI automations, scalable systems and results you can copy. Use what works. Skip the BS.',
       contactTitle: 'Talk to Builders, not Salespeople | No-code AI Automation | NETLINTECH',
@@ -531,6 +535,10 @@ const translations: Record<string, Translations> = {
             },
           ],
         },
+          faqExtra: [
+            { q: 'How fast can customer service automation go live?', a: 'Foundational capture, classification and reply drafting typically deploy within 2–3 weeks after discovery and knowledge ingestion.' },
+            { q: 'What KPIs improve first?', a: 'First month: response time & backlog reduction. Months 2–3: deflection rate, first‑contact resolution, and agent productivity lift.' }
+          ],
         heroChat: {
           chatHeader: 'Chat with AI Customer Service',
           chatItems: [
@@ -1382,6 +1390,8 @@ const translations: Record<string, Translations> = {
       
       automationTitle: 'Automatisiere dein Business mit KI | Cash drucken | NETLINTECH',
       automationDesc: 'Wir bauen skalierbare Automationen, die Bullshit-Arbeit eliminieren und ROI drucken. Kein Blabla. Kein Code. Nur Systeme, die laufen, während du schläfst. Built by NETLINTECH.',
+  servicesTitle: 'Automatisierungs- & KI-Implementierungs-Services | Workflows, Integration & KI-Agenten | NETLINTECH',
+  servicesDesc: 'End-to-End Automatisierung & KI: Prozessanalyse, No/Low-Code Workflows, KI-Agenten, Integrations-Engineering und laufende Optimierung.',
       
       blogTitle: 'Erprobte Systeme. Echter ROI. | No-Code KI-Automatisierung lernen | NETLINTECH',
       blogDesc: 'Echte Strategien, die Unternehmen wachsen lassen. Keine Theorie. Nur getestete KI-Automationen, skalierbare Systeme und Resultate zum Nachbauen. Nutze, was funktioniert. Spar dir den Bullshit.',
@@ -1674,6 +1684,10 @@ const translations: Record<string, Translations> = {
               q: 'Welchen ROI können wir erwarten?',
               a: 'Typisch: +15–35% MQL→SQL, -20–40% CPL und schnellere Time‑to‑First‑Touch. Ergebnisse variieren je nach Branche, Datenqualität und Offer‑Market‑Fit.'
             },
+          ],
+          faqExtra: [
+            { q: 'How do you unify multi-channel journeys?', a: 'We map events across CRM, email, ad platforms and on-site behavior into a single state machine so triggers and nurture steps fire with consistent context.' },
+            { q: 'Do you replace existing tools?', a: 'No. We orchestrate the existing stack (ESP, CRM, ad platforms, webinar tools) through API/webhook automation, reducing manual segmentation and sync errors.' }
           ],
         },
         heroChat: {
@@ -2258,6 +2272,10 @@ const translations: Record<string, Translations> = {
               q: 'Welchen ROI kann ich erwarten?',
               a: 'Typische Ergebnisse: 40–70% Ticket‑Deflection, 30–60% schnellere Antworten und echte 24/7‑Abdeckung in den ersten Monaten. Kundenservice Automatisierung senkt die Kosten pro Ticket und reduziert Backlogs bei steigender Zufriedenheit. Zusätzlich erhöht ki kundenservice die Agent‑Produktivität durch präzise Antwortvorschläge und automatische Datensynchronisation.'
             },
+          ],
+          faqExtra: [
+            { q: 'Can you merge multiple lead sources?', a: 'Yes. We unify ad platform leads, form fills, chat captures and scraped enrichment into one scoring + sequencing pipeline.' },
+            { q: 'What if qualification rules change?', a: 'Rules are configuration, not code. Adjust thresholds (budget, geography, tech stack) and new logic applies instantly.' }
           ],
         },
         heroChat: {

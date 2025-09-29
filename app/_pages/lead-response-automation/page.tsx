@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import UseCaseLanding from '@/components/UseCaseLanding'
+import HeroLeadResponseOrbit from '@/components/graphics/HeroLeadResponseOrbit'
 import JsonLd from '@/components/JsonLd'
 import { getSiteUrl } from '@/lib/utils'
 import { t } from '@/lib/locales'
@@ -78,6 +79,7 @@ export default function LeadResponseAutomationPage() {
         footerCtaTitle={landing?.sections?.find((s: any) => s.id === 'cta')?.heading}
         footerCtaDescription={landing?.sections?.find((s: any) => s.id === 'cta')?.paragraphs?.[0]}
         footerCtaButtonText={t.content.hero.freeAnalysisButton}
+        heroCustom={<HeroLeadResponseOrbit theme="light" />}
         theme="light"
       />
     </>

@@ -10,7 +10,12 @@ interface LocalizedLinkProps extends Omit<ComponentProps<typeof Link>, 'href'> {
 }
 
 export function LocalizedLink({ route, children, onClick, ...props }: LocalizedLinkProps) {
-  const href = t.routes[route]
+  const raw = t.routes[route]
+  const href: string = typeof raw === 'string' ? raw : '/'
+  if (!raw) {
+    // eslint-disable-next-line no-console
+    console.warn(`[LocalizedLink] Missing route for key ${String(route)}; defaulting to '/'`)
+  }
   return (
     <Link
       href={href}
