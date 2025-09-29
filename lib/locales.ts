@@ -2631,8 +2631,8 @@ const translations: Record<string, Translations> = {
         },
         modules: {
           chatgpt: {
-            title: 'ChatGPT 4o',
-            subtitle: 'ChatGPT 4o'
+            title: 'ChatGPT 5',
+            subtitle: 'Chat-Modell'
           },
           airtable: {
             title: 'Airtable',
@@ -2640,7 +2640,7 @@ const translations: Record<string, Translations> = {
           },
           calendar: {
             title: 'Kalender',
-            subtitle: 'Chat-model'
+            subtitle: 'Terminbuchung'
           },
           hubspot: {
             title: 'Hubspot',
