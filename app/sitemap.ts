@@ -24,6 +24,9 @@ async function getBlogPosts() {
   }
 }
 
+// NOTE: This JSON-based sitemap endpoint (Next.js metadata route) coexists with the XML sitemap at /sitemap.xml.
+// Search engines primarily expect the XML version (with hreflang). You may submit /sitemap.xml in GSC.
+// Keeping this for Next.js automatic <link rel="sitemap"> injections and potential programmatic uses.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locale = process.env.NEXT_PUBLIC_LOCALE || 'en'
   const baseUrl = getSiteUrl(locale)
