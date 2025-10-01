@@ -116,9 +116,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           localizedExcerpt = post.excerpt || 'Article excerpt'
         }
 
+        // Build canonical + hreflang alternates for blog article
+        const localeEn = 'en'
+        const localeDe = 'de'
+        const siteUrlEn = getSiteUrl(localeEn)
+        const siteUrlDe = getSiteUrl(localeDe)
+        const currentLocale = locale
+        const englishSlug = post.slug || post.slug_de || articleSlug
+        const germanSlug = post.slug_de || post.slug || articleSlug
+        const articleUrlEn = `${siteUrlEn}/blog/${englishSlug}`
+        const articleUrlDe = `${siteUrlDe}/blog/${germanSlug}`
+        const canonical = currentLocale === 'de' ? articleUrlDe : articleUrlEn
+
         const metadata: Metadata = {
           title: `${localizedTitle} - Netlin Technologies`,
           description: localizedExcerpt,
+          alternates: {
+            canonical,
+            languages: {
+              en: articleUrlEn,
+              de: articleUrlDe,
+              'x-default': articleUrlEn,
+            }
+          },
           // Optional: Add more metadata
           openGraph: {
             title: localizedTitle,
@@ -147,9 +167,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     // Fallback to generic blog metadata if post not found or error occurred
     const fallbackTitle = `${t.metaData.blogTitle} - ${articleSlug}`
     const fallbackDesc = t.metaData.blogDesc
+    const localeEn = 'en'
+    const localeDe = 'de'
+    const siteUrlEn = getSiteUrl(localeEn)
+    const siteUrlDe = getSiteUrl(localeDe)
+    const englishUrl = `${siteUrlEn}/blog/${articleSlug}`
+    const germanUrl = `${siteUrlDe}/blog/${articleSlug}`
+    const canonical = (process.env.NEXT_PUBLIC_LOCALE || 'en') === 'de' ? germanUrl : englishUrl
     return {
       title: fallbackTitle,
       description: fallbackDesc,
+      alternates: {
+        canonical,
+        languages: { en: englishUrl, de: germanUrl, 'x-default': englishUrl }
+      },
       openGraph: {
         title: fallbackTitle,
         description: fallbackDesc,
@@ -239,9 +270,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: t.metaData.homeDesc
   }
   
+  // Determine localized counterparts for alternates
+  const localeEn = 'en'
+  const localeDe = 'de'
+  const siteUrlEn = getSiteUrl(localeEn)
+  const siteUrlDe = getSiteUrl(localeDe)
+  // Find same route key's path in each locale to build language alternates
+  const englishPath = translations.en.routes[routeKey as keyof typeof translations.en.routes]
+  const germanPath = translations.de.routes[routeKey as keyof typeof translations.de.routes]
+  const englishUrl = `${siteUrlEn}${englishPath || ''}`
+  const germanUrl = `${siteUrlDe}${germanPath || ''}`
+  const canonical = locale === 'de' ? germanUrl : englishUrl
+
   return {
     title: pageMetadata.title,
     description: pageMetadata.description,
+    alternates: {
+      canonical,
+      languages: {
+        en: englishUrl,
+        de: germanUrl,
+        'x-default': englishUrl,
+      }
+    },
     openGraph: {
       title: pageMetadata.title,
       description: pageMetadata.description,
@@ -377,10 +428,7 @@ export default async function DynamicPage({ params }: PageProps) {
           }}
         />
       )}
-      <link rel="canonical" href={pageUrl} />
-      <link rel="alternate" hrefLang="en" href={pageUrl.replace('netlintech.de', 'netlintech.com')} />
-      <link rel="alternate" hrefLang="de" href={pageUrl.replace('netlintech.com', 'netlintech.de')} />
-      <link rel="alternate" hrefLang="x-default" href={pageUrl.replace('netlintech.de', 'netlintech.com')} />
+      {/* Canonical + hreflang now handled by generateMetadata alternates to avoid duplication */}
       <JsonLd
         data={{
           '@context': 'https://schema.org',

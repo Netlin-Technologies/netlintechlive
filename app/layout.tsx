@@ -32,11 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={layoutLocale}>
       <head>
-        <link rel="canonical" href={siteUrl} />
-        {/* Basic hreflang for root pages (per-page overrides can add specific path versions) */}
-        <link rel="alternate" hrefLang="en" href={siteUrl.replace('.de', '.com')} />
-        <link rel="alternate" hrefLang="de" href={siteUrl.replace('.com', '.de')} />
-        <link rel="alternate" hrefLang="x-default" href={siteUrl.replace('.de', '.com')} />
+        {/* Removed global canonical + hreflang to avoid duplicates. These are now defined per-page via the metadata API. */}
         <meta name="robots" content="index,follow" />
       </head>
       <body className={`${montserrat.variable} ${sora.variable}`}>

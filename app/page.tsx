@@ -8,9 +8,22 @@ export function generateMetadata(): Metadata {
   const title = t.metaData.homeTitle
   const description = t.metaData.homeDesc
   const domain = (process.env.NEXT_PUBLIC_LOCALE || 'en') === 'de' ? 'netlintech.de' : 'netlintech.com'
+  // Provide canonical + hreflang alternates at the page level (layout no longer injects them)
+  const siteUrlEn = getSiteUrl('en')
+  const siteUrlDe = getSiteUrl('de')
+  const currentLocale = process.env.NEXT_PUBLIC_LOCALE || 'en'
+  const canonical = currentLocale === 'de' ? siteUrlDe : siteUrlEn
   return {
     title,
     description,
+    alternates: {
+      canonical,
+      languages: {
+        en: siteUrlEn,
+        de: siteUrlDe,
+        'x-default': siteUrlEn,
+      }
+    },
     openGraph: {
       title,
       description,
