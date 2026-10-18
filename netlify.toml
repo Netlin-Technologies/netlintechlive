@@ -1,0 +1,82 @@
+# netlintech.com → netlingroup.com
+#
+# A régi Next.js-oldal megszűnt, ez a repó már csak átirányít. A szabályokat a Netlify
+# szervere futtatja, mielőtt bármi kiszolgálódna: 301-es (végleges) átirányítás, így a
+# keresők a régi oldalak helyezését is átviszik az új címre. A régi aloldalak a
+# legközelebbi netlingroup.com-os oldalra visznek, minden más a főoldalra. A lekérdezési
+# paraméterek (pl. utm_*) megmaradnak.
+#
+# A célcímek perjellel végződnek, mert a netlingroup.com így szolgálja ki az oldalakat –
+# így nincs dupla átirányítás.
+#
+# A fájlbeli beállítás felülírja a Netlify felületén megadottat (a régi Next.js-build
+# parancsát és könyvtárát), ezért nincs build, csak a public/ mappa – benne egy tartalék
+# oldallal arra az esetre, ha valami mégis kiszolgálódna.
+
+[build]
+  command = "echo 'Nincs build: netlintech.com -> netlingroup.com atiranyitas'"
+  publish = "public"
+
+# Az első egyező szabály érvényes: a konkrét útvonalak elöl, a „minden más” a végén.
+
+[[redirects]]
+  from = "/contact"
+  to = "https://netlingroup.com/kapcsolat/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/automation"
+  to = "https://netlingroup.com/irodai-automatizacio/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/customer-service-automation"
+  to = "https://netlingroup.com/irodai-automatizacio/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/marketing-automation"
+  to = "https://netlingroup.com/irodai-automatizacio/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/lead-response-automation"
+  to = "https://netlingroup.com/irodai-automatizacio/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/uses/*"
+  to = "https://netlingroup.com/irodai-automatizacio/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/uses"
+  to = "https://netlingroup.com/irodai-automatizacio/"
+  status = 301
+  force = true
+
+# a régi angol cikkeknek nincs megfelelője: a blog listájára visznek
+[[redirects]]
+  from = "/blog/*"
+  to = "https://netlingroup.com/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog"
+  to = "https://netlingroup.com/blog/"
+  status = 301
+  force = true
+
+# minden más (főoldal, /about, /services, régi fájlok…) a főoldalra
+[[redirects]]
+  from = "/*"
+  to = "https://netlingroup.com/"
+  status = 301
+  force = true
