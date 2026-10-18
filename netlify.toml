@@ -17,6 +17,12 @@
   command = "echo 'Nincs build: netlintech.com -> netlingroup.com atiranyitas'"
   publish = "public"
 
+[build.environment]
+  # A Netlify felületén a régi oldalhoz bekapcsolt Next.js-plugin Next.js-build kimenetet
+  # várna, és enélkül leállítaná a deployt – ezzel a változóval kihagyja magát.
+  # (Ha a plugint a felületen eltávolítod, ez a sor törölhető.)
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
 # Az első egyező szabály érvényes: a konkrét útvonalak elöl, a „minden más” a végén.
 
 [[redirects]]
